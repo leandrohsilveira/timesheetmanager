@@ -1,9 +1,17 @@
 from django.db import models
 
 # Create your models here.
+class Pais(models.Model):
+	nome = models.CharField(max_length=200)
+	sigla2 = models.CharField(max_length=2)
+	sigla3 = models.CharField(max_length=3)
+	def __str__(self):
+		return "%s/%s" % (self.nome, self.sigla2)
+
 class TipoDocumento(models.Model):
 	descricao = models.CharField(max_length=200)
 	abreviacao = models.CharField(max_length=10)
+	pais_vigencia = models.ForeignKey(Pais, blank=True, null=True)
 	def __str__(self):
 		return self.abreviacao
 
