@@ -1,10 +1,30 @@
 from django.contrib import admin
 from .models import Pessoa, Documento, Usuario, Empresa, TipoDocumento, Pais
 
-# Register your models here.
-admin.site.register(Pessoa)
-admin.site.register(Documento)
-admin.site.register(Usuario)
-admin.site.register(Empresa)
-admin.site.register(TipoDocumento)
-admin.site.register(Pais)
+class PessoaAdmin(admin.ModelAdmin):
+	pass
+
+class DocumentoAdmin(admin.ModelAdmin):
+	pass
+
+class UsuarioAdmin(admin.ModelAdmin):
+	search_fields = ['login']
+	list_filter = ['login', 'data_criacao']
+	list_display = ['login', 'data_criacao']
+
+class EmpresaAdmin(admin.ModelAdmin):
+	pass
+
+class TipoDocumentoAdmin(admin.ModelAdmin):
+	pass
+
+class PaisAdmin(admin.ModelAdmin):
+	pass
+
+
+admin.site.register(Pessoa, PessoaAdmin)
+admin.site.register(Documento, DocumentoAdmin)
+admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(Empresa, EmpresaAdmin)
+admin.site.register(TipoDocumento, TipoDocumentoAdmin)
+admin.site.register(Pais, PaisAdmin)
