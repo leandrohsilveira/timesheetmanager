@@ -1,0 +1,34 @@
+<style>
+table, th, td {
+	border: 1px solid #ccc;
+}
+</style>
+<a href="{% url 'novo_usuario' %}">Adicionar Usuário</a>
+<table>
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Login</th>
+			<th>Documento</th>
+			<th>Data de Criação</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if usuarios %}
+			{% for usuario in usuarios %}
+			<tr>
+				<td>{{usuario.pessoa.nome}}</td>
+				<td>{{usuario.login}}</td>
+				<td>{{usuario.pessoa.documento.tipo_documento.abreviacao}}: {{usuario.pessoa.documento.codigo}}</td>
+				<td>{{usuario.data_criacao}}</td>
+				<td><a href="{% url 'visualizar_usuario' usuario.id %}">Visualizar</a></td>
+			</tr>
+			{% endfor %}
+		{% else %}
+		<tr colspan="5">
+			<p>Nenhum usuário cadastrado.</p>
+		</tr>
+		{% endif %}
+	</tbody>
+</table>
