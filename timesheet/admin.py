@@ -1,11 +1,17 @@
 from django.contrib import admin
 from .models import Pessoa, Documento, Usuario, Empresa, TipoDocumento, Pais
 
+class UsuarioInline(admin.StackedInline):
+	model = Usuario
+
+class PessoaInline(admin.StackedInline):
+	model = Pessoa
+
 class PessoaAdmin(admin.ModelAdmin):
-	pass
+	inlines = [UsuarioInline]
 
 class DocumentoAdmin(admin.ModelAdmin):
-	pass
+	inlines = [PessoaInline]
 
 class UsuarioAdmin(admin.ModelAdmin):
 	search_fields = ['login']

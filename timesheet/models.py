@@ -1,12 +1,19 @@
+from django import forms
 from django.db import models
+
 
 # Create your models here.
 class Pais(models.Model):
-	nome = models.CharField(verbose_name="Nome" ,max_length=200)
-	sigla2 = models.CharField(verbose_name="Sigla (2)", max_length=2)
-	sigla3 = models.CharField(verbose_name="Sigla (3)", max_length=3)
+	nome = models.CharField(verbose_name="nome" ,max_length=200)
+	sigla2 = models.CharField(verbose_name="sigla (2)", max_length=2)
+	sigla3 = models.CharField(verbose_name="sigla (3)", max_length=3)
+
 	def __str__(self):
 		return "%s/%s" % (self.nome, self.sigla2)
+
+	class Meta:
+		verbose_name = "país"
+		verbose_name_plural = "países"
 
 class TipoDocumento(models.Model):
 	descricao = models.CharField(verbose_name="Descrição", max_length=200)
@@ -15,17 +22,30 @@ class TipoDocumento(models.Model):
 	def __str__(self):
 		return self.abreviacao
 
+	class Meta:
+		verbose_name = "tipo de documento"
+		verbose_name_plural = "tipos de documentos"
+
+
 class Documento(models.Model):
 	tipo_documento = models.ForeignKey(TipoDocumento, verbose_name="Tipo do documento")
 	codigo = models.CharField(verbose_name="Código", max_length=50)
 	def __str__(self):
-		return "%d - %s: %s" % (self.id, self.tipo_documento, self.codigo)
+		return "%s: %s" % (self.tipo_documento, self.codigo)
+
+	class Meta:
+		verbose_name = "documento"
+		verbose_name_plural = "documentos"
 
 class Pessoa(models.Model):
 	nome = models.CharField(verbose_name="Nome", max_length=200)
 	documento = models.OneToOneField(Documento, verbose_name="Documento")
 	def __str__(self):
-		return "%d - %s" % (self.id, self.nome)
+		return " %s" % (self.nome)
+
+	class Meta:
+		verbose_name = "pessoa"
+		verbose_name_plural = "pessoas"
 
 class Empresa(models.Model):
 	razao_social = models.CharField(verbose_name="Razão Social", max_length=200)
@@ -34,12 +54,20 @@ class Empresa(models.Model):
 	inscricao_estadual = models.CharField(verbose_name="Inscrição Estadual", max_length=200)
 	documento = models.OneToOneField(Documento, verbose_name="Documento")
 	def __str__(self):
-		return "%d - %s (%s)" % (self.id, self.razao_social, self.nome_fantasia)
+		return "%s (%s)" % (self.razao_social, self.nome_fantasia)
+
+	class Meta:
+		verbose_name = "empresa"
+		verbose_name_plural = "empresas"
 
 class Usuario(models.Model):
 	login = models.CharField(verbose_name="Login", max_length=16)
-	senha = models.CharField(verbose_name="Senha", max_length=200)
+	senha = models.CharField(verbose_name = "Senha", max_length = 200)
 	data_criacao = models.DateTimeField(verbose_name="Data de Criação")
 	pessoa = models.OneToOneField(Pessoa, verbose_name="Pessoa")
 	def __str__(self):
-		return "%d - %s -> Pessoa: %s" % (self.id, self.login, self.pessoa)
+		return "%s" % (self.login)
+
+	class Meta:
+		verbose_name = "usuário"
+		verbose_name_plural = "usuários"
