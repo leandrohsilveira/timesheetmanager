@@ -1,0 +1,26 @@
+{% extends 'timesheet/base.html' %}
+{% block body_block %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<i class="fa fa-bars"></i>
+			</button>
+			<a class="navbar-brand" href="{% url 'timesheet:lista_ultimas_pessoas_cadastradas' %}">
+				<i class="fa fa-clock-o fa-lg"></i>
+				Timesheet Manager
+			</a>
+		</div>
+	</div>
+</nav>
+<div class="container">
+	<div class="hidden-xs hidden-sm base-top-margin-md-lg"></div>
+	<div class="hidden-md hidden-lg base-top-margin-xs-sm"></div>
+	{% block content_block %}{% endblock %}
+	<hr>
+	<footer>
+		<p>&copy; 2015 Company, Inc.</p>
+	</footer>
+</div>
+{% endblock %}

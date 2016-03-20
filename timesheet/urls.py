@@ -1,5 +1,6 @@
 #from django.contrib.auth.decorators import login_required, permission_required
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.contrib.auth.decorators import login_required
 
 from . import views
 
@@ -7,13 +8,19 @@ from . import views
 app_name = 'timesheet'
 
 urlpatterns = [
-	url(r'^$', views.ListaUltimosUsuariosCadastradosView.as_view(), name = 'lista_ultimos_usuarios_cadastrados'),
-    url(r'^usuarios/(?P<page>\d+)$', views.ListaUsuariosView.as_view(), name = 'lista_usuarios'),
-	url(r'^usuario/$', views.novo_usuario, name = 'novo_usuario'),
-	# url(r'^usuario/(?P<pk>[0-9]+)$', views.editar_usuario, name='editar_usuario'),
-	url(r'^usuario/(?P<pk>\d+)/visualizar$', views.VisualizarUsuarioView.as_view(), name = 'visualizar_usuario'),
-	url(r'^usuario/(?P<pk>\d+)/remover', views.remover_usuario, name = 'remover_usuario'),
-	url(r'^usuario/cadastrar$', views.cadastrar_usuario, name = 'cadastrar_usuario'),
-	# url(r'^usuario/atualizar$', views.cadastrar_usuario, name='atualizar_usuario'),
+	url('^', include('django.contrib.auth.urls')),
+	url(r'^login/autenticar$', views.fazer_login, name = 'autenticar'),
+	url(r'^login/sair$', views.fazer_logout, name = 'sair'),
+
+
+	url(r'^$', login_required(views.DadosPessoaAutenticadaView.as_view()), name = 'dados_pessoa_autenticada'),
+	url(r'^usuarios/$', login_required(views.ListaUltimasPessoasCadastradasView.as_view()), name = 'lista_ultimas_pessoas_cadastradas'),
+    url(r'^usuarios/(?P<page>\d+)$', login_required(views.ListaPessoasView.as_view()), name = 'lista_pessoas'),
+	url(r'^usuario/$', views.nova_pessoa, name = 'nova_pessoa'),
+	# url(r'^usuario/(?P<pk>[0-9]+)$', views.editar_pessoa, name='editar_pessoa'),
+	url(r'^usuario/(?P<pk>\d+)/visualizar$', login_required(views.VisualizarPessoaView.as_view()), name = 'visualizar_pessoa'),
+	url(r'^usuario/(?P<pk>\d+)/remover', login_required(views.remover_pessoa), name = 'remover_pessoa'),
+	url(r'^usuario/cadastrar$', views.cadastrar_pessoa, name = 'cadastrar_pessoa'),
+	# url(r'^usuario/atualizar$', views.cadastrar_pessoa, name='atualizar_pessoa'),
 
 ]

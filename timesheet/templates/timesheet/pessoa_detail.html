@@ -1,0 +1,57 @@
+{% extends 'timesheet/base_logged.html' %} {% block content_block %} {% load humanize %}
+<h1 class="text-center">
+	<i class="fa fa-user"></i>
+	{% if user.get_username == pessoa.usuario.get_username %}
+	Meus Dados
+	{% else %}
+	Detalhes do usuário {{ pessoa.usuario.first_name }}
+	{% endif %}
+</h1>
+<hr />
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<div class="well well-lg">
+			<p>
+				<strong>Nome: </strong>
+				{{ pessoa.usuario.get_full_name }}
+			</p>
+			<p>
+				<strong>E-mail: </strong>
+				{{ pessoa.usuario.email }}
+			</p>
+			<p>
+				<strong>Login: </strong>
+				{{ pessoa.usuario.username }}
+			</p>
+			<p>
+				<strong>{{ pessoa.documento.tipo_documento.abreviacao }}: </strong>
+				{{ pessoa.documento.codigo|mask:pessoa.documento.tipo_documento.mascara }}
+			</p>
+			<p>
+				<strong>Cadastrado: </strong>
+				{{ pessoa.usuario.date_joined|naturaltime }}
+			</p>
+			<p>
+				<strong>Último login: </strong>
+				{{ pessoa.usuario.last_login|naturaltime|default:"Ainda não autenticou." }}
+			</p>
+			<div class="clearfix"></div>
+		</div>
+		<a href="#" class="btn btn-primary">
+			<i class="fa fa-pencil"></i>
+			Editar
+		</a>
+		<button type="button" data-target="#confirmModal" data-toggle="modal" data-href="{% url 'timesheet:remover_pessoa' pessoa.id %}" data-nome="{{ pessoa.nome }}" class="btn btn-danger">
+			<i class="fa fa-trash"></i>
+			Remover
+		</button>
+		<a href="{% url 'timesheet:lista_pessoas' 1 %}" class="btn btn-default">
+			<i class="fa fa-undo"></i>
+			Voltar
+		</a>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+
+{% endblock %} {% block js_block %} {% include 'timesheet/includes/modal_remover_pessoa.html' %} {% endblock %}

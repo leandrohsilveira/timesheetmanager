@@ -1,52 +1,87 @@
-from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect
+import re
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User, Group
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views import generic
 
-from .models import Usuario, Pessoa, Documento, TipoDocumento
+from .models import Pessoa, Documento, TipoDocumento
 
 
-class ListaUsuariosView(generic.ListView):
-	model = Usuario
+class ListaPessoasView(generic.ListView):
+	model = Pessoa
 	paginate_by = 10
+	queryset = Pessoa.objects.order_by('-usuario__date_joined')
 
-class ListaUltimosUsuariosCadastradosView(generic.ListView):
-	model = Usuario
+class ListaUltimasPessoasCadastradasView(generic.ListView):
+	model = Pessoa
+	queryset = Pessoa.objects.order_by('-usuario__date_joined')[:5]
 
-	queryset = Usuario.objects.order_by('-data_criacao')[:5]
+class DadosPessoaAutenticadaView(generic.DetailView):
+	model = Pessoa
+	context_object_name = "pessoa"
+	def get_object(self):
+		return get_object_or_404(Pessoa, usuario__username = self.request.user.username)
+	
+class VisualizarPessoaView(generic.DetailView):
+	model = Pessoa
+	context_object_name = "pessoa"
 
-class VisualizarUsuarioView(generic.DetailView):
-	model=Usuario
-	context_object_name="usuario"
+def fazer_login(request):
+	username = request.POST["username"];
+	password = request.POST["password"];
+	nextUrl = request.POST["next"];
 
-def remover_usuario(request, pk):
-	usuario = Usuario.objects.get(id = pk)
-	usuario.delete()
-	return redirect("timesheet:lista_usuarios", page = 1)
+	user = authenticate(username = username, password = password);
+	if user:
+		if user.is_active:
+			login(request, user);
+			if nextUrl:
+				return redirect(nextUrl);
+			else:
+				return redirect("timesheet:dados_pessoa_autenticada")
+	return redirect("/timesheet/login?next=%s" % (nextUrl));
 
-def novo_usuario(request):
-	usuario = Usuario()
-	usuario.pessoa = Pessoa()
-	usuario.pessoa.documento = Documento()
-	tipos_documentos = TipoDocumento.objects.all()
-	usuario.pessoa.documento.tipo_documento = tipos_documentos[0]
-	return render(request, 'timesheet/usuario_form.html', {'usuario': usuario, 'tipos_documentos': tipos_documentos})
+def fazer_logout(request):
+	logout(request);
+	return redirect("timesheet:dados_pessoa_autenticada");
 
-def cadastrar_usuario(request):
-	usuario = Usuario()
+def remover_pessoa(request, pk):
+	pessoa = Pessoa.objects.get(id = pk)
+	pessoa.delete()
+	return redirect("timesheet:lista_pessoas", page = 1)
+
+def nova_pessoa(request):
 	pessoa = Pessoa()
+	pessoa.pessoa = Pessoa()
+	pessoa.pessoa.documento = Documento()
+	tipos_documentos = TipoDocumento.objects.all()
+	pessoa.pessoa.documento.tipo_documento = tipos_documentos[0]
+	return render(request, 'timesheet/pessoa_form.html', {'pessoa': pessoa, 'tipos_documentos': tipos_documentos})
+
+def cadastrar_pessoa(request):
+	usuario = User()
+	usuario.username = request.POST['login']
+	usuario.set_password(request.POST['senha'])
+	usuario.date_joined = timezone.now()
+	usuario.first_name = request.POST['primeiro_nome']
+	usuario.last_name = request.POST['sobrenome']
+	usuario.email = request.POST['email']
+	usuario.is_active = True
+	User.save(usuario)
+
+	group = Group.objects.get(name = "Usuario")
+	usuario.groups.add(group)
+	User.save(usuario)
+
 	documento = Documento()
-
-	usuario.login = request.POST['login']
-	usuario.senha = request.POST['senha']
-	usuario.data_criacao = timezone.now()
-	pessoa.nome = request.POST['nome']
-	documento.codigo = request.POST['codigo']
+	documento.codigo = "".join(re.findall("\d+", request.POST['codigo']))
 	documento.tipo_documento = TipoDocumento.objects.get(pk=request.POST['tipo_documento'])
-
 	Documento.save(documento)
+
+	pessoa = Pessoa()
+	pessoa.usuario = usuario
 	pessoa.documento = documento
 	Pessoa.save(pessoa)
-	usuario.pessoa = pessoa
-	Usuario.save(usuario)
-	return redirect('timesheet:visualizar_usuario', pk = usuario.id)
+	return redirect('timesheet:dados_pessoa_autenticada')

@@ -1,4 +1,4 @@
-from django import forms
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -16,9 +16,11 @@ class Pais(models.Model):
 		verbose_name_plural = "países"
 
 class TipoDocumento(models.Model):
-	descricao = models.CharField(verbose_name="Descrição", max_length=200)
-	abreviacao = models.CharField(verbose_name="Abreviação", max_length=10)
-	pais_vigencia = models.ForeignKey(Pais, verbose_name="País de Vigência", blank=True, null=True)
+	descricao = models.CharField(verbose_name = "descrição", max_length = 200)
+	abreviacao = models.CharField(verbose_name = "abreviação", max_length = 10)
+	pais_vigencia = models.ForeignKey(Pais, verbose_name = "país de vigência")
+	mascara = models.CharField(verbose_name = "máscara", max_length = 100)
+
 	def __str__(self):
 		return self.abreviacao
 
@@ -28,8 +30,8 @@ class TipoDocumento(models.Model):
 
 
 class Documento(models.Model):
-	tipo_documento = models.ForeignKey(TipoDocumento, verbose_name="Tipo do documento")
-	codigo = models.CharField(verbose_name="Código", max_length=50)
+	tipo_documento = models.ForeignKey(TipoDocumento, verbose_name = "tipo do documento")
+	codigo = models.CharField(verbose_name = "código", max_length = 50)
 	def __str__(self):
 		return "%s: %s" % (self.tipo_documento, self.codigo)
 
@@ -38,36 +40,25 @@ class Documento(models.Model):
 		verbose_name_plural = "documentos"
 
 class Pessoa(models.Model):
-	nome = models.CharField(verbose_name="Nome", max_length=200)
-	documento = models.OneToOneField(Documento, verbose_name="Documento")
+	documento = models.OneToOneField(Documento, verbose_name = "documento")
+	usuario = models.ForeignKey(User, verbose_name = "usuario")
+
 	def __str__(self):
-		return " %s" % (self.nome)
+		return " %s" % (self.usuario.get_full_name())
 
 	class Meta:
 		verbose_name = "pessoa"
 		verbose_name_plural = "pessoas"
 
 class Empresa(models.Model):
-	razao_social = models.CharField(verbose_name="Razão Social", max_length=200)
-	nome_fantasia = models.CharField(verbose_name="Nome Fantasia", max_length=200)
-	data_fundacao = models.DateTimeField(verbose_name="Data de Fundação")
-	inscricao_estadual = models.CharField(verbose_name="Inscrição Estadual", max_length=200)
-	documento = models.OneToOneField(Documento, verbose_name="Documento")
+	razao_social = models.CharField(verbose_name = "razão social", max_length = 200)
+	nome_fantasia = models.CharField(verbose_name = "nome fantasia", max_length = 200)
+	data_fundacao = models.DateTimeField(verbose_name = "data de fundação")
+	inscricao_estadual = models.CharField(verbose_name = "inscrição estadual", max_length = 200)
+	documento = models.OneToOneField(Documento, verbose_name = "documento")
 	def __str__(self):
 		return "%s (%s)" % (self.razao_social, self.nome_fantasia)
 
 	class Meta:
 		verbose_name = "empresa"
 		verbose_name_plural = "empresas"
-
-class Usuario(models.Model):
-	login = models.CharField(verbose_name="Login", max_length=16)
-	senha = models.CharField(verbose_name = "Senha", max_length = 200)
-	data_criacao = models.DateTimeField(verbose_name="Data de Criação")
-	pessoa = models.OneToOneField(Pessoa, verbose_name="Pessoa")
-	def __str__(self):
-		return "%s" % (self.login)
-
-	class Meta:
-		verbose_name = "usuário"
-		verbose_name_plural = "usuários"

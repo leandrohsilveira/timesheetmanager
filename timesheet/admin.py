@@ -1,22 +1,14 @@
 from django.contrib import admin
-from .models import Pessoa, Documento, Usuario, Empresa, TipoDocumento, Pais
-
-class UsuarioInline(admin.StackedInline):
-	model = Usuario
+from .models import Pessoa, Documento, Empresa, TipoDocumento, Pais
 
 class PessoaInline(admin.StackedInline):
 	model = Pessoa
 
 class PessoaAdmin(admin.ModelAdmin):
-	inlines = [UsuarioInline]
+	pass
 
 class DocumentoAdmin(admin.ModelAdmin):
-	inlines = [PessoaInline]
-
-class UsuarioAdmin(admin.ModelAdmin):
-	search_fields = ['login']
-	list_filter = ['login', 'data_criacao']
-	list_display = ['login', 'data_criacao']
+	pass
 
 class EmpresaAdmin(admin.ModelAdmin):
 	pass
@@ -30,7 +22,6 @@ class PaisAdmin(admin.ModelAdmin):
 
 admin.site.register(Pessoa, PessoaAdmin)
 admin.site.register(Documento, DocumentoAdmin)
-admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Empresa, EmpresaAdmin)
 admin.site.register(TipoDocumento, TipoDocumentoAdmin)
 admin.site.register(Pais, PaisAdmin)
