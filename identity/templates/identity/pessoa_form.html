@@ -1,4 +1,4 @@
-{% extends 'timesheet/base_logged.html' %} {% block content_block %} {% load staticfiles %}
+{% extends 'base_logged.html' %} {% block content_block %} {% load staticfiles %}
 <h1 class="text-center">
 	<i class="fa fa-user"></i>
 	Formulário Usuário
@@ -11,8 +11,9 @@
 	</p>
 	{% endif %}
 	<div class="col-md-4"></div>
-	<form id="pessoa_form" class="col-md-4" action="{% url 'timesheet:cadastrar_pessoa' %}" method="post">
+	<form id="pessoa_form" class="col-md-4" action="{% url 'identity:salvar_pessoa' %}" method="post">
 		{% csrf_token %}
+		<input type="hidden" id="p" name="p" value="{{ pessoa.id }}" />
 		<div class="well well-lg">
 			<div class="form-group col-md-12">
 				<label for="nome">Primeiro Nome:</label>
@@ -41,6 +42,7 @@
 				<label for="codigo">&nbsp;</label>
 				<input id="codigo" type="text" class="form-control" name="codigo" value="{{ pessoa.documento.codigo }}">
 			</div>
+			{% if not pessoa.id %}
 			<div class="form-group col-md-12">
 				<label for="login">Login:</label>
 				<input id="login" class="form-control" type="text" name="login" value="{{ pessoa.usuario.username }}">
@@ -55,6 +57,7 @@
 				<input id="confirmar-senha" class="form-control equals" type="password" name="confirmar-senha">
 				<i class="fa form-control-feedback"></i>
 			</div>
+			{% endif %}
 			<div class="clearfix"></div>
 		</div>
 		<div class="form-group col-md-12">
@@ -62,7 +65,7 @@
 				<i class="fa fa-floppy-o"></i>
 				Salvar
 			</button>
-			<a class="btn btn-default" href="{% url 'timesheet:lista_pessoas' 1 %}">
+			<a class="btn btn-default" href="{% url 'identity:lista_pessoas' 1 %}">
 				<i class="fa fa-times"></i>
 				Cancelar
 			</a>
@@ -71,7 +74,7 @@
 	<div class="col-md-4"></div>
 </div>
 {% endblock %} {% block js_block %}
-<script src="{% static 'timesheet/dist/js/jquery.mask.min.js' %}"></script>
+<script src="{% static 'dist/js/jquery.mask.min.js' %}"></script>
 <script>
 	(function($) {
 		$(function() {

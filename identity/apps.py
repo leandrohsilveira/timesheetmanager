@@ -2,8 +2,8 @@ from django.apps import AppConfig
 from django.template.defaultfilters import register
 
 
-class TimesheetConfig(AppConfig):
-    name = 'timesheet'
+class IdentityConfig(AppConfig):
+	name = 'identity'
 
 @register.filter(name = 'mask')
 def mask(value, arg):

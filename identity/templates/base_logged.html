@@ -1,4 +1,4 @@
-{% extends 'timesheet/base.html' %} {% block body_block %}
+{% extends 'base.html' %} {% block body_block %}
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -6,7 +6,7 @@
 				<span class="sr-only">Toggle navigation</span>
 				<i class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand" href="{% url 'timesheet:dados_pessoa_autenticada' %}">
+			<a class="navbar-brand" href="{% url 'identity:dados_pessoa_autenticada' %}">
 				<i class="fa fa-clock-o fa-lg"></i>
 				Timesheet Manager
 			</a>
@@ -21,10 +21,10 @@
 					</p>
 					<ul class="dropdown-menu">
 						<li>
-							<p class="navbar-text">{{ user.get_full_name|default:user.get_username }}</p>
+							<a href="{% url 'identity:dados_pessoa_autenticada' %}"><i class="fa fa-eye"></i> {{ user.get_full_name|default:user.get_username }}</a>
 						</li>
 						<li>
-							<a href="{% url 'timesheet:sair' %}"><i class="fa fa-sign-out"></i> Sair</a>
+							<a href="{% url 'identity:sair' %}"><i class="fa fa-sign-out"></i> Sair</a>
 						</li>
 					</ul>
 				</li>
@@ -32,13 +32,13 @@
 			</ul>
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="{% url 'timesheet:dados_pessoa_autenticada' %}">
+					<a href="{% url 'identity:dados_pessoa_autenticada' %}">
 						<i class="fa fa-home"></i>
 						Home
 					</a>
 				</li>
 				<li>
-					<a href="{% url 'timesheet:lista_pessoas' 1 %}">
+					<a href="{% url 'identity:lista_pessoas' 1 %}">
 						<i class="fa fa-users"></i>
 						Usuários
 					</a>

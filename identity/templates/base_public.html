@@ -1,4 +1,4 @@
-{% extends 'timesheet/base.html' %}
+{% extends 'base.html' %}
 {% block body_block %}
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
@@ -7,7 +7,7 @@
 				<span class="sr-only">Toggle navigation</span>
 				<i class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand" href="{% url 'timesheet:lista_ultimas_pessoas_cadastradas' %}">
+			<a class="navbar-brand" href="{% url 'identity:lista_ultimas_pessoas_cadastradas' %}">
 				<i class="fa fa-clock-o fa-lg"></i>
 				Timesheet Manager
 			</a>

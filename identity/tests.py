@@ -1,6 +1,8 @@
-from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
-from timesheet.models import Usuario, Pessoa, Documento, TipoDocumento, Pais
+from django.test import TestCase
+
+from identity.models import TipoDocumento, Pais
+
 
 # Create your tests here.
 class UsuarioViewsTest(TestCase):
@@ -18,7 +20,7 @@ class UsuarioViewsTest(TestCase):
 
 	def test_novo_usuarios(self):
 		self.__before()
-		response = self.client.get(reverse('timesheet:novo_usario'))
+		response = self.client.get(reverse('identity:nova_pessoa'))
 		self.assertTrue(response != None)
 		self.assertEquals(response.status_code, 200)
 		self.assertTrue(response.context != None)

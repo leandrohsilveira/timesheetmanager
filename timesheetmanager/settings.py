@@ -27,13 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = "/timesheet/login/"
+LOGIN_URL = "/identity/login/"
 
 
 # Application definition
 
 INSTALLED_APPS = [
-	'timesheet.apps.TimesheetConfig',
+	'identity.apps.IdentityConfig',
 	'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -118,7 +118,7 @@ WSGI_APPLICATION = 'timesheetmanager.wsgi.application'
 __postgresql = {
 	'ENGINE': 'django.db.backends.postgresql',
 	'NAME': 'timesheetdb',
-	'USER': 'timesheet',
+	'USER': 'identity',
 	'PASSWORD': 't1m3sh33t',
 	'CHARSET': 'UTF-8',
 	'ATOMIC_REQUESTS': True
