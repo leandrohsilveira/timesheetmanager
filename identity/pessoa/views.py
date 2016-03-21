@@ -1,14 +1,11 @@
 import re
 
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.views import logout_then_login
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, get_object_or_404
-from django.utils import timezone
 from django.views import generic
 
 from identity.models import Pessoa, Documento, TipoDocumento
-from django.core.urlresolvers import reverse
 
 
 class CadastrarPessoaView(generic.CreateView):
@@ -61,24 +58,6 @@ class ListaPessoasView(generic.ListView):
 	model = Pessoa
 	paginate_by = 10
 	queryset = Pessoa.objects.order_by('-usuario__date_joined')
-
-def fazer_login(request):
-	username = request.POST["username"];
-	password = request.POST["password"];
-	nextUrl = request.POST["next"];
-
-	user = authenticate(username = username, password = password);
-	if user:
-		if user.is_active:
-			login(request, user);
-			if nextUrl:
-				return redirect(nextUrl);
-			else:
-				return redirect("identity:index")
-	return redirect("/identity/login?next=%s" % (nextUrl));
-
-def fazer_logout(request):
-	return logout_then_login(request);
 
 def cadastrar_pessoa(request):
 	usuario = User()
