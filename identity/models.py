@@ -38,9 +38,6 @@ class Documento(models.Model):
 	class Meta:
 		verbose_name = "documento"
 		verbose_name_plural = "documentos"
-		permissions = [
-			("own_documento", "Pode gerenciar a própria entidade Documento")
-		]
 
 class Pessoa(models.Model):
 	documento = models.OneToOneField(Documento, verbose_name = "documento")
@@ -53,7 +50,6 @@ class Pessoa(models.Model):
 		verbose_name = "pessoa"
 		verbose_name_plural = "pessoas"
 		permissions = [
-			("own_pessoa", "Pode gerenciar a própria entidade Pessoa"),
 			("can_see_pessoas_list", "Pode visualizar todas as pessoas")
 		]
 
@@ -69,6 +65,3 @@ class Empresa(models.Model):
 	class Meta:
 		verbose_name = "empresa"
 		verbose_name_plural = "empresas"
-		permissions = [
-			("own_empresas", "Pode gerenciar as próprias entidades Empresas")
-		]

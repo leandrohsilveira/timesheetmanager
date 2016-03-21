@@ -21,7 +21,7 @@
 					</p>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="{% url 'identity:dados_pessoa_autenticada' %}"><i class="fa fa-eye"></i> {{ user.get_full_name|default:user.get_username }}</a>
+							<a href="{% url 'identity:visualizar_pessoa_autenticada' %}"><i class="fa fa-eye"></i> {{ user.get_full_name|default:user.get_username }}</a>
 						</li>
 						<li>
 							<a href="{% url 'identity:sair' %}"><i class="fa fa-sign-out"></i> Sair</a>

@@ -11,9 +11,8 @@
 	</p>
 	{% endif %}
 	<div class="col-md-4"></div>
-	<form id="pessoa_form" class="col-md-4" action="{% url 'identity:salvar_pessoa' %}" method="post">
+	<form id="pessoa_form" class="col-md-4" action="{{ save_action }}" method="post">
 		{% csrf_token %}
-		<input type="hidden" id="p" name="p" value="{{ pessoa.id }}" />
 		<div class="well well-lg">
 			<div class="form-group col-md-12">
 				<label for="nome">Primeiro Nome:</label>
@@ -65,10 +64,17 @@
 				<i class="fa fa-floppy-o"></i>
 				Salvar
 			</button>
+			{% if perms.identity.can_see_pessoas_list %}
 			<a class="btn btn-default" href="{% url 'identity:lista_pessoas' 1 %}">
 				<i class="fa fa-times"></i>
 				Cancelar
 			</a>
+			{% else %}
+			<a class="btn btn-default" href="{% url 'identity:visualizar_pessoa_autenticada' %}">
+				<i class="fa fa-times"></i>
+				Cancelar
+			</a>
+			{% endif %}
 		</div>
 	</form>
 	<div class="col-md-4"></div>

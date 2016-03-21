@@ -8,22 +8,8 @@ from django.utils import timezone
 from django.views import generic
 
 from identity.models import Pessoa, Documento, TipoDocumento
+from django.core.urlresolvers import reverse
 
-
-class ListaPessoasView(generic.ListView):
-	model = Pessoa
-	paginate_by = 10
-	queryset = Pessoa.objects.order_by('-usuario__date_joined')
-
-class DadosPessoaAutenticadaView(generic.DetailView):
-	model = Pessoa
-	context_object_name = "pessoa"
-	def get_object(self):
-		return get_object_or_404(Pessoa, usuario__username = self.request.user.username)
-	
-class VisualizarPessoaView(generic.DetailView):
-	model = Pessoa
-	context_object_name = "pessoa"
 
 class CadastrarPessoaView(generic.CreateView):
 	model = Pessoa
@@ -32,16 +18,49 @@ class CadastrarPessoaView(generic.CreateView):
 	def get_context_data(self, **kwargs):
 		context = super(CadastrarPessoaView, self).get_context_data(**kwargs)
 		context['tipos_documentos'] = TipoDocumento.objects.all()
+		context['save_action'] = reverse('identity:salvar_nova_pessoa')
+		return context
+	
+	
+class VisualizarPessoaAutenticadaView(generic.DetailView):
+	model = Pessoa
+	context_object_name = "pessoa"
+	def get_object(self):
+		return get_object_or_404(Pessoa, usuario__username = self.request.user.username)
+
+class EditarPessoaAutenticadaView(generic.UpdateView):
+	model = Pessoa
+	context_object_name = "pessoa"
+	fields = ["usuario", "documento"]
+	
+	def get_object(self):
+		return get_object_or_404(Pessoa, usuario__username = self.request.user.username)
+	
+	def get_context_data(self, **kwargs):
+		context = super(EditarPessoaAutenticadaView, self).get_context_data(**kwargs)
+		context['tipos_documentos'] = TipoDocumento.objects.all()
+		context['save_action'] = reverse('identity:salvar_pessoa_autenticada')
 		return context
 
-class AtualizarPessoaView(generic.UpdateView):
+class VisualizarPessoaView(generic.DetailView):
+	model = Pessoa
+	context_object_name = "pessoa"
+
+
+class EditarPessoaView(generic.UpdateView):
 	model = Pessoa
 	context_object_name = "pessoa"
 	fields = ["usuario", "documento"]
 	def get_context_data(self, **kwargs):
-		context = super(AtualizarPessoaView, self).get_context_data(**kwargs)
+		context = super(EditarPessoaView, self).get_context_data(**kwargs)
 		context['tipos_documentos'] = TipoDocumento.objects.all()
+		context['save_action'] = reverse('identity:salvar_pessoa', args=(context["pessoa"].id,))
 		return context
+	
+class ListaPessoasView(generic.ListView):
+	model = Pessoa
+	paginate_by = 10
+	queryset = Pessoa.objects.order_by('-usuario__date_joined')
 
 def fazer_login(request):
 	username = request.POST["username"];
@@ -55,52 +74,71 @@ def fazer_login(request):
 			if nextUrl:
 				return redirect(nextUrl);
 			else:
-				return redirect("identity:dados_pessoa_autenticada")
+				return redirect("identity:index")
 	return redirect("/identity/login?next=%s" % (nextUrl));
 
 def fazer_logout(request):
 	return logout_then_login(request);
 
-def salvar_pessoa(request):
-	p = request.POST["p"]
-	if p:
-		pessoa = Pessoa.objects.get(id = p)
-		usuario = pessoa.usuario
-		documento = pessoa.documento
-	else:
-		usuario = User()
-		documento = Documento()
-		pessoa = Pessoa()
-		usuario.date_joined = timezone.now()
-		usuario.username = request.POST['login']
-		usuario.set_password(request.POST['senha'])
-
+def cadastrar_pessoa(request):
+	usuario = User()
+	usuario.is_active = True
+	usuario.first_name = request.POST['primeiro_nome']
+	usuario.username = request.POST['login']
+	usuario.last_name = request.POST['sobrenome']
+	usuario.set_password(request.POST['senha'])
+	usuario.email = request.POST['email']
+	User.save(usuario)
+	usuario.groups.add(Group.objects.get(name = "Usuario"))
+	User.save(usuario)
+	documento = Documento()
 	documento.codigo = "".join(re.findall("\d+", request.POST['codigo']))
 	documento.tipo_documento = TipoDocumento.objects.get(pk = request.POST['tipo_documento'])
 	Documento.save(documento)
-
-	usuario.is_active = True
-	usuario.first_name = request.POST['primeiro_nome']
-	usuario.last_name = request.POST['sobrenome']
-	usuario.email = request.POST['email']
-	User.save(usuario)
-
-	if not pessoa.id:
-		group = Group.objects.get(name = "Usuario")
-		usuario.groups.add(group)
-		User.save(usuario)
-
-	pessoa.usuario = usuario
+	pessoa = Pessoa()
 	pessoa.documento = documento
+	pessoa.usuario = usuario
 	Pessoa.save(pessoa)
-	return redirect('identity:dados_pessoa_autenticada')
+	if pessoa.usuario.has_perm("identity.can_see_pessoas_list"):
+		return redirect("identity:visualizar_pessoa", pk = pessoa.id)
+	return redirect("identity:visualizar_pessoa_autenticada")
+
+def atualizar_pessoa_autenticada(request):
+	pessoa = get_object_or_404(Pessoa, usuario__username = request.user.username)
+	__atualizar_pessoa(request, pessoa)
+	return redirect('identity:visualizar_pessoa_autenticada')
+
+def atualizar_pessoa(request, pk):
+	pessoa = get_object_or_404(Pessoa, pk = pk)
+	__atualizar_pessoa(request, pessoa)
+	return redirect('identity:visualizar_pessoa', pk = pessoa.id)
+
+def __atualizar_pessoa(request, pessoa):
+	pessoa.documento.codigo = "".join(re.findall("\d+", request.POST['codigo']))
+	pessoa.documento.tipo_documento = TipoDocumento.objects.get(pk = request.POST['tipo_documento'])
+	pessoa.usuario.is_active = True
+	pessoa.usuario.first_name = request.POST['primeiro_nome']
+	pessoa.usuario.last_name = request.POST['sobrenome']
+	pessoa.usuario.email = request.POST['email']
+	User.save(pessoa.usuario)
+	Documento.save(pessoa.documento)
+	Pessoa.save(pessoa)
+
+
+def remover_pessoa_autenticada(request):
+	pessoa = get_object_or_404(Pessoa, usuario__username = request.user.username)
+	__remover_pessoa(request, pessoa)
+	return redirect("identity:login")
 
 def remover_pessoa(request, pk):
-	pessoa = Pessoa.objects.get(id = pk)
+	pessoa = get_object_or_404(Pessoa, pk = pk)
+	__remover_pessoa(request, pessoa)
+	return redirect("identity:lista_pessoas", page = 1)
+
+def __remover_pessoa(request, pessoa):
 	if not pessoa.usuario.is_superuser:
 		usuario = pessoa.usuario
 		documento = pessoa.documento
 		pessoa.delete()
 		usuario.delete()
 		documento.delete()
-	return redirect("identity:lista_pessoas", page = 1)
