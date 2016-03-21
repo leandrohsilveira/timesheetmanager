@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from identity.pessoa import views
 
 
-pp_name = 'identity'
+app_name = 'identity'
 
 urlpatterns = [
 	url(r'^$', login_required(views.VisualizarPessoaAutenticadaView.as_view()), name = 'index'),

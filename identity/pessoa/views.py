@@ -14,7 +14,7 @@ class CadastrarPessoaView(generic.CreateView):
 	fields = ["usuario", "documento"]
 	def get_context_data(self, **kwargs):
 		context = super(CadastrarPessoaView, self).get_context_data(**kwargs)
-		context['tipos_documentos'] = TipoDocumento.objects.all()
+		context['tipos_documentos'] = TipoDocumento.objects.filter(documento_empresa = False)
 		context['save_action'] = reverse('identity:salvar_nova_pessoa')
 		return context
 	
@@ -35,7 +35,7 @@ class EditarPessoaAutenticadaView(generic.UpdateView):
 	
 	def get_context_data(self, **kwargs):
 		context = super(EditarPessoaAutenticadaView, self).get_context_data(**kwargs)
-		context['tipos_documentos'] = TipoDocumento.objects.all()
+		context['tipos_documentos'] = TipoDocumento.objects.filter(documento_empresa = False)
 		context['save_action'] = reverse('identity:salvar_pessoa_autenticada')
 		return context
 
@@ -50,7 +50,7 @@ class EditarPessoaView(generic.UpdateView):
 	fields = ["usuario", "documento"]
 	def get_context_data(self, **kwargs):
 		context = super(EditarPessoaView, self).get_context_data(**kwargs)
-		context['tipos_documentos'] = TipoDocumento.objects.all()
+		context['tipos_documentos'] = TipoDocumento.objects.filter(documento_empresa = False)
 		context['save_action'] = reverse('identity:salvar_pessoa', args=(context["pessoa"].id,))
 		return context
 	

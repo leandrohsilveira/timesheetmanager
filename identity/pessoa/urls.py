@@ -6,6 +6,7 @@ from identity.pessoa import views
 
 
 urlpatterns = [
+
 	url(r'^usuario$', views.CadastrarPessoaView.as_view(), name = 'cadastrar_pessoa'),
 	url(r'^usuario/cadastrar$', views.cadastrar_pessoa, name = 'salvar_nova_pessoa'),
 	

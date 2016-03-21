@@ -20,6 +20,8 @@ class TipoDocumento(models.Model):
 	abreviacao = models.CharField(verbose_name = "abreviação", max_length = 10)
 	pais_vigencia = models.ForeignKey(Pais, verbose_name = "país de vigência")
 	mascara = models.CharField(verbose_name = "máscara", max_length = 100)
+	documento_empresa = models.BooleanField(verbose_name = "documento de empresa")
+
 
 	def __str__(self):
 		return self.abreviacao

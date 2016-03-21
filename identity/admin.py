@@ -1,9 +1,6 @@
 from django.contrib import admin
 from .models import Pessoa, Documento, Empresa, TipoDocumento, Pais
 
-class PessoaInline(admin.StackedInline):
-	model = Pessoa
-
 class PessoaAdmin(admin.ModelAdmin):
 	pass
 
