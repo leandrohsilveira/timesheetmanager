@@ -17,17 +17,17 @@
 		<div class="well well-lg">
 			<div class="form-group col-md-12">
 				<label for="nome">Primeiro Nome:</label>
-				<input id="nome" class="form-control" type="text" name="primeiro_nome" value="{{ pessoa.usuario.first_name }}">
+				<input id="nome" required="required" class="form-control" type="text" name="primeiro_nome" value="{{ pessoa.usuario.first_name }}">
 				<br>
 			</div>
 			<div class="form-group col-md-12">
-				<label for="nome">Sobrenome:</label>
-				<input id="nome" class="form-control" type="text" name="sobrenome" value="{{ pessoa.usuario.last_name }}">
+				<label for="sobrenome">Sobrenome:</label>
+				<input id="sobrenome" required="required" class="form-control" type="text" name="sobrenome" value="{{ pessoa.usuario.last_name }}">
 				<br>
 			</div>
 			<div class="form-group col-md-12">
 				<label for="nome">E-mail:</label>
-				<input id="email" class="form-control" type="text" name="email" value="{{ pessoa.usuario.email }}">
+				<input id="email" required="required" class="form-control" type="email" name="email" value="{{ pessoa.usuario.email }}">
 				<br>
 			</div>
 			<div class="form-group col-md-4">
@@ -40,21 +40,21 @@
 			</div>
 			<div class="form-group col-md-8">
 				<label for="codigo">&nbsp;</label>
-				<input id="codigo" type="text" class="form-control" name="codigo" value="{{ pessoa.documento.codigo }}">
+				<input id="codigo" required="required" type="text" class="form-control" name="codigo" value="{{ pessoa.documento.codigo }}">
 			</div>
 			{% if not pessoa.id %}
 			<div class="form-group col-md-12">
 				<label for="login">Login:</label>
-				<input id="login" class="form-control" type="text" name="login" value="{{ pessoa.usuario.username }}">
+				<input id="login" required="required" class="form-control" type="text" name="login" value="{{ pessoa.usuario.username }}">
 			</div>
 			<div class="form-group has-feedback col-md-12">
 				<label class="control-label" for="senha">Senha:</label>
-				<input id="senha" class="form-control equals" type="password" name="senha">
+				<input id="senha" required="required" class="form-control equals" type="password" name="senha">
 				<i class="fa form-control-feedback"></i>
 			</div>
 			<div class="form-group has-feedback col-md-12">
 				<label class="control-label" for="confirmar-senha">Confirmar Senha:</label>
-				<input id="confirmar-senha" class="form-control equals" type="password" name="confirmar-senha">
+				<input id="confirmar-senha" required="required" class="form-control equals" type="password" name="confirmar-senha">
 				<i class="fa form-control-feedback"></i>
 			</div>
 			{% endif %}

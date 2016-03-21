@@ -15,10 +15,6 @@ class ListaPessoasView(generic.ListView):
 	paginate_by = 10
 	queryset = Pessoa.objects.order_by('-usuario__date_joined')
 
-class ListaUltimasPessoasCadastradasView(generic.ListView):
-	model = Pessoa
-	queryset = Pessoa.objects.order_by('-usuario__date_joined')[:5]
-
 class DadosPessoaAutenticadaView(generic.DetailView):
 	model = Pessoa
 	context_object_name = "pessoa"
@@ -66,7 +62,6 @@ def fazer_logout(request):
 	return logout_then_login(request);
 
 def salvar_pessoa(request):
-	print(request.method)
 	p = request.POST["p"]
 	if p:
 		pessoa = Pessoa.objects.get(id = p)
@@ -102,5 +97,10 @@ def salvar_pessoa(request):
 
 def remover_pessoa(request, pk):
 	pessoa = Pessoa.objects.get(id = pk)
-	pessoa.delete()
+	if not pessoa.usuario.is_superuser:
+		usuario = pessoa.usuario
+		documento = pessoa.documento
+		pessoa.delete()
+		usuario.delete()
+		documento.delete()
 	return redirect("identity:lista_pessoas", page = 1)

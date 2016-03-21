@@ -38,14 +38,20 @@
 			</p>
 			<div class="clearfix"></div>
 		</div>
+		{% if user.get_username == pessoa.usuario.get_username or perms.can_edit_pessoa %}
 		<a href="{% url 'identity:editar_pessoa' pessoa.id %}" class="btn btn-primary">
 			<i class="fa fa-pencil"></i>
 			Editar
 		</a>
+		{% endif %}
+		{% if not pessoa.usuario.is_superuser %}
+		{% if user.get_username == pessoa.usuario.get_username or perms.can_delete_pessoa %}
 		<button type="button" data-target="#confirmModal" data-toggle="modal" data-href="{% url 'identity:remover_pessoa' pessoa.id %}" data-nome="{{ pessoa.nome }}" class="btn btn-danger">
 			<i class="fa fa-trash"></i>
 			Remover
 		</button>
+		{% endif %}
+		{% endif %}
 		<a href="{% url 'identity:lista_pessoas' 1 %}" class="btn btn-default">
 			<i class="fa fa-undo"></i>
 			Voltar

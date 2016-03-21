@@ -17,12 +17,14 @@ Identity Manager
 			Home
 		</a>
 	</li>
+	{% if perms.identity.can_see_pessoas_list %}
 	<li>
 		<a href="{% url 'identity:lista_pessoas' 1 %}">
 			<i class="fa fa-users"></i>
 			Usuários
 		</a>
 	</li>
+	{% endif %}
 	{% if user.is_superuser %}
 	<li>
 		<a href="{% url 'admin:index' %}">

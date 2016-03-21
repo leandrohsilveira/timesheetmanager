@@ -46,13 +46,17 @@
 						<a class="btn btn-default btn-sm" href="{% url 'identity:visualizar_pessoa' pessoa.id %}">
 							<i class="fa fa-eye"></i>
 						</a>
+						{% if perms.identity.can_change_pessoa %}
 						<a class="btn btn-default btn-sm" href="{% url 'identity:editar_pessoa' pessoa.id %}">
 							<i class="fa fa-pencil"></i>
 						</a>
+						{% endif %}
+						{% if not pessoa.usuario.is_superuser and perms.identity.can_delete_pessoa %}
 						<button type="button" data-target="#confirmModal" data-toggle="modal" data-href="{% url 'identity:remover_pessoa' pessoa.id %}" data-nome="{{ pessoa.usuario.first_name }}"
 							class="btn btn-default btn-sm">
 							<i class="fa fa-trash"></i>
 						</button>
+						{% endif %}
 					</td>
 				</tr>
 				{% endfor %} {% else %}
