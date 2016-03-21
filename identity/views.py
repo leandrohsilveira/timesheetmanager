@@ -2,7 +2,8 @@ import re
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.views import logout_then_login
+from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.views import generic
 
@@ -62,8 +63,7 @@ def fazer_login(request):
 	return redirect("/identity/login?next=%s" % (nextUrl));
 
 def fazer_logout(request):
-	logout(request);
-	return redirect("identity:dados_pessoa_autenticada");
+	return logout_then_login(request);
 
 def salvar_pessoa(request):
 	print(request.method)

@@ -6,12 +6,12 @@
 				<span class="sr-only">Toggle navigation</span>
 				<i class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand" href="{% url 'identity:dados_pessoa_autenticada' %}">
-				<i class="fa fa-clock-o fa-lg"></i>
-				Timesheet Manager
-			</a>
+			<span class="navbar-brand">
+				{% block app_title %} {% endblock app_title %}
+			</span>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
+			{% if user.is_authenticated %}
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<p class="navbar-text dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -30,45 +30,18 @@
 				</li>
 
 			</ul>
-			<ul class="nav navbar-nav">
-				<li>
-					<a href="{% url 'identity:dados_pessoa_autenticada' %}">
-						<i class="fa fa-home"></i>
-						Home
-					</a>
-				</li>
-				<li>
-					<a href="{% url 'identity:lista_pessoas' 1 %}">
-						<i class="fa fa-users"></i>
-						Usuários
-					</a>
-				</li>
-				{% if user.is_authenticated and user.is_superuser %}
-				<li>
-					<a href="{% url 'admin:index' %}">
-						<i class="fa fa-cogs"></i>
-						Administração
-					</a>
-				</li>
-				{% endif %}
-				<!-- 					<div class="form-group"> -->
-				<!-- 						<input type="text" placeholder="Email" class="form-control"> -->
-				<!-- 					</div> -->
-				<!-- 					<div class="form-group"> -->
-				<!-- 						<input type="password" placeholder="Password" class="form-control"> -->
-				<!-- 					</div> -->
-				<!-- 					<button type="submit" class="btn btn-success">Sign in</button> -->
-			</ul>
+			{% block app_menu %}{% endblock app_menu %}
+			{% endif %}
 		</div>
 	</div>
 </nav>
 <div class="container">
 	<div class="hidden-xs hidden-sm base-top-margin-md-lg"></div>
 	<div class="hidden-md hidden-lg base-top-margin-xs-sm"></div>
-	{% block content_block %}{% endblock %}
+	{% block content_block %}{% endblock content_block %}
 	<hr>
 	<footer>
 		<p>&copy; 2015 Company, Inc.</p>
 	</footer>
 </div>
-{% endblock %}
+{% endblock body_block%}

@@ -54,43 +54,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CACHEOPS_REDIS = {
-    'host': 'localhost', # redis-server is on same machine
-    'port': 6379,        # default redis port
-    'db': 1,             # SELECT non-default redis database
-                         # using separate redis db or redis instance
-                         # is highly recommended
-
-    'socket_timeout': 3,   # connection timeout in seconds, optional
-    'password': 'timesheetchacheops',     # optional
-    'unix_socket_path': '' # replaces host and port
-}
-
-CACHEOPS = {
-    # Automatically cache any User.objects.get() calls for 15 minutes
-    # This includes request.user or post.author access,
-    # where Post.author is a foreign key to auth.User
-    'auth.user': {'ops': 'get', 'timeout': 60*15},
-
-    # Automatically cache all gets and queryset fetches
-    # to other django.contrib.auth models for an hour
-    'auth.*': {'ops': ('fetch', 'get'), 'timeout': 60*60},
-
-    # Cache gets, fetches, counts and exists to Permission
-    # 'all' is just an alias for ('get', 'fetch', 'count', 'exists')
-    'auth.permission': {'ops': 'all', 'timeout': 60*60},
-
-    # Enable manual caching on all other models with default timeout of an hour
-    # Use Post.objects.cache().get(...)
-    #  or Tags.objects.filter(...).order_by(...).cache()
-    # to cache particular ORM request.
-    # Invalidation is still automatic
-    '*.*': {'ops': (), 'timeout': 60*60},
-
-    # And since ops is empty by default you can rewrite last line as:
-    '*.*': {'timeout': 60*60},
-}
-
 ROOT_URLCONF = 'timesheetmanager.urls'
 
 TEMPLATES = [
@@ -100,7 +63,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-				'django.core.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
