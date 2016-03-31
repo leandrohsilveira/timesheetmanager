@@ -5,10 +5,8 @@ Created on 31 de mar de 2016
 '''
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
+from identity.forms import bootstrap_field
 from django.forms import widgets
-def bootstrap_field(field):
-	field.widget.attrs = {"class": "form-control"}
-	return field
 
 class LoginForm(AuthenticationForm):
 	next = forms.CharField(max_length=255, widget=widgets.HiddenInput)

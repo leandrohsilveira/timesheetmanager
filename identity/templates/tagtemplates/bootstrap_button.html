@@ -1,0 +1,27 @@
+{% if link %}
+<a href="{% url link %}" class="btn btn-{{ bclass }}">
+{% if icon %}
+<i class="fa fa-{{ icon }}"></i>
+{% endif %}
+{{ text|capfirst }}
+</a>
+
+{% elif href %}
+
+<a href="{% url href %}" class="btn btn-{{ bclass }}">
+{% if icon %}
+<i class="fa fa-{{ icon }}"></i>
+{% endif %}
+{{ text|capfirst }}
+</a>
+
+{% else %}
+
+<button type="{{ btype }}" class="btn btn-{{ bclass }}">
+{% if icon %}
+<i class="fa fa-{{ icon }}"></i>
+{% endif %}
+{{ text|capfirst }}
+</button>
+
+{% endif %}
