@@ -6,10 +6,13 @@
 <div class="col-md-4">
 	<form action="{% url 'identity:login' %}" method="post">
 		{% csrf_token %}
+		<div class="well well-lg">
 		
-		{% for field in form %}
-		{% bootstrap_field field %}
-		{% endfor %}
+			{% for field in form %}
+			{% bootstrap_field field %}
+			{% endfor %}
+		
+		</div>
 		
 		{% bootstrap_button icon='sign-in' text='entrar' bclass='primary' %}
 		{% bootstrap_button link='identity:cadastrar_pessoa' icon='sign-in' text='cadastre-se' %}
