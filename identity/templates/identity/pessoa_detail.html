@@ -1,4 +1,5 @@
 {% extends 'identity/identity_base.html' %} {% block content_block %} {% load humanize %}
+
 <h1 class="text-center">
 	<i class="fa fa-user"></i>
 	{% if user.get_username == pessoa.usuario.get_username %}
@@ -38,16 +39,15 @@
 			</p>
 			<div class="clearfix"></div>
 		</div>
-		{% if perms.identity.change_pessoa %}
-		<a href="{% url 'identity:editar_pessoa' pessoa.id %}" class="btn btn-primary">
-			<i class="fa fa-pencil"></i>
-			Editar
-		</a>
-		{% elif user.get_username == pessoa.usuario.get_username %}
-		<a href="{% url 'identity:editar_pessoa_autenticada' %}" class="btn btn-primary">
-			<i class="fa fa-pencil"></i>
-			Editar
-		</a>
+		{% if user.get_username == pessoa.usuario.get_username %}
+		
+		{% url 'identity:editar_pessoa_autenticada' as edit_pessoa_autenticada_url %}
+		{% bootstrap_button href=edit_pessoa_autenticada_url icon="pencil" bclass="primary" text="editar" %}
+		
+		{% elif perms.identity.change_pessoa %}
+		{% url 'identity:editar_pessoa' pessoa.id as edit_pessoa_url %}
+		{% bootstrap_button href=edit_pessoa_url icon="pencil" bclass="primary" text="editar" %}
+		
 		{% endif %}
 
 		{% if not pessoa.usuario.is_superuser %}
@@ -65,10 +65,8 @@
 		{% endif %}
 
 		{% if perms.identity.can_see_pessoas_list %}
-		<a href="{% url 'identity:lista_pessoas' 1 %}" class="btn btn-default">
-			<i class="fa fa-undo"></i>
-			Voltar
-		</a>
+		{% url 'identity:lista_pessoas' 1 as lista_pessoas_url %}
+		{% bootstrap_button href=lista_pessoas_url icon="undo" text="voltar" %}
 		{% endif %}
 
 	</div>
