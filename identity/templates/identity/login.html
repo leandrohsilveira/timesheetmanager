@@ -5,19 +5,18 @@
 </h1>
 <div class="col-md-4"></div>
 <div class="col-md-4">
-	<form action="{% url 'identity:autenticar' %}" method="post">
+	<form action="{% url 'identity:login' %}" method="post">
 		{% csrf_token %}
-		<div class="well well-lg">
-			<input type="hidden" id="next" name="next" value="{{ next }}" />
-			<div class="form-group">
-				<label for="login">Login:</label>
-				<input class="form-control" type="text" id="login" name="username" />
-			</div>
-			<div class="form-group">
-				<label for="senha">Senha:</label>
-				<input class="form-control" type="password" id="senha" name="password" />
-			</div>
+		{% for field in form %}
+		{% if not field.is_hidden %}
+		<div class="form-group">
+			{{ field.label_tag }}
+			{{ field }}
 		</div>
+		{% else %}
+		{{ field }}
+		{% endif %}
+		{% endfor %}
 		<button class="btn btn-primary" type="submit">
 			<i class="fa fa-sign-in"></i>
 			Entrar

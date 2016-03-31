@@ -4,8 +4,8 @@ from django.conf.urls import url, include
 from identity.login import views
 
 urlpatterns = [
-	url('^', include('django.contrib.auth.urls')),
-	url(r'^login/autenticar$', views.fazer_login, name = 'autenticar'),
+	#url('^', include('django.contrib.auth.urls')),
+	url(r'^login/$', views.LoginView.as_view(), name = 'login'),
 	url(r'^login/sair$', views.fazer_logout, name = 'sair'),
 
 ]
