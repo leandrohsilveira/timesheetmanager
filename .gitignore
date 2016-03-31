@@ -45,3 +45,8 @@ __pycache__
 /.project
 /db.sqlite3
 /.settings/
+
+venv
+*.pyc
+staticfiles
+.env
