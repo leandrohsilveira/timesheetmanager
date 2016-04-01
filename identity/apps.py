@@ -19,8 +19,8 @@ def bootstrap_field(bound_field):
 	return {"field": bound_field}
 
 @register.inclusion_tag(name = "bootstrap_messages", filename="tagtemplates/bootstrap_messages.html")
-def bootstrap_messages(messages=None, errors=None):
-	return {"messages": messages, "errors": errors}
+def bootstrap_messages(messages):
+	return {"messages": messages}
 
 @register.inclusion_tag(name = "bootstrap_button", filename="tagtemplates/bootstrap_button.html")
 def bootstrap_button(text="", href=None, link=None, icon=None, btype="submit", bclass="default"):
