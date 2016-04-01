@@ -9,6 +9,6 @@ app_name = 'identity'
 
 urlpatterns = [
 	url(r'^$', login_required(views.VisualizarPessoaAutenticadaView.as_view()), name = 'index'),
-	url("^", include("identity.login.urls")),
+	url('^', include('django.contrib.auth.urls')),
 	url("^", include("identity.pessoa.urls")),
 ]

@@ -6,6 +6,7 @@
 <div class="col-md-4">
 	<form action="{% url 'identity:login' %}" method="post">
 		{% csrf_token %}
+		{% bootstrap_messages errors=form.non_field_errors %}
 		<div class="well well-lg">
 		
 			{% for field in form %}

@@ -1,0 +1,18 @@
+{% extends 'identity/identity_base.html' %} {% block content_block %}
+<h1 class="text-center">
+	{{"sessão encerrada"|capfirst}}
+</h1>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+	<div class="well well-lg">
+	
+		Sua sessão foi encerrada,
+		<br />
+		Obrigado por visitar nosso Web site hoje.
+	
+	</div>
+	{% bootstrap_button link='identity:index' icon='sign-in' text='acessar novamente' bclass='primary' %}
+</div>
+<div class="col-md-4"></div>
+<div class="clearfix"></div>
+{% endblock %}

@@ -14,8 +14,13 @@ def mask(value, arg):
 	return m.replace("X", "");
 
 @register.inclusion_tag(name = "bootstrap_field", filename="tagtemplates/bootstrap_field.html")
-def bootstrap_field(field):
-	return {"field": field}
+def bootstrap_field(bound_field):
+	bound_field.field.widget.attrs = {"class": "form-control"}
+	return {"field": bound_field}
+
+@register.inclusion_tag(name = "bootstrap_messages", filename="tagtemplates/bootstrap_messages.html")
+def bootstrap_messages(messages=None, errors=None):
+	return {"messages": messages, "errors": errors}
 
 @register.inclusion_tag(name = "bootstrap_button", filename="tagtemplates/bootstrap_button.html")
 def bootstrap_button(text="", href=None, link=None, icon=None, btype="submit", bclass="default"):

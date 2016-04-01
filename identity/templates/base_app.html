@@ -24,7 +24,7 @@
 							<a href="{% url 'identity:visualizar_pessoa_autenticada' %}"><i class="fa fa-eye"></i> {{ user.get_full_name|default:user.get_username }}</a>
 						</li>
 						<li>
-							<a href="{% url 'identity:sair' %}"><i class="fa fa-sign-out"></i> Sair</a>
+							<a href="{% url 'identity:logout' %}"><i class="fa fa-sign-out"></i> Sair</a>
 						</li>
 					</ul>
 				</li>
@@ -38,6 +38,7 @@
 <div class="container">
 	<div class="hidden-xs hidden-sm base-top-margin-md-lg"></div>
 	<div class="hidden-md hidden-lg base-top-margin-xs-sm"></div>
+	{% bootstrap_messages messages=messages %}
 	{% block content_block %}{% endblock content_block %}
 	<hr>
 	<footer>
