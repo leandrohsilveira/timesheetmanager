@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block body_block %}
+{% extends 'base/base.html' %} {% block body_block %}
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -21,7 +21,10 @@
 					</p>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="{% url 'identity:visualizar_pessoa_autenticada' %}"><i class="fa fa-eye"></i> {{ user.get_full_name|default:user.get_username }}</a>
+							<a href="{% url 'identity:current_user_detail' %}"><i class="fa fa-eye"></i> {{ user.get_full_name|default:user.get_username }}</a>
+						</li>
+						<li>
+							<a href="{% url 'identity:current_user_password_update' %}"><i class="fa fa-key"></i> {{ "mudar minha senha"|capfirst }}</a>
 						</li>
 						<li>
 							<a href="{% url 'identity:logout' %}"><i class="fa fa-sign-out"></i> Sair</a>

@@ -1,4 +1,4 @@
-{% extends 'base_app.html' %} 
+{% extends 'base/base_app.html' %} 
 
 {% block head %}
 <title>Identity Manager</title>
@@ -19,7 +19,7 @@ Identity Manager
 	</li>
 	{% if perms.identity.can_see_pessoas_list %}
 	<li>
-		<a href="{% url 'identity:lista_pessoas' 1 %}">
+		<a href="{% url 'identity:users_list' 1 %}">
 			<i class="fa fa-users"></i>
 			Usuários
 		</a>

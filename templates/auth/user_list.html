@@ -1,0 +1,54 @@
+{% extends "identity/identity_base.html"%} {% load humanize %} {% block content_block %}
+<h1 class="text-center">
+	{% icon_text icon='users' text='Lista de usuários' %}
+</h1>
+<hr />
+<div class="row">
+	{% bootstrap_button link='identity:user_create' icon='plus' text='cadastrar usuário' bclass="primary" %}
+</div>
+{% if is_paginated %}
+<div class="row">{% include 'identity/includes/pagination.html' with href='identity:users_list' page_obj=page_obj %}</div>
+{% else %}
+<br />
+{% endif %}
+<div class="row">
+	<div class="table-responsive">
+		<table id="tabela" class="table table-bordered table-striped table-hover table-condensed">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Dados</th>
+					<th>Data de Criação</th>
+					<th>Último login</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if object_list %} {% for object in object_list %}
+				<tr>
+					<th>
+						<strong>{{object.id}}</strong>
+					</th>
+					<td>
+						<i class="fa fa-user"></i>
+						<strong>{{object.get_full_name|default:"sem nome definido"|capfirst}}</strong>
+						<br>
+						{{ object.get_username }}
+						<br>
+						{{ object.email }}
+					</td>
+					<td>{{object.date_joined|naturaltime}}</td>
+					<td>{{object.last_login|naturaltime|default:"Ainda não autenticou"}}</td>
+				</tr>
+				{% endfor %} 
+				{% else %}
+				<tr colspan="5">
+					<p>Nenhum usuário para exibir.</p>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% if is_paginated %}
+<div class="row">{% include 'identity/includes/pagination.html' with href='identity:users_list' page_obj=page_obj %}</div>
+{% endif %} {% endblock %}

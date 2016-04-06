@@ -1,0 +1,41 @@
+{% extends 'identity/identity_base.html' %} {% block content_block %} {% load staticfiles %}
+<h1 class="text-center">
+	<i class="fa fa-user"></i>
+	Formulário Usuário
+</h1>
+<hr />
+<div class="row">
+	<div class="col-md-4"></div>
+	<form id="pessoa_form" class="col-md-4" action="{{ request.path }}" method="post">
+		{% csrf_token %}
+		{% bootstrap_messages form.non_field_errors %}
+		<div class="well well-lg">
+			{% for field in form %}
+			{% bootstrap_field field %}
+			{% endfor %}
+			
+			{% campos_obrigatorios %}
+			
+			<div class="clearfix"></div>
+		</div>
+		<div class="form-group col-md-12">
+			<button id="salvar" class="btn btn-primary" type="submit">
+				<i class="fa fa-floppy-o"></i>
+				Salvar
+			</button>
+			{% if user.is_authenticated %}
+			<a class="btn btn-default" href="{% url 'identity:current_user_detail' %}">
+				<i class="fa fa-times"></i>
+				Cancelar
+			</a>
+			{% else %}
+			<a class="btn btn-default" href="{% url 'identity:login' %}">
+				<i class="fa fa-times"></i>
+				Cancelar
+			</a>
+			{%endif %}
+		</div>
+	</form>
+	<div class="col-md-4"></div>
+</div>
+{% endblock %} 

@@ -5,3 +5,40 @@
 .base-top-margin-xs-sm {
 	padding-top: 70px;
 }
+
+/* @-webkit-keyframes fadeIn, */
+@keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+}
+
+/* @-webkit-keyframes fadeOut, */
+@keyframes fadeOut {
+    from { opacity: 1; } to { opacity: 0; }
+}
+
+.dropdown-menu {
+/* 	animation: fadeOut 1s; */
+}
+
+* {
+	font-family: 'Raleway', sans-serif;
+}
+
+.open > .dropdown-menu {
+	animation: fadeIn 1s;
+}
+
+.text-small {
+	font-size: 0.8em;
+}
+
+.alert-small {
+	padding: 5px 5px 5px 10px;
+	font-size: 0.9em;
+}
+
+.alert a {
+	text-decoration: underline;
+	font-weight: bolder;
+}
+
