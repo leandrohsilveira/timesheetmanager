@@ -1,4 +1,4 @@
-{% extends "identity/identity_base.html"%} {% load humanize %} {% block content_block %}
+{% extends "auth/auth_base.html"%} {% load humanize %} {% block content_block %}
 <h1 class="text-center">
 	{% icon_text icon='users' text='Lista de usuários' %}
 </h1>
@@ -24,7 +24,7 @@
 			</thead>
 			<tbody>
 				{% if object_list %} {% for object in object_list %}
-				<tr>
+				<tr class="tr-link" onclick="window.location='{% url 'identity:user_detail' object.id %}'">
 					<th>
 						<strong>{{object.id}}</strong>
 					</th>

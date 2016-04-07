@@ -1,0 +1,18 @@
+{% extends 'identity/identity_base.html' %} {% block content_block %} {% load i18n %}
+<h1 class="text-center">
+	{{title|capfirst}}
+</h1>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+	<div class="well well-lg">
+		
+		{{ _('session terminated.')|capfirst }}
+		<br />
+		{{ _('thank you for visiting our application, come back soon')|capfirst }}
+	
+	</div>
+	{% bootstrap_button link='identity:index' icon='sign-in' text=_('sign in again')|capfirst bclass='primary' %}
+</div>
+<div class="col-md-4"></div>
+<div class="clearfix"></div>
+{% endblock %}

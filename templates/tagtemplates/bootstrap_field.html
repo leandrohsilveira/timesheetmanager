@@ -9,14 +9,14 @@
 	{% endif %}
 	{% if bound_field.errors %}
 	{% for error in bound_field.errors %}
-	<span class="help-block alert alert-danger alert-small">{{ error|safe }}</span>
+	<span class="help-block alert alert-danger alert-small">{{ error|capfirst|safe }}</span>
 	{% endfor %}
 	{% if bound_field.help_text %}
-	<span class="help-block alert alert-danger alert-small">{{ bound_field.help_text|safe }}</span>
+	<span class="help-block alert alert-danger alert-small">{{ bound_field.help_text|capfirst|safe }}</span>
 	{% endif %}
 	{% else %}
 	{% if bound_field.help_text %}
-	<span class="help-block alert alert-info alert-small">{{ bound_field.help_text|safe }}</span>
+	<span class="help-block alert alert-info alert-small">{{ bound_field.help_text|capfirst|safe }}</span>
 	{% endif %}
 	{% endif %}
 </div>

@@ -1,10 +1,12 @@
-{% extends 'identity/identity_base.html' %} {% block content_block %} {% load staticfiles %}
+{% extends 'auth/auth_base.html' %} {% block content_block %} {% load staticfiles %}
 <h1 class="text-center">
 	<i class="fa fa-user"></i>
 	Formulário Usuário
 </h1>
 <hr />
 <div class="row">
+	{{ context }}
+
 	<div class="col-md-4"></div>
 	<form id="pessoa_form" class="col-md-4" action="{{ request.path }}" method="post">
 		{% csrf_token %}

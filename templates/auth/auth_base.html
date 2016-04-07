@@ -1,0 +1,45 @@
+{% extends 'base/base_app.html' %} 
+
+{% block head %}
+<title>Identity Manager</title>
+{% endblock head %}
+
+{% block app_title %}
+<i class="fa fa-clock-o fa-lg"></i>
+Identity Manager
+{% endblock app_title %}
+
+{% block app_menu %}
+<ul class="nav navbar-nav">
+	<li>
+		<a href="{% url 'identity:index' %}">
+			<i class="fa fa-home"></i>
+			Home
+		</a>
+	</li>
+	{% if perms.auth.change_user %}
+	<li>
+		<a href="{% url 'identity:users_list' 1 %}">
+			<i class="fa fa-users"></i>
+			Usuários
+		</a>
+	</li>
+	{% endif %}
+	{% if user.is_superuser %}
+	<li>
+		<a href="{% url 'admin:index' %}">
+			<i class="fa fa-cogs"></i>
+			Administração
+		</a>
+	</li>
+	{% endif %}
+	<!-- 					<div class="form-group"> -->
+	<!-- 						<input type="text" placeholder="Email" class="form-control"> -->
+	<!-- 					</div> -->
+	<!-- 					<div class="form-group"> -->
+	<!-- 						<input type="password" placeholder="Password" class="form-control"> -->
+	<!-- 					</div> -->
+	<!-- 					<button type="submit" class="btn btn-success">Sign in</button> -->
+</ul>
+{% endblock %}
+

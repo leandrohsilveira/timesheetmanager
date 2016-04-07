@@ -6,11 +6,16 @@ from identity.pessoa import views
 
 urlpatterns = [
 
-	url(r'^user$', views.CurrentUserDetailView.as_view(), name = 'current_user_detail'),
+	url(r'^user/$', views.CurrentUserDetailView.as_view(), name = 'current_user_detail'),
 	url(r'^user/new$', views.UserCreateView.as_view(), name = 'user_create'),
 	url(r'^user/edit$', views.CurrentUserUpdateView.as_view(), name = 'current_user_update'),
+	url(r'^user/password/$', views.CurrentUserPasswordUpdateView.as_view(), name = 'current_user_password_update'),
+
+	url(r'^user/(?P<pk>\d+)/$', views.UserDetailView.as_view(), name = 'user_detail'),
+	url(r'^user/(?P<pk>\d+)/edit$', views.UserUpdateView.as_view(), name = 'user_update'),
+	url(r'^user/(?P<pk>\d+)/password/$', views.UserPasswordUpdateView.as_view(), name = 'user_password_update'),
+
     url(r'^users/(?P<page>\d+)$', views.UsersListView.as_view(), name = 'users_list'),
 
-	url(r'^password/$', views.CurrentUserPasswordUpdateView.as_view(), name = 'current_user_password_update'),
 	
 ]
