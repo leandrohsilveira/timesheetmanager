@@ -1,0 +1,55 @@
+{% load i18n %}
+{% blocktrans asvar current_page_template with num_page=page_obj.number total_pages=page_obj.paginator.num_pages context "paginator template" %}page {{ num_page }} of {{ total_pages }}{% endblocktrans %}
+<nav>
+	<ul class="pagination">
+		{% if page_obj.has_previous %}
+		<li>
+			<a href="{% if link %}{% url link 1 %}{% elif href %}{{ href }}/1{% endif %}" role="button" aria-label="{{ _('first')|capfirst }}">
+				<i class="fa fa-angle-double-left"></i>
+			</a>
+		</li>
+		<li>
+			<a href="{% if link %}{% url link page_obj.previous_page_number %}{% elif href %}{{ href }}/{{ page_obj.previous_page_number }}{% endif %}" role="button" aria-label="{{ _('previous')|capfirst }}">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</li>
+		{% else %}
+		<li class="disabled">
+			<a role="button" aria-label="{{ _('first')|capfirst }}">
+				<i class="fa fa-angle-double-left"></i>
+			</a>
+		</li>
+		<li class="disabled">
+			<a role="button" aria-label="{{ _('previous')|capfirst }}">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</li>
+		{% endif %}
+		<li class="active">
+			<span>{{ current_page_template }}</span>
+		</li>
+		{% if page_obj.has_next %}
+		<li>
+			<a href="{% if link %}{% url link page_obj.next_page_number %}{% elif href %}{{ href }}/{{ page_obj.next_page_number }}{% endif %}" role="button" aria-label="{{ _('next')|capfirst }}">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</li>
+		<li>
+			<a href="{% if link %}{% url link page_obj.paginator.num_pages %}{% elif href %}{{ href }}/{{ page_obj.paginator.num_pages }}{% endif %}" role="button" aria-label="{{ _('last')|capfirst }}">
+				<i class="fa fa-angle-double-right"></i>
+			</a>
+		</li>
+		{% else %}
+		<li class="disabled">
+			<a role="button" aria-label="{{ _('next')|capfirst }}">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</li>
+		<li class="disabled">
+			<a role="button" aria-label="{{ _('last')|capfirst }}">
+				<i class="fa fa-angle-double-right"></i>
+			</a>
+		</li>
+		{% endif %}
+	</ul>
+</nav>

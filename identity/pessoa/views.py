@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
-from django.utils.translation import ugettext_lazy as __, ugettext as _
+from django.utils.translation import ugettext as _
 from django.views import generic
 
 from identity.base import PermissionDeniedInfoMessageMixin, FormUpdateView
@@ -19,17 +19,17 @@ class UserCreateView(SuccessMessageMixin, generic.CreateView):
 	form_class = UserCreateForm
 	success_url = reverse_lazy('identity:current_user_detail')
 	# Translators: user data successful create message
-	success_message = __("user data successfully created!")
+	success_message = _("user successfully created!")
 
 class UserUpdateView(PermissionDeniedInfoMessageMixin, SuccessMessageMixin, PermissionRequiredMixin, generic.UpdateView):
 	model = User
 	form_class = UserUpdateForm
 	permission_required = "auth.change_user"
 	# Translators: user data successful update message
-	success_message = __("user data successfully updated!")
+	success_message = _("the user data successfully updated!")
 	context_object_name = "user_update"
 	# Translators: permission description to access the user update view appeared on permission denied message
-	permission_denied_message = __("change other users data")
+	permission_denied_message = _("change other users data")
 
 	def has_permission(self):
 		if self.get_object().is_superuser:
@@ -45,7 +45,7 @@ class UserDetailView(PermissionDeniedInfoMessageMixin, PermissionRequiredMixin, 
 	permission_required = "auth.change_user"
 	context_object_name = "user_detail"
 	# Translators: permission description to access the user detail view appeared on permission denied message
-	permission_denied_message = __("see other users data")
+	permission_denied_message = _("see other users data")
 	def has_permission(self):
 		if self.get_object().is_superuser:
 			raise PermissionDenied(self.get_permission_denied_message())
@@ -58,9 +58,9 @@ class UserPasswordUpdateView(SuccessMessageMixin, PermissionDeniedInfoMessageMix
 	permission_required = "auth.change_user"
 	template_name = "auth/password_change_form.html"
 	# Translators: user password successful update message
-	success_message = __("user password successfully updated!")
+	success_message = _("the user password successfully updated!")
 	# Translators: permission description to access the user password update view appeared on permission denied message
-	permission_denied_message = __("change other users password")
+	permission_denied_message = _("change other users password")
 
 	def get_success_url(self):
 		return reverse_lazy('identity:user_detail', kwargs = {"pk": self.object.id })
@@ -79,7 +79,7 @@ class CurrentUserUpdateView(SuccessMessageMixin, LoginRequiredMixin, generic.Upd
 	form_class = UserUpdateForm
 	success_url = reverse_lazy('identity:current_user_detail')
 	# Translators: current user data successful update message
-	success_message = __("your user data were successfully updated!")
+	success_message = _("your user data were successfully updated!")
 	context_object_name = "current_user_update"
 
 	def get_object(self):
@@ -96,7 +96,7 @@ class CurrentUserPasswordUpdateView(SuccessMessageMixin, LoginRequiredMixin, gen
 	form_class = PasswordChangeForm
 	success_url = reverse_lazy("identity:current_user_detail")
 	# Translators: current user password successful update message
-	success_message = __("your password were successfully updated!")
+	success_message = _("your password were successfully updated!")
 
 	def get_form(self):
 		return self.form_class(user = self.request.user, **self.get_form_kwargs())

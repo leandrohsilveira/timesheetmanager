@@ -1,0 +1,251 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-08 01:31-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\identity\base.py:18
+msgid "The model atribute is required."
+msgstr "O atributo 'model' é obrigatório."
+
+#: .\identity\base.py:21
+msgid "A 'pk' kwarg is required."
+msgstr "Um kwarg com chave 'pk' é obrigatório."
+
+#: .\identity\pessoa\forms.py:20
+msgid "Password"
+msgstr "Senha"
+
+#: .\identity\pessoa\forms.py:21
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's "
+"password, but you can change the password using <a href=\"password\">this "
+"form</a>."
+msgstr ""
+"Não são armazenadas senhas desprotegidas e, por isso, não há como visualizar "
+"a senha de um usuário, mas você pode alterá-la utilizando <a href=\"password"
+"\">este formulário</a>."
+
+#. Translators: user data successful create message
+#: .\identity\pessoa\views.py:22
+msgid "user successfully created!"
+msgstr "usuário cadastrado com sucesso!"
+
+#. Translators: user data successful update message
+#: .\identity\pessoa\views.py:29
+msgid "the user data successfully updated!"
+msgstr "os dados do usuário atualizados com sucesso!"
+
+#. Translators: permission description to access the user update view appeared on permission denied message
+#: .\identity\pessoa\views.py:32
+msgid "change other users data"
+msgstr "atualizar dados do usuário"
+
+#. Translators: permission description to access the user detail view appeared on permission denied message
+#: .\identity\pessoa\views.py:48
+msgid "see other users data"
+msgstr "atualizar dados do usuário"
+
+#. Translators: user password successful update message
+#: .\identity\pessoa\views.py:61
+msgid "the user password successfully updated!"
+msgstr "a senha do usuário foi atualizada com sucesso!"
+
+#. Translators: permission description to access the user password update view appeared on permission denied message
+#: .\identity\pessoa\views.py:63
+msgid "change other users password"
+msgstr "trocar senha"
+
+#. Translators: current user data successful update message
+#: .\identity\pessoa\views.py:82
+msgid "your user data were successfully updated!"
+msgstr "Seus dados de usuário foram atualizados com sucesso!"
+
+#. Translators: current user password successful update message
+#: .\identity\pessoa\views.py:99
+msgid "your password were successfully updated!"
+msgstr "Sua senha foi alterada com sucesso!"
+
+#: .\templates\auth\auth_base.html:17
+msgid "home"
+msgstr "início"
+
+#: .\templates\auth\auth_base.html:24
+msgid "users"
+msgstr "usuários"
+
+#: .\templates\auth\auth_base.html:32
+msgid "administration"
+msgstr "administração"
+
+#: .\templates\auth\password_change_form.html:4
+#: .\templates\auth\user_detail.html:40 .\templates\base\base_app.html.py:30
+msgid "change password"
+msgstr "trocar senha"
+
+#: .\templates\auth\password_change_form.html:4
+#, python-format
+msgctxt "change password"
+msgid "of %(first_name)s"
+msgstr "de %(first_name)s"
+
+#: .\templates\auth\password_change_form.html:19
+#: .\templates\auth\user_form.html:21
+msgid "save"
+msgstr "salvar"
+
+#: .\templates\auth\password_change_form.html:20
+#: .\templates\auth\user_form.html:22
+#: .\templates\base\includes\language_modal.html:40
+msgid "cancel"
+msgstr "cancelar"
+
+#: .\templates\auth\user_detail.html:3
+#, python-format
+msgid "%(first_name)s's user data"
+msgstr "dados do usuário %(first_name)s"
+
+#: .\templates\auth\user_detail.html:8
+msgid "my user"
+msgstr "meu usuário"
+
+#: .\templates\auth\user_detail.html:19
+msgid "full name"
+msgstr "nome completo"
+
+#: .\templates\auth\user_detail.html:23
+msgid "e-mail address"
+msgstr "endereço de e-mail"
+
+#: .\templates\auth\user_detail.html:27
+msgid "username"
+msgstr "usuário"
+
+#: .\templates\auth\user_detail.html:31 .\templates\auth\user_list.html:21
+msgid "sign up date"
+msgstr "data de cadastro"
+
+#: .\templates\auth\user_detail.html:35 .\templates\auth\user_list.html:22
+msgid "last login"
+msgstr "último login"
+
+#: .\templates\auth\user_detail.html:36 .\templates\auth\user_list.html:40
+msgid "never logged in"
+msgstr "nunca fez login"
+
+#: .\templates\auth\user_detail.html:41
+msgid "update user's data"
+msgstr "atualizar dados do usuário"
+
+#: .\templates\auth\user_form.html:3
+msgid "user form"
+msgstr "formulário de usuário"
+
+#: .\templates\auth\user_list.html:3
+msgid "users list"
+msgstr "lista de usuários"
+
+#: .\templates\auth\user_list.html:7
+msgid "new user"
+msgstr "novo usuário"
+
+#: .\templates\auth\user_list.html:20
+msgid "user data"
+msgstr "dados do usuário"
+
+#: .\templates\auth\user_list.html:33
+msgid "not provided yet"
+msgstr "ainda não fornecido"
+
+#: .\templates\auth\user_list.html:45
+msgid "no results to show"
+msgstr "nenhum resultado para exibir"
+
+#: .\templates\base\base_app.html:6
+msgid "toggle navigation"
+msgstr "exibir/esconder navegação"
+
+#: .\templates\base\base_app.html:24
+#: .\templates\base\includes\language_modal.html:10
+msgid "switch language"
+msgstr "trocar idioma"
+
+#: .\templates\base\base_app.html:33
+msgid "logout"
+msgstr "sair"
+
+#: .\templates\base\includes\language_modal.html:18
+msgid "choose a language"
+msgstr "escolha um idioma"
+
+#: .\templates\base\includes\language_modal.html:36
+msgid "submit"
+msgstr "submeter"
+
+#: .\templates\registration\logged_out.html:9
+msgid "session terminated."
+msgstr "sessão terminada"
+
+#: .\templates\registration\logged_out.html:11
+msgid "thank you for visiting our application, come back soon"
+msgstr "obrigado por visitar nossa aplicação, volte em breve"
+
+#: .\templates\registration\logged_out.html:14
+msgid "sign in again"
+msgstr "entrar novamente"
+
+#: .\templates\registration\login.html:4
+msgid "switch user"
+msgstr "trocar de usuário"
+
+#: .\templates\registration\login.html:6 .\templates\registration\login.html:24
+msgid "sign in"
+msgstr "entrar"
+
+#: .\templates\registration\login.html:25
+msgid "sign up"
+msgstr "cadastre-se"
+
+#: .\templates\tagtemplates\bootstrap_paginator.html:2
+#, python-format
+msgctxt "paginator template"
+msgid "page %(num_page)s of %(total_pages)s"
+msgstr "página %(num_page)s de %(total_pages)s"
+
+#: .\templates\tagtemplates\bootstrap_paginator.html:7
+#: .\templates\tagtemplates\bootstrap_paginator.html:18
+msgid "first"
+msgstr "primeiro"
+
+#: .\templates\tagtemplates\bootstrap_paginator.html:12
+#: .\templates\tagtemplates\bootstrap_paginator.html:23
+msgid "previous"
+msgstr "anterior"
+
+#: .\templates\tagtemplates\bootstrap_paginator.html:33
+#: .\templates\tagtemplates\bootstrap_paginator.html:44
+msgid "next"
+msgstr "próximo"
+
+#: .\templates\tagtemplates\bootstrap_paginator.html:38
+#: .\templates\tagtemplates\bootstrap_paginator.html:49
+msgid "last"
+msgstr "último"
+
+#: .\templates\tagtemplates\campos_obrigatorios.html:2
+msgid "required fields"
+msgstr "campos obrigatórios"

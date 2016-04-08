@@ -1,11 +1,13 @@
-{% extends 'auth/auth_base.html' %} {% block content_block %} {% load humanize %}
+{% extends 'auth/auth_base.html' %} {% load humanize %} {% load i18n %} {% block content_block %}
+
+{% blocktrans asvar user_change_title with first_name=object.first_name|capfirst %}{{ first_name }}'s user data{% endblocktrans %}
 
 <h1 class="text-center">
 	<i class="fa fa-user"></i>
 	{% if user.username == object.username %}
-	Meus Dados
+	{{ _("my user")|capfirst }}
 	{% else %}
-	Detalhes do usuário {{ object.first_name|capfirst }}
+	{{ user_change_title|capfirst }}
 	{% endif %}
 </h1>
 <hr />
@@ -14,29 +16,29 @@
 	<div class="col-md-4">
 		<div class="well well-lg">
 			<p>
-				<strong>Nome: </strong>
+				<strong>{{ _("full name")|capfirst }}: </strong>
 				{{ object.get_full_name }}
 			</p>
 			<p>
-				<strong>E-mail: </strong>
+				<strong>{{ _("e-mail address")|capfirst }}: </strong>
 				{{ object.email }}
 			</p>
 			<p>
-				<strong>Login: </strong>
+				<strong>{{ _("username")|capfirst }}: </strong>
 				{{ object.username }}
 			</p>
 			<p>
-				<strong>Cadastrado: </strong>
+				<strong>{{ _("sign up date")|capfirst }}: </strong>
 				{{ object.date_joined|naturaltime }}
 			</p>
 			<p>
-				<strong>Último login: </strong>
-				{{ object.last_login|naturaltime|default:"Ainda não autenticou." }}
+				<strong>{{ _("last login")|capfirst }}: </strong>
+				{{ object.last_login|naturaltime|default:_("never logged in")|capfirst }}
 			</p>
 			<div class="clearfix"></div>
 		</div>
-		{% bootstrap_button href='password' icon='key' bclass='success' text='alterar senha' %}
-		{% bootstrap_button href='edit' icon='pencil' bclass='primary' text='alterar dados' %}
+		{% bootstrap_button href='password' icon='key' bclass='success' text=_("change password") %}
+		{% bootstrap_button href='edit' icon='pencil' bclass='primary' text=_("update user's data") %}
 	</div>
 	<div class="col-md-4"></div>
 </div>

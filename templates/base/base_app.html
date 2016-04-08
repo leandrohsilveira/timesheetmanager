@@ -1,9 +1,9 @@
-{% extends 'base/base.html' %} {% block body_block %}
+{% extends 'base/base.html' %} {% load i18n %} {% block body_block %}
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
+				<span class="sr-only">{{ _("toggle navigation")|capfirst }}</span>
 				<i class="fa fa-bars"></i>
 			</button>
 			<span class="navbar-brand">
@@ -21,13 +21,16 @@
 					</p>
 					<ul class="dropdown-menu">
 						<li>
+							<a href="#" data-toggle="modal" data-target="#languageModal"><i class="fa fa-language"></i> {{ _("switch language")|capfirst }}</a>
+						</li>
+						<li>
 							<a href="{% url 'identity:current_user_detail' %}"><i class="fa fa-eye"></i> {{ user.get_full_name|default:user.get_username }}</a>
 						</li>
 						<li>
-							<a href="{% url 'identity:current_user_password_update' %}"><i class="fa fa-key"></i> {{ "mudar minha senha"|capfirst }}</a>
+							<a href="{% url 'identity:current_user_password_update' %}"><i class="fa fa-key"></i> {{ _("change password")|capfirst }}</a>
 						</li>
 						<li>
-							<a href="{% url 'identity:logout' %}"><i class="fa fa-sign-out"></i> Sair</a>
+							<a href="{% url 'identity:logout' %}"><i class="fa fa-sign-out"></i> {{ _("logout")|capfirst }}</a>
 						</li>
 					</ul>
 				</li>
@@ -38,6 +41,7 @@
 		</div>
 	</div>
 </nav>
+{% include "base/includes/language_modal.html" %}
 <div class="container">
 	<div class="hidden-xs hidden-sm base-top-margin-md-lg"></div>
 	<div class="hidden-md hidden-lg base-top-margin-xs-sm"></div>

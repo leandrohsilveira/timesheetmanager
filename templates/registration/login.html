@@ -1,9 +1,9 @@
-{% extends 'identity/identity_base.html' %} {% block content_block %} {% load i18n %}
+{% extends 'identity/identity_base.html' %} {% load i18n %} {% block content_block %}
 <h1 class="text-center">
 	{% if user.is_authenticated %}
-	{% icon_text icon='refresh' text=_('switch user')|capfirst %}
+	{% icon_text icon='refresh' text=_('switch user') %}
 	{% else %}
-	{% icon_text icon='sign-in' text=_('sign in')|capfirst %}
+	{% icon_text icon='sign-in' text=_('sign in') %}
 	{% endif %}
 </h1>
 <div class="col-md-4"></div>
@@ -21,8 +21,8 @@
 			{% campos_obrigatorios %}
 		</div>
 		
-		{% bootstrap_button icon='sign-in' text=_('sign in') bclass='primary' %}
-		{% bootstrap_button link='identity:user_create' icon='user-plus' text='sign up' %}
+		{% bootstrap_button icon='sign-in' text=_("sign in") bclass='primary' %}
+		{% bootstrap_button link='identity:user_create' icon='user-plus' text=_("sign up") %}
 		
 	</form>
 </div>

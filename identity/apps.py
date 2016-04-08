@@ -1,9 +1,14 @@
 from django.apps import AppConfig
+from django.core.exceptions import ImproperlyConfigured
 from django.template.defaultfilters import register
+from django.utils.translation import ugettext_lazy as _l
 
 
 class IdentityConfig(AppConfig):
 	name = 'identity'
+
+def mapped_languages(request):
+	return {"mapped_languages": ["pt-br", "en"]}
 
 @register.filter(name = 'mask')
 def mask(value, arg):
@@ -38,3 +43,9 @@ def icon_text(icon, text="", size=""):
 @register.inclusion_tag(name = "campos_obrigatorios", filename = "tagtemplates/campos_obrigatorios.html")
 def campos_obrigatorios():
 	return {}
+
+@register.inclusion_tag(name = "bootstrap_paginator", filename = "tagtemplates/bootstrap_paginator.html")
+def bootstrap_paginator(page_obj, link = None, href = None):
+	if not link and not href:
+		raise ImproperlyConfigured(_l("both arguments \"link\" and \"href\" shouldn't be None. Please provide a \"link\" or \"href\" argument."))
+	return {"page_obj": page_obj, "link": link, "href": href}
