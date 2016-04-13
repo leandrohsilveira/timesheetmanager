@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-from django.conf.global_settings import LOGGING
 from django.contrib import messages
 
 
@@ -96,8 +95,20 @@ LOGGER_FILES_ROOT = os.path.join(BASE_DIR, 'log')
 os.makedirs(LOGGER_FILES_ROOT, exist_ok = True)
 
 LOGGER_FILES = {
-	'django.debug.simple': os.path.join(LOGGER_FILES_ROOT, 'debug-simple.log'),
-	'django.debug.complete': os.path.join(LOGGER_FILES_ROOT, 'debug-complete.log'),
+
+	'console.debug':  os.path.join(LOGGER_FILES_ROOT, '_debug.log'),
+	'console.info':  os.path.join(LOGGER_FILES_ROOT, '_info.log'),
+	'console.warning':  os.path.join(LOGGER_FILES_ROOT, '_warning.log'),
+	'console.error':  os.path.join(LOGGER_FILES_ROOT, '_error.log'),
+	'console.critical':  os.path.join(LOGGER_FILES_ROOT, '_critical.log'),
+
+
+	'django.debug': os.path.join(LOGGER_FILES_ROOT, 'django.debug.log'),
+	'django.info': os.path.join(LOGGER_FILES_ROOT, 'django.info.log'),
+	'django.warning': os.path.join(LOGGER_FILES_ROOT, 'django.warning.log'),
+	'django.error': os.path.join(LOGGER_FILES_ROOT, 'django.error.log'),
+	'django.critical': os.path.join(LOGGER_FILES_ROOT, 'django.critical.log'),
+
 }
 
 for key in LOGGER_FILES:
@@ -109,30 +120,88 @@ LOGGING = {
 	'version': 1,
 	"disable_existing_loggers": False,
 	'formatters': {
-        'complete': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(asctime)s %(message)s'
+        'log': {
+            'format': '%(asctime)s: [%(levelname)s] (M: %(module)s) (P: %(process)d) (T: %(thread)d) - %(message)s'
         },
     },
 	'handlers': {
-        'django.debug.simple': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': os.path.join(BASE_DIR, 'log/debug-simple.log'),
-        },
-        'django.debug.complete': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'formatter': 'complete',
-            'filename': os.path.join(BASE_DIR, 'log/debug-complete.log'),
-        },
+
+		'console': {
+			'formatter': 'log',
+		    'class': 'logging.StreamHandler',
+		},
+
+		'console.info': {
+			'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['console.info'],
+		    'level': 'INFO',
+		},
+
+		'console.debug': {
+			'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['console.debug'],
+		    'level': 'DEBUG',
+		},
+
+		'console.warning': {
+			'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['console.warning'],
+		    'level': 'WARNING',
+		},
+		'console.error': {
+			'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['console.error'],
+		    'level': 'ERROR',
+		},
+		'console.critical': {
+			'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['console.critical'],
+		    'level': 'CRITICAL',
+		},
+
+		'django.debug': {
+		    'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['django.debug'],
+		    'level': 'DEBUG',
+		},
+		'django.info': {
+		    'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['django.info'],
+		    'level': 'INFO',
+		},
+		'django.warning': {
+		    'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['django.warning'],
+		    'level': 'WARNING',
+		},
+		'django.error': {
+		    'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['django.error'],
+		    'level': 'ERROR',
+		},
+		'django.critical': {
+		    'formatter': 'log',
+		    'class': 'logging.FileHandler',
+		    'filename': LOGGER_FILES['django.critical'],
+		    'level': 'CRITICAL',
+		},
+
     },
     'loggers': {
+		'main': {
+            'handlers': ['console', 'console.debug', 'console.info', 'console.warning', 'console.error', 'console.critical'],
+        },
         'django': {
-            'handlers': ['django.debug.simple', 'django.debug.complete'],
+            'handlers': ['django.debug', 'django.info', 'django.warning', 'django.error', 'django.critical'],
             'level': 'DEBUG',
             'propagate': True,
         },
