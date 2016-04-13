@@ -113,6 +113,7 @@ class UsersListView(PermissionRequiredMixin, PermissionDeniedInfoMessageMixin, g
 	permission_denied_message = "see all system users"
 
 	paginate_by = 10
+
 	def get_queryset(self):
 		username = self.request.user.get_username()
 		return User.objects.filter(is_superuser = False).exclude(username = username).order_by('-date_joined')

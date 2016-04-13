@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-08 01:31-0300\n"
+"POT-Creation-Date: 2016-04-12 22:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,15 +135,15 @@ msgstr "endereço de e-mail"
 msgid "username"
 msgstr "usuário"
 
-#: .\templates\auth\user_detail.html:31 .\templates\auth\user_list.html:21
+#: .\templates\auth\user_detail.html:31 .\templates\auth\user_list.html:17
 msgid "sign up date"
 msgstr "data de cadastro"
 
-#: .\templates\auth\user_detail.html:35 .\templates\auth\user_list.html:22
+#: .\templates\auth\user_detail.html:35 .\templates\auth\user_list.html:18
 msgid "last login"
 msgstr "último login"
 
-#: .\templates\auth\user_detail.html:36 .\templates\auth\user_list.html:40
+#: .\templates\auth\user_detail.html:36 .\templates\auth\user_list.html:36
 msgid "never logged in"
 msgstr "nunca fez login"
 
@@ -163,15 +163,15 @@ msgstr "lista de usuários"
 msgid "new user"
 msgstr "novo usuário"
 
-#: .\templates\auth\user_list.html:20
+#: .\templates\auth\user_list.html:16
 msgid "user data"
 msgstr "dados do usuário"
 
-#: .\templates\auth\user_list.html:33
+#: .\templates\auth\user_list.html:29
 msgid "not provided yet"
 msgstr "ainda não fornecido"
 
-#: .\templates\auth\user_list.html:45
+#: .\templates\auth\user_list.html:41
 msgid "no results to show"
 msgstr "nenhum resultado para exibir"
 
@@ -220,29 +220,39 @@ msgstr "entrar"
 msgid "sign up"
 msgstr "cadastre-se"
 
-#: .\templates\tagtemplates\bootstrap_paginator.html:2
+#: .\templates\tagtemplates\bootstrap_paginator.html:3
 #, python-format
 msgctxt "paginator template"
-msgid "page %(num_page)s of %(total_pages)s"
-msgstr "página %(num_page)s de %(total_pages)s"
-
-#: .\templates\tagtemplates\bootstrap_paginator.html:7
-#: .\templates\tagtemplates\bootstrap_paginator.html:18
-msgid "first"
-msgstr "primeiro"
+msgid ""
+"\n"
+"displaying %(first)s of %(count)s item.\n"
+msgid_plural ""
+"\n"
+"displaying %(first)s to %(end)s of %(count)s items.\n"
+msgstr[0] ""
+"\n"
+"exibindo %(first)s de %(count)s item.\n"
+msgstr[1] ""
+"\n"
+"exibindo de %(first)s a %(end)s de %(count)s itens.\n"
 
 #: .\templates\tagtemplates\bootstrap_paginator.html:12
 #: .\templates\tagtemplates\bootstrap_paginator.html:23
+msgid "first"
+msgstr "primeiro"
+
+#: .\templates\tagtemplates\bootstrap_paginator.html:17
+#: .\templates\tagtemplates\bootstrap_paginator.html:28
 msgid "previous"
 msgstr "anterior"
 
-#: .\templates\tagtemplates\bootstrap_paginator.html:33
-#: .\templates\tagtemplates\bootstrap_paginator.html:44
+#: .\templates\tagtemplates\bootstrap_paginator.html:46
+#: .\templates\tagtemplates\bootstrap_paginator.html:57
 msgid "next"
 msgstr "próximo"
 
-#: .\templates\tagtemplates\bootstrap_paginator.html:38
-#: .\templates\tagtemplates\bootstrap_paginator.html:49
+#: .\templates\tagtemplates\bootstrap_paginator.html:51
+#: .\templates\tagtemplates\bootstrap_paginator.html:62
 msgid "last"
 msgstr "último"
 

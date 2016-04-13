@@ -29,7 +29,7 @@ user_urls = [
 	url(r'^(?P<pk>\d+)/edit$', user_views.UserUpdateView.as_view(), name = 'user_update'),
 	url(r'^(?P<pk>\d+)/password/$', user_views.UserPasswordUpdateView.as_view(), name = 'user_password_update'),
 
-    url(r'^list/(?P<page>\d+)$', user_views.UsersListView.as_view(), name = 'users_list'),
+    url(r'^list/(?P<page>\d+)/$', user_views.UsersListView.as_view(), name = 'users_list'),
 ]
 
 identity_urls = [

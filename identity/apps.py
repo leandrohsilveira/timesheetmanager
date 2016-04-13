@@ -45,7 +45,18 @@ def campos_obrigatorios():
 	return {}
 
 @register.inclusion_tag(name = "bootstrap_paginator", filename = "tagtemplates/bootstrap_paginator.html")
-def bootstrap_paginator(page_obj, link = None, href = None):
+def bootstrap_paginator(page_obj, link = None, href = None, page_dist = 2):
+	control_last_page = page_obj.number + page_dist
+	if control_last_page > page_obj.paginator.num_pages:
+		control_last_page = page_obj.paginator.num_pages
+	first_page = page_obj.number - 1 - page_dist
+	if control_last_page - 1 - (page_dist * 2) < first_page:
+		first_page = control_last_page - 1 - (page_dist * 2)
+	if first_page < 0:
+		first_page = 0
+
+	last_page = first_page + (page_dist * 2) + 1
+	page_range = page_obj.paginator.page_range[first_page:last_page]
 	if not link and not href:
 		raise ImproperlyConfigured(_l("both arguments \"link\" and \"href\" shouldn't be None. Please provide a \"link\" or \"href\" argument."))
-	return {"page_obj": page_obj, "link": link, "href": href}
+	return {"page_obj": page_obj, "link": link, "href": href, "page_range": page_range}

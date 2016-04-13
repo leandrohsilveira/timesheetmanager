@@ -1,7 +1,12 @@
 {% load i18n %}
-{% blocktrans asvar current_page_template with num_page=page_obj.number total_pages=page_obj.paginator.num_pages context "paginator template" %}page {{ num_page }} of {{ total_pages }}{% endblocktrans %}
+
+{% blocktrans asvar current_page_template with first=page_obj.start_index end=page_obj.end_index context "paginator template" count count=page_obj.paginator.count %}
+displaying {{ first }} of {{ count }} item.
+{% plural %}
+displaying {{ first }} to {{ end }} of {{ count }} items.
+{% endblocktrans %}
 <nav>
-	<ul class="pagination">
+	<ul class="pagination pagination-sm">
 		{% if page_obj.has_previous %}
 		<li>
 			<a href="{% if link %}{% url link 1 %}{% elif href %}{{ href }}/1{% endif %}" role="button" aria-label="{{ _('first')|capfirst }}">
@@ -25,9 +30,17 @@
 			</a>
 		</li>
 		{% endif %}
-		<li class="active">
-			<span>{{ current_page_template }}</span>
+		
+		{% for page in page_range %}
+		
+		<li {% if page == page_obj.number %}class="active"{% endif %}>
+			<a role="button" aria-label="{{ page }}" href="{% if link %}{% url link page %}{% elif href %}{{ href }}/{{ page }}{% endif %}">
+				{{ page }}
+			</a>
 		</li>
+		
+		{% endfor %}
+		
 		{% if page_obj.has_next %}
 		<li>
 			<a href="{% if link %}{% url link page_obj.next_page_number %}{% elif href %}{{ href }}/{{ page_obj.next_page_number }}{% endif %}" role="button" aria-label="{{ _('next')|capfirst }}">
@@ -51,5 +64,8 @@
 			</a>
 		</li>
 		{% endif %}
+		<li class="active">
+			<span>{{ current_page_template|capfirst }}</span>
+		</li>
 	</ul>
 </nav>

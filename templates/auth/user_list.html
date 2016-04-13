@@ -6,11 +6,7 @@
 <div class="row">
 	{% bootstrap_button link='identity:user_create' icon='user-plus' text=_("new user") bclass="primary" %}
 </div>
-{% if is_paginated %}
 <div class="row">{% bootstrap_paginator link='identity:users_list' page_obj=page_obj %}</div>
-{% else %}
-<br />
-{% endif %}
 <div class="row">
 	<div class="table-responsive">
 		<table id="tabela" class="table table-bordered table-striped table-hover table-condensed">
@@ -41,14 +37,15 @@
 				</tr>
 				{% endfor %} 
 				{% else %}
-				<tr colspan="5">
-					<p>{{ _("no results to show")|capfirst }}</p>
+				<tr>
+					<td colspan="5">
+						<p>{{ _("no results to show")|capfirst }}</p>
+					</td>
 				</tr>
 				{% endif %}
 			</tbody>
 		</table>
 	</div>
 </div>
-{% if is_paginated %}
 <div class="row">{% bootstrap_paginator link='identity:users_list' page_obj=page_obj %}</div>
-{% endif %} {% endblock %}
+{% endblock %}
