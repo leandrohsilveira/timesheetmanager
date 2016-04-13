@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+
+from django.conf.global_settings import LOGGING
 from django.contrib import messages
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -88,6 +91,53 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 WSGI_APPLICATION = 'timesheetmanager.wsgi.application'
 
+LOGGER_FILES_ROOT = os.path.join(BASE_DIR, 'log')
+
+os.makedirs(LOGGER_FILES_ROOT, exist_ok = True)
+
+LOGGER_FILES = {
+	'django.debug.simple': os.path.join(LOGGER_FILES_ROOT, 'debug-simple.log'),
+	'django.debug.complete': os.path.join(LOGGER_FILES_ROOT, 'debug-complete.log'),
+}
+
+for key in LOGGER_FILES:
+	if not os.path.exists(LOGGER_FILES[key]):
+		with open(LOGGER_FILES[key], "w") as lf:
+			lf.write("")
+
+LOGGING = {
+	'version': 1,
+	"disable_existing_loggers": False,
+	'formatters': {
+        'complete': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        },
+    },
+	'handlers': {
+        'django.debug.simple': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            'filename': os.path.join(BASE_DIR, 'log/debug-simple.log'),
+        },
+        'django.debug.complete': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'complete',
+            'filename': os.path.join(BASE_DIR, 'log/debug-complete.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['django.debug.simple', 'django.debug.complete'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -151,3 +201,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+if DEBUG:
+	DJANGO_LOG_LEVEL = DEBUG
