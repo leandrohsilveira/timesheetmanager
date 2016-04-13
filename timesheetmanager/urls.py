@@ -38,11 +38,15 @@ identity_urls = [
 
 	url(r'^', include('django.contrib.auth.urls')),
 
-	url(r'^', include(user_urls))
+	url(r'^', include(user_urls)),
 
 ]
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
+# 	url(r'^', include('django.contrib.auth.urls')),
+]
+
+urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),
 	url(r'^user/', include(identity_urls, namespace = 'identity')),
 	url(r'^i18n/', include(i18n_urlpatterns, namespace = 'language')),

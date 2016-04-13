@@ -28,8 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = "/identity/login/"
-LOGIN_REDIRECT_URL = "/identity/"
+LOGIN_URL = "/user/login/"
+LOGIN_REDIRECT_URL = "/user/"
 
 
 # Application definition

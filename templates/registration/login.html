@@ -1,4 +1,4 @@
-{% extends 'identity/identity_base.html' %} {% load i18n %} {% block content_block %}
+{% extends 'base/base_app.html' %} {% load i18n %} {% block content_block %}
 <h1 class="text-center">
 	{% if user.is_authenticated %}
 	{% icon_text icon='refresh' text=_('switch user') %}
@@ -23,6 +23,9 @@
 		
 		{% bootstrap_button icon='sign-in' text=_("sign in") bclass='primary' %}
 		{% bootstrap_button link='identity:user_create' icon='user-plus' text=_("sign up") %}
+		<br />
+		<br />
+		<a href="#" data-toggle="modal" data-target="#languageModal"><i class="fa fa-language"></i> {{ _("switch language")|capfirst }}</a>
 		
 	</form>
 </div>
