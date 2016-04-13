@@ -16,8 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns, urlpatterns as i18n_urlpatterns
 from django.contrib import admin
-from identity import views as identity_views
-from identity.pessoa import views as user_views
+from user import views as user_views
 
 user_urls = [
 	url(r'^$', user_views.CurrentUserDetailView.as_view(), name = 'current_user_detail'),
@@ -34,7 +33,7 @@ user_urls = [
 
 identity_urls = [
 
-	url(r'^index$', identity_views.index, name = 'index'),
+	url(r'^index$', user_views.index, name = 'index'),
 
 	url(r'^', include('django.contrib.auth.urls')),
 
@@ -48,7 +47,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),
-	url(r'^user/', include(identity_urls, namespace = 'identity')),
+	url(r'^user/', include(identity_urls, namespace = 'user')),
 	url(r'^i18n/', include(i18n_urlpatterns, namespace = 'language')),
 
 )

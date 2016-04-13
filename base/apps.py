@@ -3,9 +3,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.template.defaultfilters import register
 from django.utils.translation import ugettext_lazy as _l
 
-
-class IdentityConfig(AppConfig):
-	name = 'identity'
+class BaseConfig(AppConfig):
+	name = 'base'
 
 def mapped_languages(request):
 	return {"mapped_languages": ["pt-br", "en"]}
@@ -18,7 +17,7 @@ def mask(value, arg):
 		m = m.replace("X", c, 1)
 	return m.replace("X", "");
 
-@register.inclusion_tag(name = "bootstrap_field", filename="tagtemplates/bootstrap_field.html")
+@register.inclusion_tag(name = "bootstrap_field", filename = "tagtemplates/bootstrap_field.html")
 def bootstrap_field(bound_field):
 	bound_field.field.widget.attrs = {"class": "form-control"}
 	readonly_encoded = False
@@ -28,16 +27,16 @@ def bootstrap_field(bound_field):
 
 	return {"bound_field": bound_field, "readonly_encoded": readonly_encoded}
 
-@register.inclusion_tag(name = "bootstrap_messages", filename="tagtemplates/bootstrap_messages.html")
+@register.inclusion_tag(name = "bootstrap_messages", filename = "tagtemplates/bootstrap_messages.html")
 def bootstrap_messages(messages):
 	return {"messages": messages}
 
-@register.inclusion_tag(name = "bootstrap_button", filename="tagtemplates/bootstrap_button.html")
-def bootstrap_button(text="", href=None, link=None, icon=None, btype="submit", bclass="default"):
+@register.inclusion_tag(name = "bootstrap_button", filename = "tagtemplates/bootstrap_button.html")
+def bootstrap_button(text = "", href = None, link = None, icon = None, btype = "submit", bclass = "default"):
 	return {"text": text, "link": link, "icon": icon, "btype": btype, "bclass": bclass, "href": href}
 
-@register.inclusion_tag(name = "icon_text", filename="tagtemplates/icon_text.html")
-def icon_text(icon, text="", size=""):
+@register.inclusion_tag(name = "icon_text", filename = "tagtemplates/icon_text.html")
+def icon_text(icon, text = "", size = ""):
 	return {"icon": icon, "text": text, "size": size}
 
 @register.inclusion_tag(name = "campos_obrigatorios", filename = "tagtemplates/campos_obrigatorios.html")

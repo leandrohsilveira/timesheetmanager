@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %} {% load i18n %} {% block body_block %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">{{ _("toggle navigation")|capfirst }}</span>
+				<i class="fa fa-bars"></i>
+			</button>
+			<span class="navbar-brand">
+				{% block app_title %} {% endblock app_title %}
+			</span>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			{% if user.is_authenticated %}
+			{% block user_menu %}{% endblock user_menu %}
+			{% block app_menu %}{% endblock app_menu %}
+			{% endif %}
+		</div>
+	</div>
+</nav>
+{% block off_container %}{% endblock off_container %}
+<div class="container">
+	<div class="hidden-xs hidden-sm base-top-margin-md-lg"></div>
+	<div class="hidden-md hidden-lg base-top-margin-xs-sm"></div>
+	{% bootstrap_messages messages %}
+	{% block content_block %}{% endblock content_block %}
+	<hr>
+	<footer>
+		<p>&copy; 2015 Company, Inc.</p>
+	</footer>
+</div>
+{% endblock body_block %}

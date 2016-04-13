@@ -37,7 +37,8 @@ LOGIN_REDIRECT_URL = "/user/"
 # Application definition
 
 INSTALLED_APPS = [
-	'identity.apps.IdentityConfig',
+	'base.apps.BaseConfig',
+	'user.apps.UserConfig',
 	'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,7 +77,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-				'identity.apps.mapped_languages',
+				'base.apps.mapped_languages',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -213,7 +214,7 @@ LOGGING = {
 __postgresql = {
 	'ENGINE': 'django.db.backends.postgresql',
 	'NAME': 'timesheetdb',
-	'USER': 'identity',
+	'USER': 'user',
 	'PASSWORD': 't1m3sh33t',
 	'CHARSET': 'UTF-8',
 	'ATOMIC_REQUESTS': True

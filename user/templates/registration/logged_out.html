@@ -1,4 +1,4 @@
-{% extends 'base/base_app.html' %}ity_base.html' %} {% load i18n %} {% block content_block %}
+{% extends 'user/user_base.html' %}ity_base.html' %} {% load i18n %} {% block content_block %}
 <h1 class="text-center">
 	{{title|capfirst}}
 </h1>
@@ -11,7 +11,7 @@
 		{{ _('thank you for visiting our application, come back soon')|capfirst }}
 	
 	</div>
-	{% bootstrap_button link='identity:index' icon='sign-in' text=_('sign in again')|capfirst bclass='primary' %}
+	{% bootstrap_button link='user:index' icon='sign-in' text=_('sign in again')|capfirst bclass='primary' %}
 </div>
 <div class="col-md-4"></div>
 <div class="clearfix"></div>

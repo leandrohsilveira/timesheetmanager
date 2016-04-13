@@ -4,9 +4,9 @@
 </h1>
 <hr />
 <div class="row">
-	{% bootstrap_button link='identity:user_create' icon='user-plus' text=_("new user") bclass="primary" %}
+	{% bootstrap_button link='user:user_create' icon='user-plus' text=_("new user") bclass="primary" %}
 </div>
-<div class="row">{% bootstrap_paginator link='identity:users_list' page_obj=page_obj %}</div>
+<div class="row">{% bootstrap_paginator link='user:users_list' page_obj=page_obj %}</div>
 <div class="row">
 	<div class="table-responsive">
 		<table id="tabela" class="table table-bordered table-striped table-hover table-condensed">
@@ -20,7 +20,7 @@
 			</thead>
 			<tbody>
 				{% if object_list %} {% for object in object_list %}
-				<tr class="tr-link" onclick="window.location='{% url 'identity:user_detail' object.id %}'">
+				<tr class="tr-link" onclick="window.location='{% url 'user:user_detail' object.id %}'">
 					<th>
 						<strong>{{object.id}}</strong>
 					</th>
@@ -47,5 +47,5 @@
 		</table>
 	</div>
 </div>
-<div class="row">{% bootstrap_paginator link='identity:users_list' page_obj=page_obj %}</div>
+<div class="row">{% bootstrap_paginator link='user:users_list' page_obj=page_obj %}</div>
 {% endblock %}

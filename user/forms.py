@@ -24,5 +24,3 @@ class UserUpdateForm(auth_forms.UserChangeForm):
 # 		help_text = _("Não são armazenadas senhas desprotegidas e, por isso, "
 # 						"não há como visualizar a senha de um usuário, mas você "
 # 						"pode alterá-la utilizando <a href=\"password\">este formulário</a>."))
-
-

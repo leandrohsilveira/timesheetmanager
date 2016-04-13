@@ -1,4 +1,4 @@
-{% extends 'base/base_app.html' %} {% load i18n %}
+{% extends 'user/user_base.html' %} {% load i18n %}
 
 {% block head %}
 <title>Identity Manager</title>
@@ -12,14 +12,14 @@ Identity Manager
 {% block app_menu %} 
 <ul class="nav navbar-nav">
 	<li>
-		<a href="{% url 'identity:index' %}">
+		<a href="{% url 'user:index' %}">
 			<i class="fa fa-home"></i>
 			{{ _("home")|capfirst }}
 		</a>
 	</li>
 	{% if perms.auth.change_user %}
 	<li>
-		<a href="{% url 'identity:users_list' 1 %}">
+		<a href="{% url 'user:users_list' 1 %}">
 			<i class="fa fa-users"></i>
 			{{ _("users")|capfirst }}
 		</a>
