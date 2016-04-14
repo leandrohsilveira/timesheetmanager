@@ -17,19 +17,11 @@ Identity Manager
 			{{ _("home")|capfirst }}
 		</a>
 	</li>
-	{% if perms.auth.change_user %}
+	{% if perms.auth.add_user %}
 	<li>
 		<a href="{% url 'user:users_list' 1 %}">
 			<i class="fa fa-users"></i>
 			{{ _("users")|capfirst }}
-		</a>
-	</li>
-	{% endif %}
-	{% if user.is_superuser %}
-	<li>
-		<a href="{% url 'admin:index' %}">
-			<i class="fa fa-cogs"></i>
-			{{ _("administration")|capfirst }}
 		</a>
 	</li>
 	{% endif %}

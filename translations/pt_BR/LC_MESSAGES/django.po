@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-12 22:09-0300\n"
+"POT-Creation-Date: 2016-04-13 23:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,209 +18,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\identity\base.py:18
+#: .\base\forms.py:16
+#, python-format
+msgid ""
+"access denied, please provide the credentials of a user who has permission "
+"to %s."
+msgstr ""
+"acesso negado, por favor, forneça as credenciais de um usuário que possui "
+"permissão para %s"
+
+#: .\base\forms.py:28
 msgid "The model atribute is required."
 msgstr "O atributo 'model' é obrigatório."
 
-#: .\identity\base.py:21
+#: .\base\forms.py:31
 msgid "A 'pk' kwarg is required."
 msgstr "Um kwarg com chave 'pk' é obrigatório."
 
-#: .\identity\pessoa\forms.py:20
-msgid "Password"
-msgstr "Senha"
-
-#: .\identity\pessoa\forms.py:21
-msgid ""
-"Raw passwords are not stored, so there is no way to see this user's "
-"password, but you can change the password using <a href=\"password\">this "
-"form</a>."
-msgstr ""
-"Não são armazenadas senhas desprotegidas e, por isso, não há como visualizar "
-"a senha de um usuário, mas você pode alterá-la utilizando <a href=\"password"
-"\">este formulário</a>."
-
-#. Translators: user data successful create message
-#: .\identity\pessoa\views.py:22
-msgid "user successfully created!"
-msgstr "usuário cadastrado com sucesso!"
-
-#. Translators: user data successful update message
-#: .\identity\pessoa\views.py:29
-msgid "the user data successfully updated!"
-msgstr "os dados do usuário atualizados com sucesso!"
-
-#. Translators: permission description to access the user update view appeared on permission denied message
-#: .\identity\pessoa\views.py:32
-msgid "change other users data"
-msgstr "atualizar dados do usuário"
-
-#. Translators: permission description to access the user detail view appeared on permission denied message
-#: .\identity\pessoa\views.py:48
-msgid "see other users data"
-msgstr "atualizar dados do usuário"
-
-#. Translators: user password successful update message
-#: .\identity\pessoa\views.py:61
-msgid "the user password successfully updated!"
-msgstr "a senha do usuário foi atualizada com sucesso!"
-
-#. Translators: permission description to access the user password update view appeared on permission denied message
-#: .\identity\pessoa\views.py:63
-msgid "change other users password"
-msgstr "trocar senha"
-
-#. Translators: current user data successful update message
-#: .\identity\pessoa\views.py:82
-msgid "your user data were successfully updated!"
-msgstr "Seus dados de usuário foram atualizados com sucesso!"
-
-#. Translators: current user password successful update message
-#: .\identity\pessoa\views.py:99
-msgid "your password were successfully updated!"
-msgstr "Sua senha foi alterada com sucesso!"
-
-#: .\templates\auth\auth_base.html:17
-msgid "home"
-msgstr "início"
-
-#: .\templates\auth\auth_base.html:24
-msgid "users"
-msgstr "usuários"
-
-#: .\templates\auth\auth_base.html:32
-msgid "administration"
-msgstr "administração"
-
-#: .\templates\auth\password_change_form.html:4
-#: .\templates\auth\user_detail.html:40 .\templates\base\base_app.html.py:30
-msgid "change password"
-msgstr "trocar senha"
-
-#: .\templates\auth\password_change_form.html:4
-#, python-format
-msgctxt "change password"
-msgid "of %(first_name)s"
-msgstr "de %(first_name)s"
-
-#: .\templates\auth\password_change_form.html:19
-#: .\templates\auth\user_form.html:21
-msgid "save"
-msgstr "salvar"
-
-#: .\templates\auth\password_change_form.html:20
-#: .\templates\auth\user_form.html:22
-#: .\templates\base\includes\language_modal.html:40
-msgid "cancel"
-msgstr "cancelar"
-
-#: .\templates\auth\user_detail.html:3
-#, python-format
-msgid "%(first_name)s's user data"
-msgstr "dados do usuário %(first_name)s"
-
-#: .\templates\auth\user_detail.html:8
-msgid "my user"
-msgstr "meu usuário"
-
-#: .\templates\auth\user_detail.html:19
-msgid "full name"
-msgstr "nome completo"
-
-#: .\templates\auth\user_detail.html:23
-msgid "e-mail address"
-msgstr "endereço de e-mail"
-
-#: .\templates\auth\user_detail.html:27
-msgid "username"
-msgstr "usuário"
-
-#: .\templates\auth\user_detail.html:31 .\templates\auth\user_list.html:17
-msgid "sign up date"
-msgstr "data de cadastro"
-
-#: .\templates\auth\user_detail.html:35 .\templates\auth\user_list.html:18
-msgid "last login"
-msgstr "último login"
-
-#: .\templates\auth\user_detail.html:36 .\templates\auth\user_list.html:36
-msgid "never logged in"
-msgstr "nunca fez login"
-
-#: .\templates\auth\user_detail.html:41
-msgid "update user's data"
-msgstr "atualizar dados do usuário"
-
-#: .\templates\auth\user_form.html:3
-msgid "user form"
-msgstr "formulário de usuário"
-
-#: .\templates\auth\user_list.html:3
-msgid "users list"
-msgstr "lista de usuários"
-
-#: .\templates\auth\user_list.html:7
-msgid "new user"
-msgstr "novo usuário"
-
-#: .\templates\auth\user_list.html:16
-msgid "user data"
-msgstr "dados do usuário"
-
-#: .\templates\auth\user_list.html:29
-msgid "not provided yet"
-msgstr "ainda não fornecido"
-
-#: .\templates\auth\user_list.html:41
-msgid "no results to show"
-msgstr "nenhum resultado para exibir"
-
-#: .\templates\base\base_app.html:6
+#: .\base\templates\base\base_app.html:6
 msgid "toggle navigation"
 msgstr "exibir/esconder navegação"
 
-#: .\templates\base\base_app.html:24
-#: .\templates\base\includes\language_modal.html:10
+#: .\base\templates\base\includes\language_modal.html:10
+#: .\user\templates\registration\login.html:28
+#: .\user\templates\user\user_base.html:16
 msgid "switch language"
 msgstr "trocar idioma"
 
-#: .\templates\base\base_app.html:33
-msgid "logout"
-msgstr "sair"
-
-#: .\templates\base\includes\language_modal.html:18
+#: .\base\templates\base\includes\language_modal.html:18
 msgid "choose a language"
 msgstr "escolha um idioma"
 
-#: .\templates\base\includes\language_modal.html:36
+#: .\base\templates\base\includes\language_modal.html:36
 msgid "submit"
 msgstr "submeter"
 
-#: .\templates\registration\logged_out.html:9
-msgid "session terminated."
-msgstr "sessão terminada"
+#: .\base\templates\base\includes\language_modal.html:40
+#: .\user\templates\auth\password_change_form.html:20
+#: .\user\templates\auth\user_form.html:22
+msgid "cancel"
+msgstr "cancelar"
 
-#: .\templates\registration\logged_out.html:11
-msgid "thank you for visiting our application, come back soon"
-msgstr "obrigado por visitar nossa aplicação, volte em breve"
-
-#: .\templates\registration\logged_out.html:14
-msgid "sign in again"
-msgstr "entrar novamente"
-
-#: .\templates\registration\login.html:4
-msgid "switch user"
-msgstr "trocar de usuário"
-
-#: .\templates\registration\login.html:6 .\templates\registration\login.html:24
-msgid "sign in"
-msgstr "entrar"
-
-#: .\templates\registration\login.html:25
-msgid "sign up"
-msgstr "cadastre-se"
-
-#: .\templates\tagtemplates\bootstrap_paginator.html:3
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:3
 #, python-format
 msgctxt "paginator template"
 msgid ""
@@ -236,26 +75,278 @@ msgstr[1] ""
 "\n"
 "exibindo de %(first)s a %(end)s de %(count)s itens.\n"
 
-#: .\templates\tagtemplates\bootstrap_paginator.html:12
-#: .\templates\tagtemplates\bootstrap_paginator.html:23
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:12
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:23
 msgid "first"
 msgstr "primeiro"
 
-#: .\templates\tagtemplates\bootstrap_paginator.html:17
-#: .\templates\tagtemplates\bootstrap_paginator.html:28
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:17
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:28
 msgid "previous"
 msgstr "anterior"
 
-#: .\templates\tagtemplates\bootstrap_paginator.html:46
-#: .\templates\tagtemplates\bootstrap_paginator.html:57
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:46
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:57
 msgid "next"
 msgstr "próximo"
 
-#: .\templates\tagtemplates\bootstrap_paginator.html:51
-#: .\templates\tagtemplates\bootstrap_paginator.html:62
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:51
+#: .\base\templates\tagtemplates\bootstrap_paginator.html:62
 msgid "last"
 msgstr "último"
 
-#: .\templates\tagtemplates\campos_obrigatorios.html:2
+#: .\base\templates\tagtemplates\campos_obrigatorios.html:2
 msgid "required fields"
 msgstr "campos obrigatórios"
+
+#: .\history\forms.py:36
+#, python-format
+msgid "created new %(content_type_name)s: \"%(object_str)s\"."
+msgstr "Novo %(content_type_name)s criado: \"%(object_str)s\""
+
+#: .\history\forms.py:39
+#, python-format
+msgid "modified %(content_type_name)s: \"%(object_str)s\"."
+msgstr "%(content_type_name)s atualizado: \"%(object_str)s\""
+
+#: .\history\models.py:36 .\history\templates\history\historyentry_list.html:12
+msgid "event time"
+msgstr "ocorrido em"
+
+#: .\history\models.py:43
+#| msgid "users"
+msgid "user"
+msgstr "usuários"
+
+#: .\history\models.py:51
+msgid "content type"
+msgstr "tipo do conteudo"
+
+#: .\history\models.py:55
+msgid "object id"
+msgstr "id do objeto"
+
+#: .\history\models.py:56
+msgid "parameters"
+msgstr "parametros"
+
+#: .\history\models.py:57 .\history\templates\history\historyentry_list.html:14
+msgid "message"
+msgstr "mensagem"
+
+#: .\history\models.py:62
+msgid "no message recorded."
+msgstr "nenhuma mensagem gravada."
+
+#: .\history\templates\history\history_base.html:17
+#: .\user\templates\auth\auth_base.html:17
+msgid "home"
+msgstr "início"
+
+#: .\history\templates\history\history_base.html:24
+#| msgid "users list"
+msgid "system history entries"
+msgstr "lista de históricos do sistema"
+
+#: .\history\templates\history\history_base.html:32
+#: .\user\templates\auth\auth_base.html:32
+msgid "administration"
+msgstr "administração"
+
+#: .\history\templates\history\historyentry_list.html:3
+#| msgid "users list"
+msgid "log entries list"
+msgstr "lista de usuários"
+
+#: .\history\templates\history\historyentry_list.html:13
+msgid "made by"
+msgstr "feito por"
+
+#: .\history\templates\history\historyentry_list.html:40
+#: .\user\templates\auth\user_list.html:42
+msgid "no results to show"
+msgstr "nenhum resultado para exibir"
+
+#: .\history\views.py:31
+#| msgid "the user data successfully updated!"
+msgid "the history entry was successfully deleted!"
+msgstr "os dados do usuário atualizados com sucesso!"
+
+#: .\user\forms.py:20
+msgid "Password"
+msgstr "Senha"
+
+#: .\user\forms.py:21
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's "
+"password, but you can change the password using <a href=\"password\">this "
+"form</a>."
+msgstr ""
+"Não são armazenadas senhas desprotegidas e, por isso, não há como visualizar "
+"a senha de um usuário, mas você pode alterá-la utilizando <a href=\"password"
+"\">este formulário</a>."
+
+#: .\user\templates\auth\auth_base.html:24
+msgid "users"
+msgstr "usuários"
+
+#: .\user\templates\auth\password_change_form.html:4
+#: .\user\templates\auth\user_detail.html:41
+#: .\user\templates\user\user_base.html:22
+msgid "change password"
+msgstr "trocar senha"
+
+#: .\user\templates\auth\password_change_form.html:4
+#, python-format
+msgctxt "change password"
+msgid "of %(first_name)s"
+msgstr "de %(first_name)s"
+
+#: .\user\templates\auth\password_change_form.html:19
+#: .\user\templates\auth\user_form.html:21
+msgid "save"
+msgstr "salvar"
+
+#: .\user\templates\auth\user_detail.html:3
+#, python-format
+msgid "%(first_name)s's user data"
+msgstr "dados do usuário %(first_name)s"
+
+#: .\user\templates\auth\user_detail.html:8
+msgid "my user"
+msgstr "meu usuário"
+
+#: .\user\templates\auth\user_detail.html:19
+msgid "full name"
+msgstr "nome completo"
+
+#: .\user\templates\auth\user_detail.html:23
+msgid "e-mail address"
+msgstr "endereço de e-mail"
+
+#: .\user\templates\auth\user_detail.html:27
+msgid "username"
+msgstr "usuário"
+
+#: .\user\templates\auth\user_detail.html:31
+#: .\user\templates\auth\user_list.html:17
+msgid "sign up date"
+msgstr "data de cadastro"
+
+#: .\user\templates\auth\user_detail.html:35
+#: .\user\templates\auth\user_list.html:18
+msgid "last login"
+msgstr "último login"
+
+#: .\user\templates\auth\user_detail.html:36
+#: .\user\templates\auth\user_list.html:36
+msgid "never logged in"
+msgstr "nunca fez login"
+
+#: .\user\templates\auth\user_detail.html:42
+msgid "update user's data"
+msgstr "atualizar dados do usuário"
+
+#: .\user\templates\auth\user_form.html:3
+msgid "user form"
+msgstr "formulário de usuário"
+
+#: .\user\templates\auth\user_list.html:3
+msgid "users list"
+msgstr "lista de usuários"
+
+#: .\user\templates\auth\user_list.html:7
+msgid "new user"
+msgstr "novo usuário"
+
+#: .\user\templates\auth\user_list.html:16
+msgid "user data"
+msgstr "dados do usuário"
+
+#: .\user\templates\auth\user_list.html:29
+msgid "not provided yet"
+msgstr "ainda não fornecido"
+
+#: .\user\templates\registration\logged_out.html:9
+msgid "session terminated."
+msgstr "sessão terminada"
+
+#: .\user\templates\registration\logged_out.html:11
+msgid "thank you for visiting our application, come back soon"
+msgstr "obrigado por visitar nossa aplicação, volte em breve"
+
+#: .\user\templates\registration\logged_out.html:14
+msgid "sign in again"
+msgstr "entrar novamente"
+
+#: .\user\templates\registration\login.html:4
+msgid "switch user"
+msgstr "trocar de usuário"
+
+#: .\user\templates\registration\login.html:6
+#: .\user\templates\registration\login.html:24
+msgid "sign in"
+msgstr "entrar"
+
+#: .\user\templates\registration\login.html:25
+msgid "sign up"
+msgstr "cadastre-se"
+
+#: .\user\templates\user\user_base.html:25
+msgid "logout"
+msgstr "sair"
+
+#. Translators: user data successful create message
+#: .\user\views.py:31
+msgid "user successfully created!"
+msgstr "usuário cadastrado com sucesso!"
+
+#. Translators: user data successful update message
+#: .\user\views.py:38
+msgid "the user data successfully updated!"
+msgstr "os dados do usuário atualizados com sucesso!"
+
+#. Translators: permission description to access the user update view appeared on permission denied message
+#: .\user\views.py:41
+msgid "change other users data"
+msgstr "atualizar dados do usuário"
+
+#. Translators: permission description to access the user detail view appeared on permission denied message
+#: .\user\views.py:57
+msgid "see other users data"
+msgstr "atualizar dados do usuário"
+
+#. Translators: user password successful update message
+#: .\user\views.py:70
+msgid "the user password successfully updated!"
+msgstr "a senha do usuário foi atualizada com sucesso!"
+
+#. Translators: permission description to access the user password update view appeared on permission denied message
+#: .\user\views.py:72
+msgid "change other users password"
+msgstr "trocar senha"
+
+#. Translators: current user data successful update message
+#: .\user\views.py:91
+msgid "your user data were successfully updated!"
+msgstr "Seus dados de usuário foram atualizados com sucesso!"
+
+#: .\user\views.py:93
+#, python-format
+#| msgid "%(first_name)s's user data"
+msgid "%(user_first_name)s has updated own user's data."
+msgstr "%(user_first_name)s atualizou os dados do próprio usuário."
+
+#. Translators: current user password successful update message
+#: .\user\views.py:111
+msgid "your password were successfully updated!"
+msgstr "Sua senha foi alterada com sucesso!"
+
+#. Translators: permission description to access the all users list view appeared on permission denied message
+#: .\user\views.py:125
+#| msgid "see other users data"
+msgid "see all system users"
+msgstr "atualizar dados do usuário"
+
+#~ msgid "history entries"
+#~ msgstr "histórico"

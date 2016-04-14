@@ -6,6 +6,17 @@ from django.utils.translation import ugettext_lazy as _l
 class BaseConfig(AppConfig):
 	name = 'base'
 
+_available_sites = []
+
+def request_available_sites(request):
+	print(_available_sites)
+	return { "request_available_sites": [site for site in _available_sites if site["has_permission"](request, site["perms"]) ] }
+
+def register_site(name, icon, reverseUrl, perms = [], has_permission = lambda request, required_perms: not required_perms or request.user.has_perms(required_perms)):
+	_available_sites.append({ "name": name, "icon": icon, "reverseUrl": reverseUrl, "perms": perms, "has_permission": has_permission })
+
+register_site(name = "administration", icon = "cogs", reverseUrl = "admin:index", has_permission = lambda request, required_perms: request.user.is_staff)
+
 def mapped_languages(request):
 	return {"mapped_languages": ["pt-br", "en"]}
 

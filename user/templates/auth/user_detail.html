@@ -37,8 +37,10 @@
 			</p>
 			<div class="clearfix"></div>
 		</div>
+		{% if user.username == object.username or perms.auth.change_user %}
 		{% bootstrap_button href='password' icon='key' bclass='success' text=_("change password") %}
 		{% bootstrap_button href='edit' icon='pencil' bclass='primary' text=_("update user's data") %}
+		{% endif %}
 	</div>
 	<div class="col-md-4"></div>
 </div>

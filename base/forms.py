@@ -4,14 +4,16 @@ Created on 13 de abr de 2016
 @author: Leandro
 '''
 from django.contrib import messages
+from django.contrib.admin import models as log_models
 from django.contrib.auth.mixins import AccessMixin
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as __, ugettext as _
 from django.views import generic
 
 
 class PermissionDeniedInfoMessageMixin(AccessMixin):
-	message_template = __("access denied, please provide the credentials of a user who has permission to %s.")
+	message_template = _("access denied, please provide the credentials of a user who has permission to %s.")
 	def handle_no_permission(self):
 		message = self.get_permission_denied_message()
 		if message:

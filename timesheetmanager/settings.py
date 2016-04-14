@@ -39,6 +39,7 @@ LOGIN_REDIRECT_URL = "/user/"
 INSTALLED_APPS = [
 	'base.apps.BaseConfig',
 	'user.apps.UserConfig',
+	'history.apps.HistoryConfig',
 	'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,6 +78,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+				'base.apps.request_available_sites',
 				'base.apps.mapped_languages',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
