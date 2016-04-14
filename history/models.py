@@ -59,7 +59,7 @@ class HistoryEntry(models.Model):
 	objects = HistoryEntryManager()
 
 	def __str__(self):
-		return self.get_event_message(default = _("no message recorded."))
+		return _("HistoryEntry< id: %d, message_template: %s, parameters: %s, content_type: %s. >") % (self.id,self.message_template, self.parameters, self.content_type)
 
 	def get_event_message(self, default = None):
 		if self.message_template:

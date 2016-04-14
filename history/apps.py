@@ -1,7 +1,11 @@
 from django.apps import AppConfig
 from base.apps import register_site
 
-class HistoryConfig(AppConfig):
-    name = 'history'
 
-register_site(name = "history entries manager", icon = "history", reverseUrl = "history:index", perms = ["history.change_history"])
+app_name = "history entries manager"
+namespace = "history"
+
+class HistoryConfig(AppConfig):
+    name = namespace
+
+register_site(site_id=namespace, name = app_name, icon = "history", reverseUrl = "%s:index" % namespace, perms = ["%s.change_history" % namespace])

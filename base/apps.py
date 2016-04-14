@@ -2,20 +2,31 @@ from django.apps import AppConfig
 from django.core.exceptions import ImproperlyConfigured
 from django.template.defaultfilters import register
 from django.utils.translation import ugettext_lazy as _l
+import logging
 
 class BaseConfig(AppConfig):
 	name = 'base'
 
+_LOGGER = logging.getLogger("timesheetmanager.base.apps")
+
 _available_sites = []
 
 def request_available_sites(request):
-	print(_available_sites)
+	_LOGGER.debug(_available_sites)
 	return { "request_available_sites": [site for site in _available_sites if site["has_permission"](request, site["perms"]) ] }
 
-def register_site(name, icon, reverseUrl, perms = [], has_permission = lambda request, required_perms: not required_perms or request.user.has_perms(required_perms)):
-	_available_sites.append({ "name": name, "icon": icon, "reverseUrl": reverseUrl, "perms": perms, "has_permission": has_permission })
+def request_current_site(request):
+	current_site = None
+	namespace = request.resolver_match.namespace
+	for site in _available_sites:
+		if site["site_id"] == namespace:
+			current_site = site
+	return {"request_current_site": current_site}
 
-register_site(name = "administration", icon = "cogs", reverseUrl = "admin:index", has_permission = lambda request, required_perms: request.user.is_staff)
+def register_site(site_id, name, icon, reverseUrl, perms = [], has_permission = lambda request, required_perms: not required_perms or request.user.has_perms(required_perms)):
+	_available_sites.append({ "site_id": site_id, "name": name, "icon": icon, "reverseUrl": reverseUrl, "perms": perms, "has_permission": has_permission })
+
+register_site(site_id="admin", name = "administration", icon = "cogs", reverseUrl = "admin:index", has_permission = lambda request, required_perms: request.user.is_staff)
 
 def mapped_languages(request):
 	return {"mapped_languages": ["pt-br", "en"]}

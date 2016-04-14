@@ -78,6 +78,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+				'base.apps.request_current_site',
 				'base.apps.request_available_sites',
 				'base.apps.mapped_languages',
                 'django.template.context_processors.debug',

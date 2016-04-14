@@ -26,7 +26,7 @@
 						{{ object.user.get_full_name|capfirst}}
 					</td>
 					<td>
-						{{ object|capfirst }}
+						{{ object.get_event_message|capfirst }}
 					</td>
 					<td>
 						{% url "history:historyentry_delete" object.id as delete_url %}

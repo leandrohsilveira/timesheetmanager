@@ -15,45 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns, urlpatterns as i18n_urlpatterns
-from django.contrib import admin
+from django.contrib.admin import site as admin_site  
 
-from history import views as history_views
-from user import views as user_views
+from user.site import UserSiteConfig
+from history.site import HistoryEntrySiteConfig
 
 
-user_urls = [
-
-	url(r'^index$', user_views.index, name = 'index'),
-
-	url(r'^', include('django.contrib.auth.urls')),
-
-	url(r'^$', user_views.CurrentUserDetailView.as_view(), name = 'current_user_detail'),
-	url(r'^signup$', user_views.UserSignUpView.as_view(), name = 'user_signup'),
-	url(r'^new$', user_views.UserCreateView.as_view(), name = 'user_create'),
-	url(r'^edit$', user_views.CurrentUserUpdateView.as_view(), name = 'current_user_update'),
-	url(r'^password/$', user_views.CurrentUserPasswordUpdateView.as_view(), name = 'current_user_password_update'),
-
-	url(r'^(?P<pk>\d+)/$', user_views.UserDetailView.as_view(), name = 'user_detail'),
-	url(r'^(?P<pk>\d+)/edit$', user_views.UserUpdateView.as_view(), name = 'user_update'),
-	url(r'^(?P<pk>\d+)/password/$', user_views.UserPasswordUpdateView.as_view(), name = 'user_password_update'),
-
-    url(r'^list/(?P<page>\d+)/$', user_views.UsersListView.as_view(), name = 'users_list'),
-]
-
-logentry_urls = [
-	url(r'^$', history_views.index, name = 'index'),
-	url(r'^(?P<pk>\d+)/delete$', history_views.delete_historyentry, name = 'historyentry_delete'),
-	url(r'^list/(?P<page>\d+)/$', history_views.HistoryEntryListView.as_view(), name = 'historyentry_list'),
-]
-
-urlpatterns = [
-# 	url(r'^', include('django.contrib.auth.urls')),
-]
-
-urlpatterns += i18n_patterns(
-    url(r'^admin/', admin.site.urls),
-	url(r'^user/', include(user_urls, namespace = 'user')),
+urlpatterns = i18n_patterns(
 	url(r'^i18n/', include(i18n_urlpatterns, namespace = 'language')),
-	url(r'^history/', include(logentry_urls, namespace = 'history')),
+	
+    url(r'^admin/', admin_site.urls),
+    
+	url(r'^user/', UserSiteConfig.as_include()),
+	url(r'^history/', HistoryEntrySiteConfig.as_include()),
 
 )
