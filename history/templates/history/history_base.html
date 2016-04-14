@@ -1,0 +1,29 @@
+{% extends 'user/user_base.html' %} {% load i18n %}
+
+{% block head %}
+<title>Log Entries Manager</title>
+{% endblock head %}
+
+{% block app_title %}
+<i class="fa fa-history fa-lg"></i>
+Log Entries Manager
+{% endblock app_title %}
+
+{% block app_menu %} 
+<ul class="nav navbar-nav">
+	<li>
+		<a href="{% url 'history:index' %}">
+			<i class="fa fa-home"></i>
+			{{ _("home")|capfirst }}
+		</a>
+	</li>
+	{% if perms.auth.change_user %}
+	<li>
+		<a href="{% url 'history:historyentry_list' 1 %}">
+			<i class="fa fa-list"></i>
+			{{ _("system history entries")|capfirst }}
+		</a>
+	</li>
+	{% endif %}
+</ul>
+{% endblock %}
