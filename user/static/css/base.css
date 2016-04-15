@@ -1,9 +1,31 @@
+.env-font {
+	font-family: 'Fredericka the Great';
+	margin-bottom: 0px;
+}
+
+.slogan {
+	font-size: 0.7em;
+}
+
+.navbar-default {
+    background-color: rgba(255,255,255,0.95);
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    color: #555;
+    background-color: inherit;
+}
+
+.font-bolder {
+	font-weight: bolder;
+}
+
 .base-top-margin-md-lg {
-	padding-top: 60px;
+	padding-top: 180px;
 }
 
 .base-top-margin-xs-sm {
-	padding-top: 70px;
+	padding-top: 190px;
 }
 
 /* @-webkit-keyframes fadeIn, */

@@ -1,11 +1,14 @@
-{% extends 'user/user_base.html' %} {% load i18n %} {% block content_block %}
-<h1 class="text-center">
-	{% if user.is_authenticated %}
-	{% icon_text icon='refresh' text=_('switch user') %}
-	{% else %}
-	{% icon_text icon='sign-in' text=_('sign in') %}
-	{% endif %}
-</h1>
+{% extends 'user/user_base.html' %} {% load i18n %} 
+
+{% block page_title %}
+{% if user.is_authenticated %}
+{% icon_text icon='refresh' text=_('switch user') %}
+{% else %}
+{% icon_text icon='sign-in' text=_('sign in') %}
+{% endif %}
+{% endblock page_title %}
+
+{% block content_block %}
 <div class="col-md-3"></div>
 <div class="col-md-6">
 	<form action="{% url 'user:login' %}" method="post">

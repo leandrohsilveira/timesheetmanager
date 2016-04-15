@@ -1,7 +1,10 @@
-{% extends 'user/user_base.html' %}ity_base.html' %} {% load i18n %} {% block content_block %}
-<h1 class="text-center">
-	{{title|capfirst}}
-</h1>
+{% extends 'user/user_base.html' %}ity_base.html' %} {% load i18n %} 
+
+{% block page_title %}
+{{title|capfirst}}
+{% endblock page_title %}
+
+{% block content_block %}
 <div class="col-md-3"></div>
 <div class="col-md-6">
 	<div class="well well-lg">

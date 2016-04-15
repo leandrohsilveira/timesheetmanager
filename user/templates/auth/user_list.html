@@ -1,8 +1,10 @@
-{% extends "auth/auth_base.html"%} {% load humanize %} {% load i18n %} {% block content_block %} 
-<h1 class="text-center">
-	{% icon_text icon='users' text=_("users list") %}
-</h1>
-<hr />
+{% extends "auth/auth_base.html"%} {% load humanize %} {% load i18n %} 
+
+{% block page_title %}
+{% icon_text icon='users' text=_("users list") %}
+{% endblock page_title %}
+
+{% block content_block %}
 <div class="row">
 	{% bootstrap_button link='user:user_create' icon='user-plus' text=_("new user") bclass="primary" %}
 </div>
@@ -48,4 +50,4 @@
 	</div>
 </div>
 <div class="row">{% bootstrap_paginator link='user:users_list' page_obj=page_obj %}</div>
-{% endblock %}
+{% endblock content_block %}

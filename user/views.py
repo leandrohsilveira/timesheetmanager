@@ -70,7 +70,7 @@ class UserUpdateView(PermissionDeniedInfoMessageMixin, SuccessMessageMixin, Perm
 	form_class = UserUpdateForm
 	permission_required = "auth.change_user"
 	# Translators: user data successful update message
-	success_message = _lazy("the user data successfully updated!")
+	success_message = _lazy("user data successfully updated!")
 	context_object_name = "user_update"
 	# Translators: permission description to access the user update view appeared on permission denied message
 	permission_denied_message = _lazy("change other users data")
@@ -103,7 +103,7 @@ class UserPasswordUpdateView(SuccessMessageMixin, PermissionDeniedInfoMessageMix
 	permission_required = "auth.change_user"
 	template_name = "auth/password_change_form.html"
 	# Translators: user password successful update message
-	success_message = _lazy("the user password successfully updated!")
+	success_message = _lazy("user password successfully updated!")
 	# Translators: permission description to access the user password update view appeared on permission denied message
 	permission_denied_message = _lazy("change other users password")
 	history_message_template = "%(user_first_name)s has updated \"%(changed_user_first_name)s\" user password."

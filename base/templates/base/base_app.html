@@ -1,14 +1,24 @@
 {% extends 'base/base.html' %} {% load i18n %} 
 
 {% block body_block %}
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container text-center text-success">
+		<h1 class="env-font">
+			ProductivEnv
+		</h1>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span class="env-font slogan">Productive Enterprise Companion</span>
+	</div>
+	<div class="container text-center">
+		<h4 class="font-bolder text-muted">{% block page_title %}{%endblock page_title %}</h4>
+	</div>
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 				<span class="sr-only">{{ _("toggle navigation")|capfirst }}</span>
 				<i class="fa fa-bars"></i>
 			</button>
-			<span class="navbar-brand">
+			<span class="navbar-brand font-bolder">
 				{% block app_title %}
 				{% with page_current_site=request_current_site %}
 				{% trans page_current_site.name as page_current_site_name %}
@@ -26,10 +36,13 @@
 			{% block user_menu %}{% endblock user_menu %}
 			<ul class="nav navbar-right navbar-nav">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<a href="#" class="dropdown-toggle visible-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-th"></i>
 						{{ _("applications")|capfirst }}
 						<i class="fa fa-caret-down"></i>
+					</a>
+					<a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-th"></i>
 					</a>
 					<ul class="dropdown-menu">
 						{% for site in request_available_sites %}

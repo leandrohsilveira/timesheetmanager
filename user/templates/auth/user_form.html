@@ -1,8 +1,10 @@
-{% extends 'auth/auth_base.html' %} {% load staticfiles %} {% load i18n %} {% block content_block %}
-<h1 class="text-center">
-	{% icon_text icon="user" text=_("user form") %}
-</h1>
-<hr />
+{% extends 'auth/auth_base.html' %} {% load staticfiles %} {% load i18n %} 
+
+{% block page_title %}
+{% icon_text icon="user" text=_("user form") %}
+{% endblock page_title %}
+
+{% block content_block %}
 <div class="row">
 	<div class="col-md-3"></div>
 	<form id="pessoa_form" class="col-md-6" action="{{ request.path }}" method="post">

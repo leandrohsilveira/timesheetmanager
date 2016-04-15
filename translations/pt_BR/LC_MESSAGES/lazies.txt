@@ -12,3 +12,54 @@ msgstr "gerenciador de usuário"
 
 msgid "administration"
 msgstr "administração"
+
+msgid "%(user_first_name)s has signed up."
+msgstr "%(user_first_name)s cadastrou-se"
+
+msgid "%(user_first_name)s has created a new user named \"%(changed_user_first_name)s\"."
+msgstr "%(user_first_name)s criou um novo usuário chamado \"%(changed_user_first_name)s\"."
+
+msgid "%(user_first_name)s has updated \"%(changed_user_first_name)s\" user's data."
+msgstr "%(user_first_name)s atualizou os dados do usuário \"%(changed_user_first_name)s\"."
+
+msgid "%(user_first_name)s has updated \"%(changed_user_first_name)s\" user password."
+msgstr "%(user_first_name)s alterou a senha do usuário \"%(changed_user_first_name)s\"."
+
+msgid "%(user_first_name)s has updated own user's data."
+msgstr "%(user_first_name)s atualizou os dados do próprio usuário."
+
+msgid "%(user_first_name)s has updated own user's password."
+msgstr "%(user_first_name)s atualizou a senha do próprio usuário."
+
+msgid "user successfully created!"
+msgstr "usuário cadastrado com sucesso!"
+
+msgid "create new users"
+msgstr "cadastrar novos usuários no sistema"
+
+msgid "user data successfully updated!"
+msgstr "dados de usuário atualizados com sucesso!"
+
+msgid "change other users data"
+msgstr "atualizar os dados de outros usuários do sistema"
+
+msgid "see other users data"
+msgstr "visualizar os dados de outros usuários do sistema"
+
+msgid "user password successfully updated!"
+msgstr "senha de usuário alterada com sucesso!"
+
+msgid "change other users password"
+msgstr "alterar a senha de outros usuários"
+
+msgid "your user data were successfully updated!"
+msgstr "seus dados de usuário foram atualizados com sucesso!"
+
+msgid "your password were successfully updated!"
+msgstr "sua senha foi alterada com sucesso!"
+
+msgid "see all system users"
+msgstr "visualizar todos os usuários do sistema"
+
+msgid "access denied, please provide the credentials of a user who has permission to %(message)s."
+msgstr "acesso negado, por favor, forneça as credenciais de um usuário que possui permissão para %(message)s"

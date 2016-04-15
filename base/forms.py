@@ -8,16 +8,16 @@ from django.contrib.admin import models as log_models
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import ugettext_lazy as __, ugettext as _
+from django.utils.translation import ugettext_lazy as _lazy, ugettext as _
 from django.views import generic
 
 
 class PermissionDeniedInfoMessageMixin(AccessMixin):
-	message_template = _("access denied, please provide the credentials of a user who has permission to %s.")
+	message_template = _lazy("access denied, please provide the credentials of a user who has permission to %(message)s.")
 	def handle_no_permission(self):
 		message = self.get_permission_denied_message()
 		if message:
-			messages.info(self.request, self.message_template % message)
+			messages.info(self.request, self.message_template % { "message": message })
 		return super(PermissionDeniedInfoMessageMixin, self).handle_no_permission()
 
 class ViewIdMixin:
