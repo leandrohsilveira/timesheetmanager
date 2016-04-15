@@ -1,5 +1,5 @@
 {% if link %}
-<a href="{% url link %}" class="btn btn-{{ bclass }}">
+<a href="{% url link %}" class="btn btn-{{ bclass }}" {% if confirm_message %}onclick="return confirm('{{ confirm_message|capfirst }}');"{% endif %}>
 {% if icon %}
 <i class="fa fa-{{ icon }}"></i>
 {% endif %}
@@ -8,7 +8,7 @@
 
 {% elif href %}
 
-<a href="{{ href }}" class="btn btn-{{ bclass }}">
+<a href="{{ href }}" class="btn btn-{{ bclass }}" {% if confirm_message %}onclick="return confirm('{{ confirm_message|capfirst }}');"{% endif %}>
 {% if icon %}
 <i class="fa fa-{{ icon }}"></i>
 {% endif %}
@@ -17,7 +17,7 @@
 
 {% else %}
 
-<button type="{{ btype }}" class="btn btn-{{ bclass }}">
+<button type="{{ btype }}" class="btn btn-{{ bclass }}" {% if confirm_message %}onclick="return confirm('{{ confirm_message|capfirst }}');"{% endif %}>
 {% if icon %}
 <i class="fa fa-{{ icon }}"></i>
 {% endif %}

@@ -1,0 +1,14 @@
+msgid "all history entries"
+msgstr "todas entradas de histórico"
+
+msgid "my history entries"
+msgstr "minhas entradas de histórico"
+
+msgid "history manager"
+msgstr "gerenciador de histórico"
+
+msgid "user manager"
+msgstr "gerenciador de usuário"
+
+msgid "administration"
+msgstr "administração"

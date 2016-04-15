@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, gettext_lazy as _lazy
 
 class HistoryEntryManager(models.Manager):
 
@@ -32,15 +32,18 @@ class HistoryEntryManager(models.Manager):
 
 # Create your models here.
 class HistoryEntry(models.Model):
+	class Meta:
+		verbose_name = _lazy("history entry")
+		verbose_name_plural = _lazy("history entries")
 	event_time = models.DateTimeField(
-        _('event time'),
+        _lazy('event time'),
         default = timezone.now,
         editable = False,
     )
 	user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         models.CASCADE,
-        verbose_name = _('user'),
+        verbose_name = _lazy('user'),
     	null = True,
     	blank = True,
     	default = None
@@ -48,18 +51,23 @@ class HistoryEntry(models.Model):
 	content_type = models.ForeignKey(
 		ContentType,
 		models.SET_NULL,
-		verbose_name = _('content type'),
+		verbose_name = _lazy('content type'),
 		blank = True,
 		null = True,
 	)
-	object_id = models.IntegerField(_('object id'), blank = True, null = True)
-	parameters = models.TextField(_('parameters'), blank = True, null = True, max_length = 255)
-	message_template = models.TextField(_('message'), blank = True, null = True, max_length = 255)
+	object_id = models.IntegerField(_lazy('object id'), blank = True, null = True)
+	parameters = models.TextField(_lazy('parameters'), blank = True, null = True, max_length = 255)
+	message_template = models.TextField(_lazy('message'), blank = True, null = True, max_length = 255)
 
 	objects = HistoryEntryManager()
 
 	def __str__(self):
-		return _("HistoryEntry< id: %d, message_template: %s, parameters: %s, content_type: %s. >") % (self.id,self.message_template, self.parameters, self.content_type)
+		return _("HistoryEntry< id: %(pk)d, message_template: %(message_template)s, parameters: %(parameters)s, content_type: %(content_type)s. >") % {
+					"pk": self.id,
+					"message_template": self.message_template,
+					"parameters": self.parameters,
+					"content_type": self.content_type
+				}
 
 	def get_event_message(self, default = None):
 		if self.message_template:

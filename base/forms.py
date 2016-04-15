@@ -20,6 +20,29 @@ class PermissionDeniedInfoMessageMixin(AccessMixin):
 			messages.info(self.request, self.message_template % message)
 		return super(PermissionDeniedInfoMessageMixin, self).handle_no_permission()
 
+class ViewIdMixin:
+	view_id = None
+	view_verbose_name = None
+
+	def get_view_id(self):
+		return self.view_id
+
+	def get_view_verbose_name(self):
+		return self.view_verbose_name
+
+	def get_context_data(self, **kwargs):
+		if hasattr(self, "get_context_data"):
+			context_data = super(ViewIdMixin, self).get_context_data(**kwargs)
+			view_id = self.get_view_id()
+			if view_id:
+				context_data["view_id"] = view_id
+			view_verbose_name = self.get_view_verbose_name()
+			if view_verbose_name:
+				context_data["view_verbose_name"] = view_verbose_name
+			return context_data
+		else:
+			raise ImproperlyConfigured(_("ViewIdMixin must be mixed with an class that has a 'get_context_data' method."))
+
 class FormUpdateView(generic.FormView):
 	object = None
 	def get_object(self, *args, **kwargs):

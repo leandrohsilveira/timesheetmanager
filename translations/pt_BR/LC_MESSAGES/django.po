@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-13 23:18-0300\n"
+"POT-Creation-Date: 2016-04-14 21:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,17 +27,26 @@ msgstr ""
 "acesso negado, por favor, forneça as credenciais de um usuário que possui "
 "permissão para %s"
 
-#: .\base\forms.py:28
+#: .\base\forms.py:44
+msgid ""
+"ViewIdMixin must be mixed with an class that has a 'get_context_data' method."
+msgstr "ViewIdMixin deve ser misturada a uma classe que possui um método chamado 'get_context_data'."
+
+#: .\base\forms.py:51
 msgid "The model atribute is required."
 msgstr "O atributo 'model' é obrigatório."
 
-#: .\base\forms.py:31
+#: .\base\forms.py:54
 msgid "A 'pk' kwarg is required."
 msgstr "Um kwarg com chave 'pk' é obrigatório."
 
-#: .\base\templates\base\base_app.html:6
+#: .\base\templates\base\base_app.html:8
 msgid "toggle navigation"
 msgstr "exibir/esconder navegação"
+
+#: .\base\templates\base\base_app.html:31
+msgid "applications"
+msgstr "aplicações"
 
 #: .\base\templates\base\includes\language_modal.html:10
 #: .\user\templates\registration\login.html:28
@@ -60,7 +69,6 @@ msgid "cancel"
 msgstr "cancelar"
 
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:3
-#, python-format
 msgctxt "paginator template"
 msgid ""
 "\n"
@@ -99,76 +107,54 @@ msgstr "último"
 msgid "required fields"
 msgstr "campos obrigatórios"
 
-#: .\history\forms.py:36
-#, python-format
+#: .\history\forms.py:48
 msgid "created new %(content_type_name)s: \"%(object_str)s\"."
-msgstr "Novo %(content_type_name)s criado: \"%(object_str)s\""
+msgstr "novo %(content_type_name)s criado: \"%(object_str)s\""
 
-#: .\history\forms.py:39
-#, python-format
+#: .\history\forms.py:51
 msgid "modified %(content_type_name)s: \"%(object_str)s\"."
 msgstr "%(content_type_name)s atualizado: \"%(object_str)s\""
 
-#: .\history\models.py:36 .\history\templates\history\historyentry_list.html:12
-msgid "event time"
-msgstr "ocorrido em"
+#: .\history\models.py:65
+#, python-format
+msgid ""
+"HistoryEntry< id: %(pk)d, message_template: %(message_template)s, "
+"parameters: %(parameters)s, content_type: %(content_type)s. >"
+msgstr ""
+"EntradaHistorico< id: %(pk)d, template_mensagem: %(message_template)s, "
+"parametros: %(parameters)s, tipo_conteudo: %(content_type)s."
 
-#: .\history\models.py:43
-#| msgid "users"
-msgid "user"
-msgstr "usuários"
-
-#: .\history\models.py:51
-msgid "content type"
-msgstr "tipo do conteudo"
-
-#: .\history\models.py:55
-msgid "object id"
-msgstr "id do objeto"
-
-#: .\history\models.py:56
-msgid "parameters"
-msgstr "parametros"
-
-#: .\history\models.py:57 .\history\templates\history\historyentry_list.html:14
-msgid "message"
-msgstr "mensagem"
-
-#: .\history\models.py:62
-msgid "no message recorded."
-msgstr "nenhuma mensagem gravada."
-
-#: .\history\templates\history\history_base.html:17
-#: .\user\templates\auth\auth_base.html:17
+#: .\history\templates\history\history_base.html:8
+#: .\user\templates\auth\auth_base.html:8
 msgid "home"
 msgstr "início"
 
-#: .\history\templates\history\history_base.html:24
-#| msgid "users list"
+#: .\history\templates\history\history_base.html:15
 msgid "system history entries"
 msgstr "lista de históricos do sistema"
 
-#: .\history\templates\history\history_base.html:32
-#: .\user\templates\auth\auth_base.html:32
-msgid "administration"
-msgstr "administração"
+#: .\history\templates\history\historyentry_list.html:2
+msgid "are you sure that you wish to delete this history entry?"
+msgstr "você tem certeza que deseja excluir esta entrada de histórico?"
 
-#: .\history\templates\history\historyentry_list.html:3
-#| msgid "users list"
-msgid "log entries list"
-msgstr "lista de usuários"
+#: .\history\templates\history\historyentry_list.html:14
+msgid "event time"
+msgstr "ocorrido em"
 
-#: .\history\templates\history\historyentry_list.html:13
+#: .\history\templates\history\historyentry_list.html:16
 msgid "made by"
 msgstr "feito por"
 
-#: .\history\templates\history\historyentry_list.html:40
+#: .\history\templates\history\historyentry_list.html:18
+msgid "message"
+msgstr "mensagem"
+
+#: .\history\templates\history\historyentry_list.html:50
 #: .\user\templates\auth\user_list.html:42
 msgid "no results to show"
 msgstr "nenhum resultado para exibir"
 
-#: .\history\views.py:31
-#| msgid "the user data successfully updated!"
+#: .\history\views.py:43
 msgid "the history entry was successfully deleted!"
 msgstr "os dados do usuário atualizados com sucesso!"
 
@@ -186,7 +172,7 @@ msgstr ""
 "a senha de um usuário, mas você pode alterá-la utilizando <a href=\"password"
 "\">este formulário</a>."
 
-#: .\user\templates\auth\auth_base.html:24
+#: .\user\templates\auth\auth_base.html:15
 msgid "users"
 msgstr "usuários"
 
@@ -296,57 +282,21 @@ msgstr "cadastre-se"
 msgid "logout"
 msgstr "sair"
 
-#. Translators: user data successful create message
-#: .\user\views.py:31
-msgid "user successfully created!"
-msgstr "usuário cadastrado com sucesso!"
+#, --------------------------------------------------------------
+#, LAZIES 
+#, -------------------------------------------------------------- 
 
-#. Translators: user data successful update message
-#: .\user\views.py:38
-msgid "the user data successfully updated!"
-msgstr "os dados do usuário atualizados com sucesso!"
+msgid "all history entries"
+msgstr "todas entradas de histórico"
 
-#. Translators: permission description to access the user update view appeared on permission denied message
-#: .\user\views.py:41
-msgid "change other users data"
-msgstr "atualizar dados do usuário"
+msgid "my history entries"
+msgstr "minhas entradas de histórico"
 
-#. Translators: permission description to access the user detail view appeared on permission denied message
-#: .\user\views.py:57
-msgid "see other users data"
-msgstr "atualizar dados do usuário"
+msgid "history manager"
+msgstr "gerenciador de histórico"
 
-#. Translators: user password successful update message
-#: .\user\views.py:70
-msgid "the user password successfully updated!"
-msgstr "a senha do usuário foi atualizada com sucesso!"
+msgid "user manager"
+msgstr "gerenciador de usuário"
 
-#. Translators: permission description to access the user password update view appeared on permission denied message
-#: .\user\views.py:72
-msgid "change other users password"
-msgstr "trocar senha"
-
-#. Translators: current user data successful update message
-#: .\user\views.py:91
-msgid "your user data were successfully updated!"
-msgstr "Seus dados de usuário foram atualizados com sucesso!"
-
-#: .\user\views.py:93
-#, python-format
-#| msgid "%(first_name)s's user data"
-msgid "%(user_first_name)s has updated own user's data."
-msgstr "%(user_first_name)s atualizou os dados do próprio usuário."
-
-#. Translators: current user password successful update message
-#: .\user\views.py:111
-msgid "your password were successfully updated!"
-msgstr "Sua senha foi alterada com sucesso!"
-
-#. Translators: permission description to access the all users list view appeared on permission denied message
-#: .\user\views.py:125
-#| msgid "see other users data"
-msgid "see all system users"
-msgstr "atualizar dados do usuário"
-
-#~ msgid "history entries"
-#~ msgstr "histórico"
+msgid "administration"
+msgstr "administração"

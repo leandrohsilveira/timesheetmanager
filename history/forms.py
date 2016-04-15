@@ -4,7 +4,7 @@ Created on 13 de abr de 2016
 @author: Leandro
 '''
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 
 from history.models import HistoryEntry
@@ -23,10 +23,11 @@ class HistoryEntryMixin:
 		return None
 
 	def get_history_parameters(self):
-		if self.object:
+		instance = self.get_object_instance()
+		if instance:
 			return {
-				"content_type_name": ContentType.objects.get_for_model(self.get_object_instance()).name,
-				"object_str": self.object.__str__()
+				"content_type_name": ContentType.objects.get_for_model(instance).name,
+				"object_str": instance.__str__()
 			}
 		return {}
 

@@ -1,6 +1,8 @@
 {% extends "history/history_base.html" %} {% load humanize %} {% load i18n %} {% block content_block %} 
+{% trans "are you sure that you wish to delete this history entry?" as delete_confirm_message %}
+
 <h1 class="text-center">
-	{% icon_text icon='history' text=_("log entries list") %}
+	{% icon_text icon='history' text=view_verbose_name|capfirst %}
 </h1>
 <hr />
 <div class="row">{% bootstrap_paginator link='history:historyentry_list' page_obj=page_obj %}</div>
@@ -10,9 +12,13 @@
 			<thead>
 				<tr>
 					<th>{{ _("event time")|capfirst }}</th>
+					{% if view_id == "historyentry_list" %}
 					<th>{{ _("made by")|capfirst }}</th>
+					{% endif %}
 					<th>{{ _("message")|capfirst }}</th>
+					{% if perms.history.delete_historyentry %}
 					<th></th>
+					{% endif %}
 				</tr>
 			</thead>
 			<tbody>
@@ -22,16 +28,20 @@
 						<i class="fa fa-history"></i>
 						{{ object.event_time|naturaltime }}
 					</td>
+					{% if view_id == "historyentry_list" %}
 					<td>
 						{{ object.user.get_full_name|capfirst}}
 					</td>
+					{% endif %}
 					<td>
 						{{ object.get_event_message|capfirst }}
 					</td>
+					{% if perms.history.delete_historyentry %}
 					<td>
 						{% url "history:historyentry_delete" object.id as delete_url %}
-						{% bootstrap_button icon="trash" bclass="danger btn-sm" href=delete_url %} 
+						{% bootstrap_button icon="trash" bclass="danger btn-sm" href=delete_url confirm_message=delete_confirm_message %} 
 					</td>
+					{% endif %}
 				</tr>
 				{% endfor %} 
 				{% else %}

@@ -1,8 +1,10 @@
+import logging
+
 from django.apps import AppConfig
 from django.core.exceptions import ImproperlyConfigured
 from django.template.defaultfilters import register
 from django.utils.translation import ugettext_lazy as _l
-import logging
+
 
 class BaseConfig(AppConfig):
 	name = 'base'
@@ -54,8 +56,8 @@ def bootstrap_messages(messages):
 	return {"messages": messages}
 
 @register.inclusion_tag(name = "bootstrap_button", filename = "tagtemplates/bootstrap_button.html")
-def bootstrap_button(text = "", href = None, link = None, icon = None, btype = "submit", bclass = "default"):
-	return {"text": text, "link": link, "icon": icon, "btype": btype, "bclass": bclass, "href": href}
+def bootstrap_button(text = "", href = None, link = None, icon = None, btype = "submit", bclass = "default", confirm_message = None):
+	return { "text": text, "link": link, "icon": icon, "btype": btype, "bclass": bclass, "href": href, "confirm_message": confirm_message }
 
 @register.inclusion_tag(name = "icon_text", filename = "tagtemplates/icon_text.html")
 def icon_text(icon, text = "", size = ""):
