@@ -1,9 +1,10 @@
-{% extends 'base/base.html' %} {% load i18n %} 
+{% extends 'base/base.html' %} {% load i18n %}
 
 {% block body_block %}
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container text-center text-success">
 		<h1 class="env-font">
+			<button id="btn-menu" class="btn btn-default btn-lg pull-left"><i class="fa fa-th"></i></button>
 			ProductivEnv
 		</h1>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -12,6 +13,7 @@
 	<div class="container text-center">
 		<h4 class="font-bolder text-muted">{% block page_title %}{%endblock page_title %}</h4>
 	</div>
+
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -57,16 +59,24 @@
 			{% endif %}
 		</div>
 	</div>
+
 </nav>
-{% block off_container %}{% endblock off_container %}
-<div class="container">
-	<div class="hidden-xs hidden-sm base-top-margin-md-lg"></div>
-	<div class="hidden-md hidden-lg base-top-margin-xs-sm"></div>
-	{% bootstrap_messages messages %}
-	{% block content_block %}{% endblock content_block %}
-	<hr>
-	<footer>
-		<p>&copy; 2015 Company, Inc.</p>
-	</footer>
-</div>
+<nav id="menu" class="menu slideout-menu text-success">
+	<header>
+		<h2>Menu</h2>
+	</header>
+</nav>
+<main id="panel" class="panel slideout-panel">
+	{% block off_container %}{% endblock off_container %}
+	<div id="panel" class="container">
+		<div class="hidden-xs hidden-sm base-top-margin-md-lg"></div>
+		<div class="hidden-md hidden-lg base-top-margin-xs-sm"></div>
+		{% bootstrap_messages messages %}
+		{% block content_block %}{% endblock content_block %}
+		<hr>
+		<footer>
+			<p>&copy; 2015 Company, Inc.</p>
+		</footer>
+	</div>
+</main>
 {% endblock body_block %}
