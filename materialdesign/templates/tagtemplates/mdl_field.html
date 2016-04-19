@@ -1,0 +1,25 @@
+{% if not bound_field.is_hidden %}
+<div class="form-group {% if bound_field.errors %}has-error{% endif %}">
+	{% if not readonly_encoded %}
+	<label class="control-label" for="{{ bound_field.id_for_label }}">
+		{% if bound_field.field.required %}<i class="fa fa-certificate text-small"></i>{% endif %}
+		{{ bound_field.label|capfirst }}:
+	</label>
+	{{ bound_field }}
+	{% endif %}
+	{% if bound_field.errors %}
+	{% for error in bound_field.errors %}
+	<span class="help-block alert alert-danger alert-small">{{ error|capfirst|safe }}</span>
+	{% endfor %}
+	{% if bound_field.help_text %}
+	<span class="help-block alert alert-danger alert-small">{{ bound_field.help_text|capfirst|safe }}</span>
+	{% endif %}
+	{% else %}
+	{% if bound_field.help_text %}
+	<span class="help-block alert alert-info alert-small">{{ bound_field.help_text|capfirst|safe }}</span>
+	{% endif %}
+	{% endif %}
+</div>
+{% else %}
+{{ bound_field }}
+{% endif %}

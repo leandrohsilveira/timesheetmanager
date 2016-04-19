@@ -1,0 +1,27 @@
+{% if link %}
+<a href="{% url link %}" class="btn btn-{{ bclass }}" {% if confirm_message %}onclick="return confirm('{{ confirm_message|capfirst }}');"{% endif %}>
+{% if icon %}
+<i class="fa fa-{{ icon }}"></i>
+{% endif %}
+{{ text|capfirst }}
+</a>
+
+{% elif href %}
+
+<a href="{{ href }}" class="btn btn-{{ bclass }}" {% if confirm_message %}onclick="return confirm('{{ confirm_message|capfirst }}');"{% endif %}>
+{% if icon %}
+<i class="fa fa-{{ icon }}"></i>
+{% endif %}
+{{ text|capfirst }}
+</a>
+
+{% else %}
+
+<button type="{{ btype }}" class="btn btn-{{ bclass }}" {% if confirm_message %}onclick="return confirm('{{ confirm_message|capfirst }}');"{% endif %}>
+{% if icon %}
+<i class="fa fa-{{ icon }}"></i>
+{% endif %}
+{{ text|capfirst }}
+</button>
+
+{% endif %}

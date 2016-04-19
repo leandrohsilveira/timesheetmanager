@@ -8,4 +8,4 @@ app_name = "user manager"
 class UserConfig(AppConfig):
 	name = 'user'
 
-register_site(site_id=namespace, name = app_name, icon = "user", reverseUrl = "%s:index" % namespace)
+register_site(site_id = namespace, name = app_name, icon = "group", reverseUrl = "%s:index" % namespace)

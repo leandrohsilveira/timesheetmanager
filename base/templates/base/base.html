@@ -4,8 +4,6 @@
 {% load i18n %}
 <head>
 {% block font %}
-<link href='https://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 {% endblock font %}
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,8 +12,11 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<!-- Bootstrap core CSS -->
-<link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300,100' rel='stylesheet' type='text/css'>
+<link href="{% static 'materialdesign/fonts.css' %}" rel="stylesheet">
+<link href="{% static 'materialdesign/material-icons.css' %}" rel="stylesheet">
+
+<link href="{% static 'materialdesign/material.green-light_green.min.css' %}" rel="stylesheet">
 <!-- Font Awesome core CSS -->
 <link href="{% static 'dist/css/font-awesome.min.css' %}" rel="stylesheet">
 <!-- Custom styles for this template -->
@@ -40,10 +41,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="{% static 'dist/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'dist/js/slideout.min.js' %}"></script>
-	<script src="{% static 'js/app-slideout.js' %}"></script>
-	
+	<script src="{% static 'materialdesign/material.min.js' %}"></script>
 	{% block app_js_block %}{% endblock app_js_block %}
 	{% block js_block %}{% endblock js_block %}
 </body>

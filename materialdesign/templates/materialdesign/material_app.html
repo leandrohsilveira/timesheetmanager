@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %} {% load i18n %}
+
+{% block body_block %}
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	<header class="mdl-layout__header mdl-color-text--white">
+		<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+		<div class="mdl-layout__header-row">
+			<div class="mdl-layout-spacer"></div>
+			<h3 class="env-font mdl-cell--hide-phone">ProductivEnv</h3>
+			<h4 class="env-font mdl-cell--hide-tablet mdl-cell--hide-desktop">ProductivEnv</h4>
+			<div class="mdl-layout-spacer"></div>
+			<i class="material-icons md-36">{{ request_current_site.icon }}</i>
+		</div>
+		{% block app_menu %}{% endblock app_menu %}
+	</header>
+	{% if user.is_authenticated %}
+	<div class="app-drawer mdl-layout__drawer mdl-color--green-800">
+		<header class="app-drawer-header mdl-color--green-600">
+			<i class="material-icons md-48">account_circle</i>
+			<div class="app-user-dropdown">
+				<span>{{ user.first_name|default:user.get_username }}</span>
+				<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+					<i class="material-icons" role="presentation">arrow_drop_down</i>
+					<span class="visuallyhidden">Accounts</span>
+				</button>
+				<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+					<li class="mdl-menu__item">
+						<i class="material-icons">language</i>
+						<a class="mdl-navigation__link" href="#" data-toggle="modal" data-target="#languageModal">{{ _("switch language")|capfirst }}</a>
+					</li>
+					<li class="mdl-menu__item">
+						<i class="material-icons">remove_red_eye</i>
+						<a class="mdl-navigation__link" href="{% url 'user:current_user_detail' %}">{{ user.get_full_name|default:user.get_username }}</a>
+					</li >
+					<li class="mdl-menu__item">
+						<i class="material-icons">vpn_key</i>
+						<a class="mdl-navigation__link" href="{% url 'user:current_user_password_update' %}">{{ _("change password")|capfirst }}</a>
+					</li>
+					<li class="mdl-menu__item">
+						<i class="material-icons">exit_to_app</i>
+						<a class="mdl-navigation__link" href="{% url 'user:logout' %}">{{ _("logout")|capfirst }}</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<nav class="mdl-navigation">
+			{% for site in request_available_sites %}
+			{% trans site.name as site_name %}
+			<a class="mdl-navigation__link" href="{% url site.reverseUrl %}">
+				<i class="material-icons" role="presentation">{{ site.icon }}</i> 
+				{{ site_name|capfirst }}
+			</a>
+			{% endfor %}
+		</nav>
+	</div>
+	{% endif %}
+	
+	<main class="mdl-layout__content"> 
+		{% block off_container %}{% endblock off_container %}
+		<div class="app-content mdl-grid">
+			{% bootstrap_messages messages %} 
+			{% block content_block %}{% endblock content_block %}
+		</div>
+	</main>
+	
+</div>
+
+{% endblock body_block %}

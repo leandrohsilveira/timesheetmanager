@@ -1,121 +1,105 @@
+@font-face {
+	font-family: 'Fredericka the Great';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Fredericka the Great'), local('FrederickatheGreat'), url("../fonts/Fredericka the Great.woff2") format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
 .env-font {
 	font-family: 'Fredericka the Great';
-	margin-bottom: 0px;
+	margin-top: 25px;
 }
 
 .slogan {
 	font-size: 0.7em;
 }
 
-.navbar-default {
-	color: #3c763d;
-    background-color: rgba(255,255,255,0.95);
+.app-content {
+  max-width: 1080px;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-    background-color: inherit;
+.app-drawer {
+	border: none;
+	color: #fff;
+	overflow: visible;	
 }
 
-.font-bolder {
-	font-weight: bolder;
+.mdl-layout__header .mdl-layout__drawer-button {
+	color: #fff;
 }
 
-.base-top-margin-md-lg {
-	padding-top: 180px;
+.app-drawer .mdl-navigation .mdl-navigation__link {
+    padding: 16px 16px;
+	color: #fff;
 }
 
-.base-top-margin-xs-sm {
-	padding-top: 190px;
+.app-drawer .mdl-navigation .mdl-navigation__link:hover {
+    padding: 16px 16px;
+	color: #000;
+	background-color: rgb(178,255,89);
 }
 
-.btn {
-	transition: all .7s;
+
+.mdl-progress {
+	width: 100%;
 }
 
-.form-control {
-	-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-	-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-	transition: border-color ease-in-out .5s,box-shadow ease-in-out .5s;
+.mdl-progress .bar {
+	background-color: #fff !important;
 }
 
-/* @-webkit-keyframes fadeIn, */
-@keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
+.app-drawer-header {
+	box-sizing: border-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-justify-content: flex-end;
+	-ms-flex-pack: end;
+	justify-content: flex-end;
+	padding: 16px;
 }
 
-/* @-webkit-keyframes fadeOut, */
-@keyframes fadeOut {
-    from { opacity: 1; } to { opacity: 0; }
+.app-user-dropdown {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	position: relative;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	width: 100%;
 }
 
-* {
-	font-family: 'Raleway', sans-serif;
+.app-drawer .mdl-menu .mdl-menu__item {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
 }
 
-.open > .dropdown-menu {
-	animation: fadeIn 1s;
+.mdl-menu .mdl-menu__item .mdl-navigation__link {
+	padding-left: 5px;
 }
 
-.text-small {
-	font-size: 0.8em;
+.mdl-layout.is-upgraded .mdl-layout__tab.is-active,
+.mdl-layout__tab {
+	color: #fff;
 }
 
-.alert-small {
-	padding: 5px 5px 5px 10px;
-	font-size: 0.9em;
+.app-user-dropdown-header {
+/* 	text-align: right; */
 }
 
-.alert a {
-	text-decoration: underline;
-	font-weight: bolder;
-}
-
-.tr-link {
-	cursor: pointer;
-}
-
-#menu {
-	background-color: #222;
-	padding-top: 10px;
-	padding-left: 10px;
-	border-left: 1px solid #555;  
-}
-
-/* ======================================================== */
-/* SLIDEOUT CONFIG */
-/* ======================================================== */
-
-body {
-  width: 100%;
-  height: 100%;
-}
-
-.slideout-menu {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 0;
-  width: 256px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  display: none;
-}
-
-.slideout-panel {
-  position:relative;
-  z-index: 1;
-  will-change: transform;
-}
-
-.slideout-open,
-.slideout-open body,
-.slideout-open .slideout-panel {
-  overflow: hidden;
-}
-
-.slideout-open .slideout-menu {
-  display: block;
-}
-
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

@@ -1,47 +1,56 @@
 {% extends 'auth/auth_base.html' %} {% load humanize %} {% load i18n %} 
 
-{% block page_title %}
-{% blocktrans asvar user_change_title with first_name=object.first_name|capfirst %}{{ first_name }}'s user data{% endblocktrans %}
-<i class="fa fa-user"></i>
-{% if user.username == object.username %}
-{{ _("my user")|capfirst }}
-{% else %}
-{{ user_change_title|capfirst }}
-{% endif %}
-{% endblock page_title %}
-
 {% block content_block %}
-<div class="row">
-	<div class="col-md-3"></div>
-	<div class="col-md-6">
-		<div class="well well-lg">
-			<p>
-				<strong>{{ _("full name")|capfirst }}: </strong>
-				{{ object.get_full_name }}
-			</p>
-			<p>
-				<strong>{{ _("e-mail address")|capfirst }}: </strong>
-				{{ object.email }}
-			</p>
-			<p>
-				<strong>{{ _("username")|capfirst }}: </strong>
-				{{ object.username }}
-			</p>
-			<p>
-				<strong>{{ _("sign up date")|capfirst }}: </strong>
-				{{ object.date_joined|naturaltime }}
-			</p>
-			<p>
-				<strong>{{ _("last login")|capfirst }}: </strong>
-				{{ object.last_login|naturaltime|default:_("never logged in")|capfirst }}
-			</p>
-			<div class="clearfix"></div>
-		</div>
-		{% if user.username == object.username or perms.auth.change_user %}
-		{% bootstrap_button href='password' icon='key' bclass='success' text=_("change password") %}
-		{% bootstrap_button href='edit' icon='pencil' bclass='primary' text=_("update user's data") %}
+<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+	<div class="mdl-card__title mdl-color--green-600 mdl-color-text--white">
+		<i class="material-icons">account_circle</i>
+		<h2 class="mdl-card__title-text">
+		{% if user.username == object.username %}
+		{{ _("my user")|capfirst }}
+		{% else %}
+		{% blocktrans asvar user_change_title with first_name=object.first_name|capfirst %}{{ first_name }}'s user data{% endblocktrans %}
+		{{ user_change_title|capfirst }}
 		{% endif %}
+		</h2>
 	</div>
-	<div class="col-md-3"></div>
+	<div class="mdl-card__supporting-text">
+		<p>
+			<strong>{{ _("full name")|capfirst }}: </strong>
+			{{ object.get_full_name }}
+		</p>
+		<p>
+			<strong>{{ _("e-mail address")|capfirst }}: </strong>
+			{{ object.email }}
+		</p>
+		<p>
+			<strong>{{ _("username")|capfirst }}: </strong>
+			{{ object.username }}
+		</p>
+		<p>
+			<strong>{{ _("sign up date")|capfirst }}: </strong>
+			{{ object.date_joined|naturaltime }}
+		</p>
+		<p>
+			<strong>{{ _("last login")|capfirst }}: </strong>
+			{{ object.last_login|naturaltime|default:_("never logged in")|capfirst }}
+		</p>
+	</div>
+	{% if user.username == object.username or perms.auth.change_user %}
+	<div class="mdl-card__menu">
+		<button id="cardmenubtn" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+			<i class="material-icons">more_vert</i>
+		</button>
+		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="cardmenubtn">
+			<li class="mdl-menu__item">
+				<i class="material-icons">mode_edit</i>
+				<a class="mdl-navigation__link" href="password">{{ _("update user's data")|capfirst }}</a>
+			</li >
+			<li class="mdl-menu__item">
+				<i class="material-icons">vpn_key</i>
+				<a class="mdl-navigation__link" href="edit">{{ _("change password")|capfirst }}</a>
+			</li>
+		</ul>
+	</div>
+	{% endif %}
 </div>
 {% endblock content_block %}

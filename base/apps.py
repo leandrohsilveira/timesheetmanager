@@ -28,7 +28,7 @@ def request_current_site(request):
 def register_site(site_id, name, icon, reverseUrl, perms = [], has_permission = lambda request, required_perms: not required_perms or request.user.has_perms(required_perms)):
 	_available_sites.append({ "site_id": site_id, "name": name, "icon": icon, "reverseUrl": reverseUrl, "perms": perms, "has_permission": has_permission })
 
-register_site(site_id="admin", name = "administration", icon = "cogs", reverseUrl = "admin:index", has_permission = lambda request, required_perms: request.user.is_staff)
+register_site(site_id = "admin", name = "administration", icon = "settings_applications", reverseUrl = "admin:index", has_permission = lambda request, required_perms: request.user.is_staff)
 
 def mapped_languages(request):
 	return {"mapped_languages": ["pt-br", "en"]}

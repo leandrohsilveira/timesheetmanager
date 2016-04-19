@@ -38,6 +38,7 @@ LOGIN_REDIRECT_URL = "/user/"
 
 INSTALLED_APPS = [
 	'base.apps.BaseConfig',
+	'materialdesign.apps.MaterialdesignConfig',
 	'user.apps.UserConfig',
 	'history.apps.HistoryConfig',
 	'django.contrib.humanize',
