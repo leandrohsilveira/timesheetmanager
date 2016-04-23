@@ -5,25 +5,40 @@
 {% endblock page_title %}
 
 {% block content_block %}
-<div class="row">
-	<div class="col-md-3"></div>
-	<form id="pessoa_form" class="col-md-6" action="{{ request.path }}" method="post">
-		{% csrf_token %}
-		{% bootstrap_messages form.non_field_errors %}
-		<div class="well well-lg">
+<div class="mdl-layout-spacer"></div>
+<form class="mdl-cell--5-col" id="pessoa_form" action="{{ request.path }}" method="post">
+	{% csrf_token %}
+	{% bootstrap_messages form.non_field_errors %}
+	
+	<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+		<div class="mdl-card__title mdl-color--green-600 mdl-color-text--white">
+			<i class="material-icons">account_circle</i>
+			<h2 class="mdl-card__title-text">
+			{% if user.username == object.username %}
+			{{ _("my user")|capfirst }}
+			{% else %}
+			{% blocktrans asvar user_change_title with first_name=object.first_name|capfirst %}{{ first_name }}'s user data{% endblocktrans %}
+			{{ user_change_title|capfirst }}
+			{% endif %}
+			</h2>
+		</div>
+		
+		<div class="mdl-card__supporting-text">
 			{% for field in form %}
-			{% bootstrap_field field %}
+			{% mdl_field field %}
 			{% endfor %}
-			
-			{% campos_obrigatorios %}
-			
-			<div class="clearfix"></div>
 		</div>
-		<div class="form-group col-md-12">
-			{% bootstrap_button icon="floppy-o" bclass="primary" text=_("save") %}
-			{% bootstrap_button link="user:current_user_detail" icon="times" text=_("cancel") %}
+		
+		<div class="mdl-card__actions mdl-card--border">
+			<button type="submit" class="make-navigation mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+				{{ _("save")|capfirst }}
+			</button>
+			<a href="{% url 'user:current_user_detail' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+				{{ _("cancel")|capfirst }}
+			</a>
 		</div>
-	</form>
-	<div class="col-md-3"></div>
-</div>
+		
+	</div>
+</form>
+<div class="mdl-layout-spacer"></div>
 {% endblock %} 

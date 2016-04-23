@@ -1,5 +1,6 @@
 {% extends 'auth/auth_base.html' %} {% load humanize %} {% load i18n %} 
 
+{% with 'user-detail' as current_page %}
 {% block content_block %}
 <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
 	<div class="mdl-card__title mdl-color--green-600 mdl-color-text--white">
@@ -43,14 +44,15 @@
 		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="cardmenubtn">
 			<li class="mdl-menu__item">
 				<i class="material-icons">mode_edit</i>
-				<a class="mdl-navigation__link" href="password">{{ _("update user's data")|capfirst }}</a>
+				<a class="mdl-navigation__link" href="edit">{{ _("update user's data")|capfirst }}</a>
 			</li >
 			<li class="mdl-menu__item">
 				<i class="material-icons">vpn_key</i>
-				<a class="mdl-navigation__link" href="edit">{{ _("change password")|capfirst }}</a>
+				<a class="mdl-navigation__link" href="password">{{ _("change password")|capfirst }}</a>
 			</li>
 		</ul>
 	</div>
 	{% endif %}
 </div>
 {% endblock content_block %}
+{% endwith %}

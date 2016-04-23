@@ -1,0 +1,47 @@
+{% load i18n %}
+
+{% blocktrans asvar current_page_template with first=page_obj.start_index end=page_obj.end_index context "paginator template" count count=page_obj.paginator.count %}
+displaying {{ first }} of {{ count }} item.
+{% plural %}
+displaying {{ first }} to {{ end }} of {{ count }} items.
+{% endblocktrans %}
+{% if page_obj.has_previous %}
+<a class="mdl-button mdl-js-button mdl-button--icon" href="{% if link %}{% url link 1 %}{% elif href %}{{ href }}/1{% endif %}" role="button" aria-label="{{ _('first')|capfirst }}">
+	<i class="material-icons">skip_previous</i>
+</a>
+<a class="mdl-button mdl-js-button mdl-button--icon" href="{% if link %}{% url link page_obj.previous_page_number %}{% elif href %}{{ href }}/{{ page_obj.previous_page_number }}{% endif %}" role="button" aria-label="{{ _('previous')|capfirst }}">
+	<i class="material-icons">keyboard_arrow_left</i>
+</a>
+{% else %}
+<button class="mdl-button mdl-js-button mdl-button--icon" disabled role="button" aria-label="{{ _('first')|capfirst }}">
+	<i class="material-icons">skip_previous</i>
+</button>
+<button class="mdl-button mdl-js-button mdl-button--icon" disabled role="button" aria-label="{{ _('previous')|capfirst }}">
+	<i class="material-icons">keyboard_arrow_left</i>
+</button>
+{% endif %}
+
+{% for page in page_range %}
+
+<a class="mdl-button mdl-js-button mdl-button--icon {% if page == page_obj.number %}mdl-button--colored{% endif %}" role="button" aria-label="{{ page }}" href="{% if link %}{% url link page %}{% elif href %}{{ href }}/{{ page }}{% endif %}">
+	{{ page }}
+</a>
+
+{% endfor %}
+
+{% if page_obj.has_next %}
+<a class="mdl-button mdl-js-button mdl-button--icon" href="{% if link %}{% url link page_obj.next_page_number %}{% elif href %}{{ href }}/{{ page_obj.next_page_number }}{% endif %}" role="button" aria-label="{{ _('next')|capfirst }}">
+	<i class="material-icons">keyboard_arrow_right</i>
+</a>
+<a class="mdl-button mdl-js-button mdl-button--icon" href="{% if link %}{% url link page_obj.paginator.num_pages %}{% elif href %}{{ href }}/{{ page_obj.paginator.num_pages }}{% endif %}" role="button" aria-label="{{ _('last')|capfirst }}">
+	<i class="material-icons">skip_next</i>
+</a>
+{% else %}
+<button class="mdl-button mdl-js-button mdl-button--icon" disabled role="button" aria-label="{{ _('next')|capfirst }}">
+	<i class="material-icons">keyboard_arrow_right</i>
+</button>
+<button class="mdl-button mdl-js-button mdl-button--icon" disabled role="button" aria-label="{{ _('last')|capfirst }}">
+	<i class="material-icons">skip_next</i>
+</button>
+{% endif %}
+<span>{{ current_page_template|capfirst }}</span>

@@ -3,7 +3,7 @@
 {% block body_block %}
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 	<header class="mdl-layout__header mdl-color-text--white">
-		<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+		<div id="loading-bar" class="escondido mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
 		<div class="mdl-layout__header-row">
 			<div class="mdl-layout-spacer"></div>
 			<h3 class="env-font mdl-cell--hide-phone">ProductivEnv</h3>
@@ -30,15 +30,15 @@
 					</li>
 					<li class="mdl-menu__item">
 						<i class="material-icons">remove_red_eye</i>
-						<a class="mdl-navigation__link" href="{% url 'user:current_user_detail' %}">{{ user.get_full_name|default:user.get_username }}</a>
+						<a class="mdl-navigation__link make-navigation" href="{% url 'user:current_user_detail' %}">{{ user.get_full_name|default:user.get_username }}</a>
 					</li >
 					<li class="mdl-menu__item">
 						<i class="material-icons">vpn_key</i>
-						<a class="mdl-navigation__link" href="{% url 'user:current_user_password_update' %}">{{ _("change password")|capfirst }}</a>
+						<a class="mdl-navigation__link make-navigation" href="{% url 'user:current_user_password_update' %}">{{ _("change password")|capfirst }}</a>
 					</li>
 					<li class="mdl-menu__item">
 						<i class="material-icons">exit_to_app</i>
-						<a class="mdl-navigation__link" href="{% url 'user:logout' %}">{{ _("logout")|capfirst }}</a>
+						<a class="mdl-navigation__link make-navigation" href="{% url 'user:logout' %}">{{ _("logout")|capfirst }}</a>
 					</li>
 				</ul>
 			</div>
@@ -46,7 +46,7 @@
 		<nav class="mdl-navigation">
 			{% for site in request_available_sites %}
 			{% trans site.name as site_name %}
-			<a class="mdl-navigation__link" href="{% url site.reverseUrl %}">
+			<a class="mdl-navigation__link make-navigation" href="{% url site.reverseUrl %}">
 				<i class="material-icons" role="presentation">{{ site.icon }}</i> 
 				{{ site_name|capfirst }}
 			</a>
