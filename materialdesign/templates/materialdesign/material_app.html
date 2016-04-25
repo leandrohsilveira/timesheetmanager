@@ -1,6 +1,47 @@
 {% extends 'base/base.html' %} {% load i18n %}
 
 {% block body_block %}
+
+
+
+<dialog id="languageModal" class="mdl-dialog">
+	<h5 class="mdl-dialog__title">
+		<i class="material-icons">language</i>
+		{{ _("switch language")|capfirst }}
+	</h5>
+	<form action="{% url 'language:set_language' %}" method="post">
+		{% csrf_token %}
+		<input name="next" type="hidden" value="{{ redirect_to }}" />
+		<div class="mdl-dialog__content">
+	    	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+	    		<label class="mdl-textfield__label" for="{{ bound_field.id_for_label }}">
+					{{ _("choose a language")|capfirst }}:
+				</label>
+				<select class="mdl-textfield__input" id="language" name="language">
+					{% get_current_language as LANGUAGE_CODE %}
+			        {% get_available_languages as LANGUAGES %}
+			        {% get_language_info_list for LANGUAGES as languages %}
+			        {% for language in languages %}
+			        	{% if language.code in mapped_languages %}
+			            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+			                {{ language.name_local }} ({{ language.code }})
+			            </option>
+			            {% endif %}
+			        {% endfor %}
+				</select>
+	    	</div>
+	    </div>
+	    <div class="mdl-dialog__actions">
+			<button type="submit" class="mdl-button make-navigation" data-closedialog="#languageModal">
+				{{ _("submit")|capfirst }}
+			</button>
+			<button type="button" class="mdl-button" data-closedialog="#languageModal">
+				{{ _("cancel")|capfirst }}
+			</button>
+	    </div>
+    </form>
+</dialog>
+
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 	<header class="mdl-layout__header mdl-color-text--white">
 		<div id="loading-bar" class="escondido mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
@@ -26,7 +67,7 @@
 				<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="accbtn">
 					<li class="mdl-menu__item">
 						<i class="material-icons">language</i>
-						<a class="mdl-navigation__link" href="#" data-toggle="modal" data-target="#languageModal">{{ _("switch language")|capfirst }}</a>
+						<a class="mdl-navigation__link" href="#" data-opendialog="#languageModal">{{ _("switch language")|capfirst }}</a>
 					</li>
 					<li class="mdl-menu__item">
 						<i class="material-icons">remove_red_eye</i>
@@ -58,7 +99,7 @@
 	<main class="mdl-layout__content"> 
 		{% block off_container %}{% endblock off_container %}
 		<div class="app-content mdl-grid">
-			{% bootstrap_messages messages %} 
+			{% mdl_messages messages %} 
 			{% block content_block %}{% endblock content_block %}
 		</div>
 	</main>

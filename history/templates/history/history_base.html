@@ -1,20 +1,20 @@
-{% extends 'user/user_base.html' %} {% load i18n %}
+{% extends 'materialdesign/material_app.html' %} {% load i18n %}
 
 {% block app_menu %} 
-<ul class="nav navbar-nav">
-	<li>
-		<a href="{% url 'history:index' %}">
-			<i class="fa fa-home"></i>
+<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+	<a href="{% url 'history:index' %}" class="make-navigation mdl-navigation__link mdl-layout__tab">
+		<i class="material-icons">home</i>
+		<span>
 			{{ _("home")|capfirst }}
-		</a>
-	</li>
-	{% if perms.auth.change_user %}
-	<li>
-		<a href="{% url 'history:historyentry_list' 1 %}">
-			<i class="fa fa-list"></i>
+		</span>
+	</a>
+	{% if perms.auth.add_user %}
+	<a href="{% url 'history:historyentry_list' 1 %}" class="make-navigation mdl-navigation__link mdl-layout__tab">
+		<i class="material-icons">list</i>
+		<span>
 			{{ _("system history entries")|capfirst }}
-		</a>
-	</li>
+		</span>
+	</a>
 	{% endif %}
-</ul>
+</div>
 {% endblock %}

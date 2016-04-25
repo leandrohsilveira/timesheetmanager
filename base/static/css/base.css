@@ -27,6 +27,14 @@
 	float: left;
 }
 
+.fl-right {
+	float: right;
+}
+
+.table-responsive {
+	overflow-x: auto; 
+}
+
 .add-fixed {
 	position: fixed;
 	bottom: 50px;
@@ -112,6 +120,10 @@
 
 .app-user-dropdown-header {
 /* 	text-align: right; */
+}
+
+.mdl-dialog__title {
+	font-size: 16px;
 }
 
 .material-icons.md-18 { font-size: 18px; }

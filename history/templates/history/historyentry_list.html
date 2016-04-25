@@ -1,49 +1,53 @@
 {% extends "history/history_base.html" %} {% load humanize %} {% load i18n %} 
 
-{% block page_title %}
-{% icon_text icon='history' text=view_verbose_name|capfirst %}
-{% endblock page_title %}
-
 {% block content_block %} 
 {% trans "are you sure that you wish to delete this history entry?" as delete_confirm_message %}
 
-<div class="row">{% bootstrap_paginator link='history:historyentry_list' page_obj=page_obj %}</div>
-<div class="row">
+{% mdl_paginator page_obj=page_obj link='history:historyentry_list' %}
+<div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--2dp">
+	<div class="mdl-card__title mdl-color--green-600 mdl-color-text--white">
+		<i class="material-icons">list</i>
+		<h2 class="mdl-card__title-text">
+		{{ view_verbose_name|capfirst }}
+		</h2>
+	</div>
 	<div class="table-responsive">
-		<table id="tabela" class="table table-bordered table-striped table-hover table-condensed">
+		<table id="tabela" class="mdl-data-table mdl-cell mdl-cell--12-col mdl-js-data-table">
 			<thead>
 				<tr>
-					<th>{{ _("event time")|capfirst }}</th>
+					<th class="mdl-data-table__cell--non-numeric">{{ _("event time")|capfirst }}</th>
 					{% if view_id == "historyentry_list" %}
-					<th>{{ _("made by")|capfirst }}</th>
+					<th class="mdl-data-table__cell--non-numeric">{{ _("made by")|capfirst }}</th>
 					{% endif %}
-					<th>{{ _("message")|capfirst }}</th>
+					<th class="mdl-data-table__cell--non-numeric">{{ _("message")|capfirst }}</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% if object_list %} {% for object in object_list %}
 				<tr>
-					<td>
-						<i class="fa fa-history"></i>
+					<td class="mdl-data-table__cell--non-numeric">
 						{{ object.event_time|naturaltime }}
 					</td>
 					{% if view_id == "historyentry_list" %}
-					<td>
+					<td class="mdl-data-table__cell--non-numeric">
 						{{ object.user.get_full_name|capfirst}}
 					</td>
 					{% endif %}
-					<td>
+					<td class="mdl-data-table__cell--non-numeric">
 						{{ object.get_event_message|capfirst }}
 						{% if perms.history.delete_historyentry %}
-						{% url "history:historyentry_delete" object.id as delete_url %}
-						{% bootstrap_button icon="trash" bclass="danger pull-right btn-sm" href=delete_url confirm_message=delete_confirm_message %} 
+						<a href="{% url 'history:historyentry_delete' object.id  %}" 
+								class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red fl-right" 
+								onclick="return confirm('{{ delete_confirm_message }}')">
+							<i class="material-icons">delete</i>
+						</a>
 						{% endif %}
 					</td>
 				</tr>
 				{% endfor %} 
 				{% else %}
 				<tr>
-					<td colspan="5">
+					<td class="mdl-data-table__cell--non-numeric" colspan="5">
 						<p>{{ _("no results to show")|capfirst }}</p>
 					</td>
 				</tr>
@@ -52,5 +56,5 @@
 		</table>
 	</div>
 </div>
-<div class="row">{% bootstrap_paginator link='history:historyentry_list' page_obj=page_obj %}</div>
+{% mdl_paginator page_obj=page_obj link='history:historyentry_list' %}
 {% endblock %}

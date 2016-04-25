@@ -16,9 +16,11 @@
 			<h2 class="mdl-card__title-text">
 			{% if user.username == object.username %}
 			{{ _("my user")|capfirst }}
-			{% else %}
+			{% elif object %}
 			{% blocktrans asvar user_change_title with first_name=object.first_name|capfirst %}{{ first_name }}'s user data{% endblocktrans %}
 			{{ user_change_title|capfirst }}
+			{% else %}
+			{{ _("new user form") }}
 			{% endif %}
 			</h2>
 		</div>

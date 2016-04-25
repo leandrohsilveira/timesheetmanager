@@ -1,7 +1,8 @@
 {% if messages %}
-<div class="row">
 	{% for message in messages %}
-	<div class="alert alert-{{ message.tags|default:'danger' }}" role="alert">{{ message|capfirst }}</div>
+	<div class="mdl-snackbar mdl-snackbar--active" aria-hidden="false">
+		<div class="mdl-snackbar__text">{{ message|capfirst }}</div>
+		<button class="mdl-snackbar__action" type="button"></button>
+	</div>
 	{% endfor %}
-</div>
 {% endif %}

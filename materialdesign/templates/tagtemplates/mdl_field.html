@@ -13,14 +13,12 @@
 	<span class="mdl-textfield__error">{{ error|capfirst|safe }}</span>
 	{% endfor %}
 	{% endif %}
-	{% if bound_field.help_text %}
-	<br>
-	{{ bound_field.help_text|capfirst|safe }}
-	{% endif %}
 	
 </div>
-
-
+{% if bound_field.help_text %}
+<br>
+{{ bound_field.help_text|capfirst|safe }}
+{% endif %}
 
 {% else %}
 {{ bound_field }}

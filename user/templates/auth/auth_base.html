@@ -2,14 +2,14 @@
 
 {% block app_menu %} 
 <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-	<a href="{% url 'user:index' %}" class="make-navigation mdl-navigation__link mdl-layout__tab {% if current_page == 'home' %}is-active{% endif %}">
+	<a href="{% url 'user:index' %}" class="make-navigation mdl-navigation__link mdl-layout__tab">
 		<i class="material-icons">home</i>
 		<span>
 			{{ _("home")|capfirst }}
 		</span>
 	</a>
 	{% if perms.auth.add_user %}
-	<a href="{% url 'user:users_list' 1 %}" class="make-navigation mdl-navigation__link mdl-layout__tab {% if current_page == 'user-detail' %}is-active{% endif %}">
+	<a href="{% url 'user:users_list' 1 %}" class="make-navigation mdl-navigation__link mdl-layout__tab">
 		<i class="material-icons">list</i>
 		<span>
 			{{ _("users")|capfirst }}
