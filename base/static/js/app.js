@@ -59,7 +59,7 @@ JQ(function() {
 	JQ(".mdl-snackbar.mdl-snackbar--active").applyAll(function(el, index) {
 		setTimeout(function() {
 			el.classList.remove("mdl-snackbar--active");
-		}, 2000);
+		}, 4000);
 	});
 	
 });

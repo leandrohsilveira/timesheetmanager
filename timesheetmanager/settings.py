@@ -262,7 +262,7 @@ LOCALE_PATHS = (
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'America/Brasilia'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

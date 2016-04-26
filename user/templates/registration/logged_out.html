@@ -1,21 +1,22 @@
-{% extends 'user/user_base.html' %}ity_base.html' %} {% load i18n %} 
+{% extends 'materialdesign/material_app.html' %} {% load i18n %} 
 
 {% block page_title %}
 {{title|capfirst}}
 {% endblock page_title %}
 
 {% block content_block %}
-<div class="col-md-3"></div>
-<div class="col-md-6">
-	<div class="well well-lg">
-		
-		{{ _('session terminated.')|capfirst }}
-		<br />
-		{{ _('thank you for visiting our application, come back soon')|capfirst }}
-	
-	</div>
-	{% bootstrap_button link='user:index' icon='sign-in' text=_('sign in again')|capfirst bclass='primary' %}
+
+<div class="mdl-layout-spacer"></div>
+<div class="mdl-cell--5-col">
+  <br>
+  <br>
+  {{ _('session terminated.')|capfirst }}
+  <br>
+  {{ _('thank you for visiting our application, come back soon')|capfirst }}
+  <br>
+  <br>
+  <a href="{% url 'user:index' %}" class="mdl-button">{{ _('sign in again') }}</a>
 </div>
-<div class="col-md-3"></div>
-<div class="clearfix"></div>
+<div class="mdl-layout-spacer"></div>
+
 {% endblock %}
