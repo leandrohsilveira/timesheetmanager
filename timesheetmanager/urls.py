@@ -19,12 +19,14 @@ from django.contrib.admin import site as admin_site
 
 from user.site import UserSiteConfig
 from history.site import HistoryEntrySiteConfig
-
+from user.views import index
 
 urlpatterns = i18n_patterns(
+	url(r'^$', index),
+	
 	url(r'^i18n/', include(i18n_urlpatterns, namespace = 'language')),
 	
-    url(r'^admin/', admin_site.urls),
+    	url(r'^admin/', admin_site.urls),
     
 	url(r'^user/', UserSiteConfig.as_include()),
 	url(r'^history/', HistoryEntrySiteConfig.as_include()),
