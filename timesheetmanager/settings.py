@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ENV_CONFIGS = {
   'SECRET_KEY': os.getenv('SECRET_KEY','tdbcz%oo&hha2)z_=5&dk77=5025hayj1c86)y1(c)i!dexnr0'),
-  'ALLOWED_HOSTS': os.getenv('ALLOWED_HOSTS', '').split(','),
+  'ALLOWED_HOSTS': os.getenv('ALLOWED_HOSTS', '*').split(','),
   'DEBUG': bool(os.getenv('DEBUG_MODE', 'True')),
   'DATABASE': {
     'default': {
