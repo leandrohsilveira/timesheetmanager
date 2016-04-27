@@ -13,22 +13,42 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 from django.contrib import messages
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ENV_CONFIGS = {
+  'SECRET_KEY': os.getenv('SECRET_KEY','tdbcz%oo&hha2)z_=5&dk77=5025hayj1c86)y1(c)i!dexnr0'),
+  'ALLOWED_HOSTS': os.getenv('ALLOWED_HOSTS', '').split(','),
+  'DEBUG': bool(os.getenv('DEBUG_MODE', 'True')),
+  'DATABASE': {
+    'default': {
+        	'ENGINE': os.getenv('DATABASE_ENGINE','django.db.backends.sqlite3'),
+        	'NAME': os.getenv('DATABASE_NAME', os.path.join(BASE_DIR, 'db.sqlite3')),
+      	'HOST': os.getenv('DATABASE_HOST', None),
+        	'USER': os.getenv('DATABASE_USER', None),
+         'PASSWORD': os.getenv('DATABASE_PASSWORD', None),
+         'CHARSET': os.getenv('DATABASE_CHARSET', 'UTF-8'),
+         'ATOMIC_REQUESTS': os.getenv('DATABASE_ATOMICREQUESTS','False'),
+    },
+  },
+}
+
+try:
+    from .__secretsettings import CONFIGS as NEW_ENV_CONFIGS
+    ENV_CONFIGS = NEW_ENV_CONFIGS
+except:
+    print("Module __secretsettings not found, loading defaults")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tdbcz%oo&hha2)z_=5&dk77=5025hayj1c86)y1(c)i!dexnr0'
+SECRET_KEY = ENV_CONFIGS["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENV_CONFIGS["DEBUG"]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ENV_CONFIGS["ALLOWED_HOSTS"]
 
 LOGIN_URL = "/user/login/"
 LOGIN_REDIRECT_URL = "/user/"
@@ -217,23 +237,15 @@ LOGGING = {
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 __postgresql = {
 	'ENGINE': 'django.db.backends.postgresql',
-   'HOST': 'ec2-54-83-17-9.compute-1.amazonaws.com',
-	'NAME': 'd1pg2cdsd7qs00',
-	'USER': 'hboiavryjpmvve',
-	'PASSWORD': 'rEdK-kcNUcNsAAIH18eV6ZqOoE',
+   'HOST': os.getenv('DJANGO_DATABASE_HOST', 'localhost'),
+	'NAME': os.getenv('DJANGO_DATABASE_NAME', 'productivenv_db'),
+	'USER': os.getenv('DJANGO_DATABASE_USER', 'productivenv'),
+	'PASSWORD': os.getenv('DJANGO_DATABASE_PASSWORD', 'rEdK-kcNUcNsAAIH18eV6ZqOoE'),
 	'CHARSET': 'UTF-8',
 	'ATOMIC_REQUESTS': True
 }
 
-__sqlite3 = {
-	'ENGINE': 'django.db.backends.sqlite3',
-	'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-}
-
-DATABASES = {
-    'default': __sqlite3
-}
-
+DATABASES = ENV_CONFIGS["DATABASE"]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

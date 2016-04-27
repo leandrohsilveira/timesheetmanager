@@ -51,4 +51,5 @@ venv
 staticfiles
 .env
 /log/
-.codenvy
+__secretsettings.py
+.codenvy/
