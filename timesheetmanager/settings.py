@@ -20,7 +20,7 @@ ENV_CONFIGS = {
   'SECRET_KEY': os.getenv('SECRET_KEY','tdbcz%oo&hha2)z_=5&dk77=5025hayj1c86)y1(c)i!dexnr0'),
   'ALLOWED_HOSTS': os.getenv('ALLOWED_HOSTS', '*').split(','),
   'DEBUG': bool(os.getenv('DEBUG_MODE', 'True')),
-  'STATIC_ROOT': os.getenv('STATIC_ROOT', 'http://localhost'),
+  'STATIC_ROOT': os.getenv('STATIC_ROOT', os.path.join(BASE_DIR, 'static')),
   'DATABASE': {
     'default': {
         'ENGINE': os.getenv('DATABASE_ENGINE','django.db.backends.sqlite3'),
@@ -289,6 +289,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = ENV_CONFIGS["STATIC_ROOT"]
 
 if DEBUG:
 	DJANGO_LOG_LEVEL = DEBUG
