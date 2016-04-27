@@ -217,9 +217,10 @@ LOGGING = {
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 __postgresql = {
 	'ENGINE': 'django.db.backends.postgresql',
-	'NAME': 'timesheetdb',
-	'USER': 'user',
-	'PASSWORD': 't1m3sh33t',
+   'HOST': 'ec2-54-83-17-9.compute-1.amazonaws.com',
+	'NAME': 'd1pg2cdsd7qs00',
+	'USER': 'hboiavryjpmvve',
+	'PASSWORD': 'rEdK-kcNUcNsAAIH18eV6ZqOoE',
 	'CHARSET': 'UTF-8',
 	'ATOMIC_REQUESTS': True
 }
