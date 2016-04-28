@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 21:55-0300\n"
+"POT-Creation-Date: 2016-04-28 00:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,9 @@ msgstr ""
 #: .\base\forms.py:44
 msgid ""
 "ViewIdMixin must be mixed with an class that has a 'get_context_data' method."
-msgstr "ViewIdMixin deve ser misturada a uma classe que possui um método chamado 'get_context_data'."
+msgstr ""
+"ViewIdMixin deve ser misturada a uma classe que possui um método chamado "
+"'get_context_data'."
 
 #: .\base\forms.py:51
 msgid "The model atribute is required."
@@ -31,35 +33,41 @@ msgstr "O atributo 'model' é obrigatório."
 msgid "A 'pk' kwarg is required."
 msgstr "Um kwarg com chave 'pk' é obrigatório."
 
-#: .\base\templates\base\base_app.html:8
+#: .\base\templates\base\base_app.html:20
 msgid "toggle navigation"
 msgstr "exibir/esconder navegação"
 
-#: .\base\templates\base\base_app.html:31
+#: .\base\templates\base\base_app.html:43
 msgid "applications"
 msgstr "aplicações"
 
 #: .\base\templates\base\includes\language_modal.html:10
-#: .\user\templates\registration\login.html:28
-#: .\user\templates\user\user_base.html:16
+#: .\materialdesign\templates\materialdesign\material_app.html:8
+#: .\materialdesign\templates\materialdesign\material_app.html:84
+#: .\user\templates\registration\login.html:52
 msgid "switch language"
 msgstr "trocar idioma"
 
 #: .\base\templates\base\includes\language_modal.html:18
+#: .\materialdesign\templates\materialdesign\material_app.html:16
 msgid "choose a language"
 msgstr "escolha um idioma"
 
 #: .\base\templates\base\includes\language_modal.html:36
+#: .\materialdesign\templates\materialdesign\material_app.html:34
 msgid "submit"
 msgstr "submeter"
 
 #: .\base\templates\base\includes\language_modal.html:40
-#: .\user\templates\auth\password_change_form.html:20
-#: .\user\templates\auth\user_form.html:22
+#: .\materialdesign\templates\materialdesign\material_app.html:37
+#: .\user\templates\auth\password_change_form.html:29
+#: .\user\templates\auth\user_form.html:39
 msgid "cancel"
 msgstr "cancelar"
 
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:3
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:3
+#, python-format
 msgctxt "paginator template"
 msgid ""
 "\n"
@@ -76,21 +84,29 @@ msgstr[1] ""
 
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:12
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:23
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:9
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:16
 msgid "first"
 msgstr "primeiro"
 
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:17
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:28
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:12
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:19
 msgid "previous"
 msgstr "anterior"
 
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:46
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:57
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:33
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:40
 msgid "next"
 msgstr "próximo"
 
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:51
 #: .\base\templates\tagtemplates\bootstrap_paginator.html:62
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:36
+#: .\materialdesign\templates\tagtemplates\mdl_paginator.html:43
 msgid "last"
 msgstr "último"
 
@@ -99,10 +115,12 @@ msgid "required fields"
 msgstr "campos obrigatórios"
 
 #: .\history\forms.py:48
+#, python-format
 msgid "created new %(content_type_name)s: \"%(object_str)s\"."
 msgstr "novo %(content_type_name)s criado: \"%(object_str)s\""
 
 #: .\history\forms.py:51
+#, python-format
 msgid "modified %(content_type_name)s: \"%(object_str)s\"."
 msgstr "%(content_type_name)s atualizado: \"%(object_str)s\""
 
@@ -115,32 +133,32 @@ msgstr ""
 "EntradaHistorico< id: %(pk)d, template_mensagem: %(message_template)s, "
 "parametros: %(parameters)s, tipo_conteudo: %(content_type)s."
 
-#: .\history\templates\history\history_base.html:8
-#: .\user\templates\auth\auth_base.html:8
+#: .\history\templates\history\history_base.html:7
+#: .\user\templates\auth\auth_base.html:7
 msgid "home"
 msgstr "início"
 
-#: .\history\templates\history\history_base.html:15
+#: .\history\templates\history\history_base.html:14
 msgid "system history entries"
 msgstr "históricos do sistema"
 
-#: .\history\templates\history\historyentry_list.html:2
+#: .\history\templates\history\historyentry_list.html:4
 msgid "are you sure that you wish to delete this history entry?"
 msgstr "você tem certeza que deseja excluir esta entrada de histórico?"
 
-#: .\history\templates\history\historyentry_list.html:14
+#: .\history\templates\history\historyentry_list.html:18
 msgid "event time"
 msgstr "ocorrido em"
 
-#: .\history\templates\history\historyentry_list.html:16
+#: .\history\templates\history\historyentry_list.html:20
 msgid "made by"
 msgstr "feito por"
 
-#: .\history\templates\history\historyentry_list.html:18
+#: .\history\templates\history\historyentry_list.html:22
 msgid "message"
 msgstr "mensagem"
 
-#: .\history\templates\history\historyentry_list.html:50
+#: .\history\templates\history\historyentry_list.html:51
 #: .\user\templates\auth\user_list.html:42
 msgid "no results to show"
 msgstr "nenhum resultado para exibir"
@@ -148,6 +166,22 @@ msgstr "nenhum resultado para exibir"
 #: .\history\views.py:43
 msgid "the history entry was successfully deleted!"
 msgstr "os dados do usuário atualizados com sucesso!"
+
+#: .\materialdesign\templates\materialdesign\material_app.html:76
+#: .\user\templates\auth\user_detail.html:10
+#: .\user\templates\auth\user_form.html:18
+msgid "my user"
+msgstr "meu usuário"
+
+#: .\materialdesign\templates\materialdesign\material_app.html:80
+#: .\user\templates\auth\password_change_form.html:14
+#: .\user\templates\auth\user_detail.html:51
+msgid "change password"
+msgstr "trocar senha"
+
+#: .\materialdesign\templates\materialdesign\material_app.html:88
+msgid "logout"
+msgstr "sair"
 
 #: .\user\forms.py:20
 msgid "Password"
@@ -163,35 +197,26 @@ msgstr ""
 "a senha de um usuário, mas você pode alterá-la utilizando <a href=\"password"
 "\">este formulário</a>."
 
-#: .\user\templates\auth\auth_base.html:15
+#: .\user\templates\auth\auth_base.html:14
 msgid "users"
 msgstr "usuários"
 
-#: .\user\templates\auth\password_change_form.html:4
-#: .\user\templates\auth\user_detail.html:41
-#: .\user\templates\user\user_base.html:22
-msgid "change password"
-msgstr "trocar senha"
-
-#: .\user\templates\auth\password_change_form.html:4
+#: .\user\templates\auth\password_change_form.html:14
 #, python-format
 msgctxt "change password"
 msgid "of %(first_name)s"
 msgstr "de %(first_name)s"
 
-#: .\user\templates\auth\password_change_form.html:19
-#: .\user\templates\auth\user_form.html:21
+#: .\user\templates\auth\password_change_form.html:26
+#: .\user\templates\auth\user_form.html:36
 msgid "save"
 msgstr "salvar"
 
-#: .\user\templates\auth\user_detail.html:3
+#: .\user\templates\auth\user_detail.html:12
+#: .\user\templates\auth\user_form.html:20
 #, python-format
 msgid "%(first_name)s's user data"
 msgstr "dados do usuário %(first_name)s"
-
-#: .\user\templates\auth\user_detail.html:8
-msgid "my user"
-msgstr "meu usuário"
 
 #: .\user\templates\auth\user_detail.html:19
 msgid "full name"
@@ -206,12 +231,12 @@ msgid "username"
 msgstr "usuário"
 
 #: .\user\templates\auth\user_detail.html:31
-#: .\user\templates\auth\user_list.html:17
+#: .\user\templates\auth\user_list.html:18
 msgid "sign up date"
 msgstr "data de cadastro"
 
 #: .\user\templates\auth\user_detail.html:35
-#: .\user\templates\auth\user_list.html:18
+#: .\user\templates\auth\user_list.html:19
 msgid "last login"
 msgstr "último login"
 
@@ -220,62 +245,54 @@ msgstr "último login"
 msgid "never logged in"
 msgstr "nunca fez login"
 
-#: .\user\templates\auth\user_detail.html:42
+#: .\user\templates\auth\user_detail.html:47
 msgid "update user's data"
 msgstr "atualizar dados do usuário"
 
-#: .\user\templates\auth\user_form.html:3
+#: .\user\templates\auth\user_form.html:4
 msgid "user form"
 msgstr "formulário de usuário"
 
-#: .\user\templates\auth\user_list.html:3
+#: .\user\templates\auth\user_form.html:23
+msgid "new user form"
+msgstr "formulário de usuário"
+
+#: .\user\templates\auth\user_list.html:10
 msgid "users list"
 msgstr "lista de usuários"
 
-#: .\user\templates\auth\user_list.html:7
-msgid "new user"
-msgstr "novo usuário"
-
-#: .\user\templates\auth\user_list.html:16
+#: .\user\templates\auth\user_list.html:17
 msgid "user data"
 msgstr "dados do usuário"
 
-#: .\user\templates\auth\user_list.html:29
+#: .\user\templates\auth\user_list.html:28
 msgid "not provided yet"
 msgstr "ainda não fornecido"
 
-#: .\user\templates\registration\logged_out.html:9
+#: .\user\templates\registration\logged_out.html:13
 msgid "session terminated."
 msgstr "sessão terminada"
 
-#: .\user\templates\registration\logged_out.html:11
+#: .\user\templates\registration\logged_out.html:15
 msgid "thank you for visiting our application, come back soon"
 msgstr "obrigado por visitar nossa aplicação, volte em breve"
 
-#: .\user\templates\registration\logged_out.html:14
+#: .\user\templates\registration\logged_out.html:18
 msgid "sign in again"
 msgstr "entrar novamente"
 
-#: .\user\templates\registration\login.html:4
+#: .\user\templates\registration\login.html:18
 msgid "switch user"
 msgstr "trocar de usuário"
 
-#: .\user\templates\registration\login.html:6
-#: .\user\templates\registration\login.html:24
+#: .\user\templates\registration\login.html:23
+#: .\user\templates\registration\login.html:37
 msgid "sign in"
 msgstr "entrar"
 
-#: .\user\templates\registration\login.html:25
+#: .\user\templates\registration\login.html:41
 msgid "sign up"
 msgstr "cadastre-se"
-
-#: .\user\templates\user\user_base.html:25
-msgid "logout"
-msgstr "sair"
-
-#, --------------------------------------------------------------
-#, LAZIES 
-#, -------------------------------------------------------------- 
 
 msgid "all history entries"
 msgstr "todas entradas de histórico"

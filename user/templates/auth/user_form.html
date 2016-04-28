@@ -20,7 +20,7 @@
 			{% blocktrans asvar user_change_title with first_name=object.first_name|capfirst %}{{ first_name }}'s user data{% endblocktrans %}
 			{{ user_change_title|capfirst }}
 			{% else %}
-			{{ _("new user form") }}
+			{{ _("new user form")|capfirst }}
 			{% endif %}
 			</h2>
 		</div>
