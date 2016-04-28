@@ -52,7 +52,7 @@ class UserSignUpView(SuccessMessageMixin, HistoryEntryMixin, generic.CreateView)
 	success_url = reverse_lazy('user:current_user_detail')
 	# Translators: user data successful create message
 	success_message = _lazy("user successfully created!")
-	history_message_template = _lazy("%(user_first_name)s has signed up.")
+	history_message_template = "%(user_first_name)s has signed up."
 
 	def get_user(self):
 		return self.get_form().instance
