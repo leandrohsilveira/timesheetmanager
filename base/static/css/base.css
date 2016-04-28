@@ -43,26 +43,29 @@
 }
 
 .app-drawer {
-	border: none;
-	color: #fff;
 	overflow: visible;	
 }
 
-.mdl-layout__header .mdl-layout__drawer-button {
-	color: #fff;
+.mdl-card__title .material-icons {
+	margin-right: 10px;
+}
+
+.app-drawer .mdl-navigation__link .material-icons {
+	margin-right: 20px;
+}
+
+.mdl-layout__drawer .mdl-navigation.app-drawer-content {
+	padding-top: 0;
+}
+
+.app-drawer-content .mdl-navigation__link {
+	font-size: 0.85em;
+	font-weight: bold;
 }
 
 .app-drawer .mdl-navigation .mdl-navigation__link {
     padding: 16px 16px;
-	color: #fff;
 }
-
-.app-drawer .mdl-navigation .mdl-navigation__link:hover {
-    padding: 16px 16px;
-	color: #000;
-	background-color: rgb(178,255,89);
-}
-
 
 .mdl-progress {
 	width: 100%;
@@ -100,7 +103,7 @@
 	width: 100%;
 }
 
-.app-drawer .mdl-menu .mdl-menu__item {
+.mdl-menu .mdl-menu__item {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;

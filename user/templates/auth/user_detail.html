@@ -3,7 +3,7 @@
 {% with 'user-detail' as current_page %}
 {% block content_block %}
 <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
-	<div class="mdl-card__title mdl-color--green-600 mdl-color-text--white">
+	<div class="mdl-card__title">
 		<i class="material-icons">account_circle</i>
 		<h2 class="mdl-card__title-text">
 		{% if user.username == object.username %}
@@ -38,7 +38,7 @@
 	</div>
 	{% if user.username == object.username or perms.auth.change_user %}
 	<div class="mdl-card__menu">
-		<button id="cardmenubtn" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+		<button id="cardmenubtn" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
 			<i class="material-icons">more_vert</i>
 		</button>
 		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="cardmenubtn">

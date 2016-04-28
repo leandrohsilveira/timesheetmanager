@@ -35,10 +35,10 @@ ENV_CONFIGS = {
 }
 
 try:
-    from .__secretsettings import CONFIGS as NEW_ENV_CONFIGS
-    ENV_CONFIGS = NEW_ENV_CONFIGS
+	from .__secretsettings import CONFIGS as NEW_ENV_CONFIGS
+	ENV_CONFIGS = NEW_ENV_CONFIGS
 except:
-    print("Module __secretsettings not found, loading defaults")
+	print("Module __secretsettings not found, loading defaults")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/

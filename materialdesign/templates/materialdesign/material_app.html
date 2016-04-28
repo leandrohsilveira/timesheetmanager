@@ -41,7 +41,7 @@
 </dialog>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-	<header class="mdl-layout__header mdl-color-text--white">
+	<header class="mdl-layout__header">
 		<div id="loading-bar" class="escondido mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
 		<div class="mdl-layout__header-row">
 			<div class="mdl-layout-spacer"></div>
@@ -50,39 +50,19 @@
 			<div class="mdl-layout-spacer"></div>
 			<i class="material-icons md-36">{{ request_current_site.icon }}</i>
 		</div>
-		{% block app_menu %}{% endblock app_menu %}
+		
 	</header>
 	{% if user.is_authenticated %}
-	<div class="app-drawer mdl-layout__drawer mdl-color--green-800">
-		<header class="app-drawer-header mdl-color--green-600">
+	<div class="app-drawer mdl-layout__drawer">
+		<header class="app-drawer-header mdl-color--primary mdl-color-text--white">
 			<i class="material-icons md-48">account_circle</i>
 			<div class="app-user-dropdown">
 				<span>{{ user.first_name|default:user.get_username }}</span>
-				<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-					<i class="material-icons" role="presentation">arrow_drop_down</i>
-					<span class="visuallyhidden">Accounts</span>
-				</button>
-				<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-					<li class="mdl-menu__item">
-						<i class="material-icons">language</i>
-						<a class="mdl-navigation__link" href="#" data-opendialog="#languageModal">{{ _("switch language")|capfirst }}</a>
-					</li>
-					<li class="mdl-menu__item">
-						<i class="material-icons">remove_red_eye</i>
-						<a class="mdl-navigation__link make-navigation" href="{% url 'user:current_user_detail' %}">{{ user.get_full_name|default:user.get_username }}</a>
-					</li >
-					<li class="mdl-menu__item">
-						<i class="material-icons">vpn_key</i>
-						<a class="mdl-navigation__link make-navigation" href="{% url 'user:current_user_password_update' %}">{{ _("change password")|capfirst }}</a>
-					</li>
-					<li class="mdl-menu__item">
-						<i class="material-icons">exit_to_app</i>
-						<a class="mdl-navigation__link make-navigation" href="{% url 'user:logout' %}">{{ _("logout")|capfirst }}</a>
-					</li>
-				</ul>
 			</div>
 		</header>
-		<nav class="mdl-navigation">
+		<nav class="mdl-navigation app-drawer-content">
+			{% block app_menu %}{% endblock app_menu %}
+			<a class="mdl-menu__item--full-bleed-divider"></a>
 			{% for site in request_available_sites %}
 			{% trans site.name as site_name %}
 			<a class="mdl-navigation__link make-navigation" href="{% url site.reverseUrl %}">
@@ -90,6 +70,23 @@
 				{{ site_name|capfirst }}
 			</a>
 			{% endfor %}
+			<a class="mdl-menu__item--full-bleed-divider"></a>
+			<a class="mdl-navigation__link make-navigation" href="{% url 'user:current_user_detail' %}">
+				<i class="material-icons">person</i>
+				{{ _("my user")|capfirst }}
+			</a>
+			<a class="mdl-navigation__link make-navigation" href="{% url 'user:current_user_password_update' %}">
+				<i class="material-icons">vpn_key</i>
+				{{ _("change password")|capfirst }}
+			</a>
+			<a class="mdl-navigation__link" href="#" data-opendialog="#languageModal">
+				<i class="material-icons">language</i>
+				{{ _("switch language")|capfirst }}
+			</a>
+			<a class="mdl-navigation__link make-navigation" href="{% url 'user:logout' %}">
+				<i class="material-icons">exit_to_app</i>
+				{{ _("logout")|capfirst }}
+			</a>
 		</nav>
 	</div>
 	{% endif %}
