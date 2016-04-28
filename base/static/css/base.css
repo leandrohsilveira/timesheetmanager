@@ -43,7 +43,7 @@
 }
 
 .app-drawer {
-	overflow: visible;	
+	overflow-x: visible;	
 }
 
 .mdl-card__title .material-icons {
