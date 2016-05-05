@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns, urlpatterns as i18n_urlpatterns
-from django.contrib.admin import site as admin_site  
+from django.contrib.admin import site as admin_site
 
-from user.site import UserSiteConfig
+from checklist.site import ChecklistSiteConfig
 from history.site import HistoryEntrySiteConfig
+from user.site import UserSiteConfig
 from user.views import index
+
 
 urlpatterns = i18n_patterns(
 	url(r'^$', index),
@@ -30,5 +32,6 @@ urlpatterns = i18n_patterns(
     
 	url(r'^user/', UserSiteConfig.as_include()),
 	url(r'^history/', HistoryEntrySiteConfig.as_include()),
+	url(r'^checklist/', ChecklistSiteConfig.as_include())
 
 )

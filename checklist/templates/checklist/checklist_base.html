@@ -1,0 +1,10 @@
+{% extends 'materialdesign/material_app.html' %} {% load i18n %}
+
+{% block app_menu %} 
+<a href="{% url 'checklist:index' %}" class="make-navigation mdl-navigation__link">
+	<i class="material-icons">home</i>
+	<span>
+		{{ _("home")|capfirst }}
+	</span>
+</a>
+{% endblock %}

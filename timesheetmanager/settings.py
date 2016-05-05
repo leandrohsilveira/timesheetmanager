@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 	'materialdesign.apps.MaterialdesignConfig',
 	'user.apps.UserConfig',
 	'history.apps.HistoryConfig',
+	'checklist.apps.ChecklistConfig',
 	'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',

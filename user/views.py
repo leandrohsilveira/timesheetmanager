@@ -15,7 +15,9 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
 from django.views import generic
 
-from base.forms import PermissionDeniedInfoMessageMixin, FormUpdateView
+from base.forms import PermissionDeniedInfoMessageMixin, BaseFormView, \
+	UpdateFormMixin, ProductivEnvLogEntryMixin, ProductivEnvHistoryEntryMixin, \
+	ProductivEnvModelFormView
 from history.forms import HistoryEntryMixin
 from user.forms import UserCreateForm, UserUpdateForm
 
@@ -23,31 +25,26 @@ from user.forms import UserCreateForm, UserUpdateForm
 def index(request):
 	return redirect("user:current_user_detail")
 
-class UserHistoryEntryMixin(HistoryEntryMixin):
-	def get_object_instance(self):
-		form = self.get_form()
-		if hasattr(form, "user"):
-			return form.user
-		elif hasattr(form, "instance"):
-			return form.instance
-		return None
+class UserHistoryEntryMixin(ProductivEnvLogEntryMixin, ProductivEnvHistoryEntryMixin):
 
-	def get_history_parameters(self):
-		form = self.get_form()
-		user = None
-		if hasattr(form, "user"):
-			user = self.get_form().user
-		elif hasattr(form, "instance"):
-			user = self.get_form().instance
+	def get_message_parameters(self):
+		instance = self.get_current_object()
+		return {
+			"user_first_name": self.get_user().first_name if self.get_user().first_name else self.get_user().get_username(),
+			'changed_user_first_name': instance.first_name if instance.first_name else instance.get_username()
+		}
 
-		return { "user_first_name": self.request.user.first_name, 'changed_user_first_name': user.first_name }
+class CurrentUserHistoryEntryMixin(ProductivEnvLogEntryMixin, ProductivEnvHistoryEntryMixin):
 
-class CurrentUserHistoryEntryMixin(HistoryEntryMixin):
-	def get_history_parameters(self):
-		return { "user_first_name": self.request.user.first_name }
+	def get_message_parameters(self):
+		return { "user_first_name": self.get_user().first_name if self.get_user().first_name else self.get_user().get_username() }
 
-class UserSignUpView(SuccessMessageMixin, HistoryEntryMixin, generic.CreateView):
+
+class UserSignUpView(SuccessMessageMixin, ProductivEnvLogEntryMixin, ProductivEnvHistoryEntryMixin, ProductivEnvModelFormView):
 	model = User
+	view_id = "user_signup"
+	view_name = _lazy("New user form")
+	pattern = r'^signup$'
 	form_class = UserCreateForm
 	success_url = reverse_lazy('user:current_user_detail')
 	# Translators: user data successful create message
@@ -55,35 +52,48 @@ class UserSignUpView(SuccessMessageMixin, HistoryEntryMixin, generic.CreateView)
 	history_message_template = "%(user_first_name)s has signed up."
 
 	def get_user(self):
-		return self.get_form().instance
+		instance = self.get_current_object()
+		if instance:
+			return instance
+		else:
+			return super(UserSignUpView, self).get_user()
 
-	def get_history_parameters(self):
-		return { "user_first_name": self.get_form().instance.first_name }
+	def get_message_parameters(self):
+		return { "user_first_name": self.get_user().first_name if self.get_user().first_name else self.get_user().get_username() }
 
-class UserCreateView(PermissionDeniedInfoMessageMixin, UserHistoryEntryMixin, UserSignUpView):
+class UserCreateView(PermissionDeniedInfoMessageMixin, SuccessMessageMixin, PermissionRequiredMixin, UserHistoryEntryMixin, ProductivEnvModelFormView):
+	model = User
+	view_id = "user_create"
+	view_name = _lazy("New user form")
+	pattern = r'^new$'
+	form_class = UserCreateForm
+	success_url = reverse_lazy('user:current_user_detail')
+	# Translators: user data successful create message
+	success_message = _lazy("user successfully created!")
 	permission_required = "auth.add_user"
 	permission_denied_message = _lazy("create new users")
 	history_message_template = "%(user_first_name)s has created a new user named \"%(changed_user_first_name)s\"."
 
-class UserUpdateView(PermissionDeniedInfoMessageMixin, SuccessMessageMixin, PermissionRequiredMixin, UserHistoryEntryMixin, generic.UpdateView):
+class UserUpdateView(PermissionDeniedInfoMessageMixin, SuccessMessageMixin, PermissionRequiredMixin, UserHistoryEntryMixin, ProductivEnvModelFormView):
 	model = User
+	view_id = "user_update"
+	view_name = _lazy("%(first_name)s's user data")
+	pattern = r'^(?P<pk>\d+)/edit$'
 	form_class = UserUpdateForm
 	permission_required = "auth.change_user"
 	# Translators: user data successful update message
 	success_message = _lazy("user data successfully updated!")
-	context_object_name = "user_update"
 	# Translators: permission description to access the user update view appeared on permission denied message
 	permission_denied_message = _lazy("change other users data")
 	history_message_template = "%(user_first_name)s has updated \"%(changed_user_first_name)s\" user's data."
 
 	def has_permission(self):
-		if self.get_object().is_superuser:
+		if self.get_current_object().is_superuser:
 			return False
 		return super(UserUpdateView, self).has_permission()
 
 	def get_success_url(self):
 		return reverse_lazy('user:user_detail', kwargs = {"pk": self.object.id })
-
 
 class UserDetailView(PermissionDeniedInfoMessageMixin, PermissionRequiredMixin, generic.DetailView):
 	model = User
@@ -97,8 +107,11 @@ class UserDetailView(PermissionDeniedInfoMessageMixin, PermissionRequiredMixin, 
 		return super(UserDetailView, self).has_permission()
 
 
-class UserPasswordUpdateView(SuccessMessageMixin, PermissionDeniedInfoMessageMixin, PermissionRequiredMixin, UserHistoryEntryMixin, FormUpdateView):
+class UserPasswordUpdateView(PermissionDeniedInfoMessageMixin, SuccessMessageMixin, PermissionRequiredMixin, UserHistoryEntryMixin, ProductivEnvModelFormView):
 	model = User
+	view_id = "user_password_update"
+	view_name = _lazy("change password of %(first_name)s")
+	pattern = r'^(?P<pk>\d+)/password$'
 	form_class = AdminPasswordChangeForm
 	permission_required = "auth.change_user"
 	template_name = "auth/password_change_form.html"
@@ -111,16 +124,17 @@ class UserPasswordUpdateView(SuccessMessageMixin, PermissionDeniedInfoMessageMix
 	def get_success_url(self):
 		return reverse_lazy('user:user_detail', kwargs = {"pk": self.object.id })
 
-	def get_form(self):
-		return self.form_class(user = self.object, **self.get_form_kwargs())
+	def get_form_kwargs(self):
+		kwargs = super(UserPasswordUpdateView, self).get_form_kwargs()
+		kwargs["user"] = kwargs["instance"]
+		del kwargs["instance"]
+		return kwargs
 
-	def form_valid(self, form):
-		response = super(UserPasswordUpdateView, self).form_valid(form)
-		update_session_auth_hash(self.request, form.user)
-		return response
-
-class CurrentUserUpdateView(SuccessMessageMixin, LoginRequiredMixin, CurrentUserHistoryEntryMixin, generic.UpdateView):
+class CurrentUserUpdateView(SuccessMessageMixin, LoginRequiredMixin, CurrentUserHistoryEntryMixin, ProductivEnvModelFormView):
 	model = User
+	view_id = "current_user_update"
+	view_name = _lazy("my user")
+	pattern = r'^edit$'
 	form_class = UserUpdateForm
 	success_url = reverse_lazy('user:current_user_detail')
 	# Translators: current user data successful update message
@@ -129,29 +143,42 @@ class CurrentUserUpdateView(SuccessMessageMixin, LoginRequiredMixin, CurrentUser
 	history_message_template = "%(user_first_name)s has updated own user's data."
 
 	def get_object(self):
+		self.is_update = True
 		return self.request.user
 
 class CurrentUserDetailView(LoginRequiredMixin, generic.DetailView):
 	model = User
 	context_object_name = "current_user_detail"
+
 	def get_object(self):
 		return self.request.user
 
-class CurrentUserPasswordUpdateView(SuccessMessageMixin, LoginRequiredMixin, CurrentUserHistoryEntryMixin, generic.FormView):
-	template_name = "auth/password_change_form.html"
+class CurrentUserPasswordUpdateView(SuccessMessageMixin, LoginRequiredMixin, CurrentUserHistoryEntryMixin, ProductivEnvModelFormView):
+	model = User
 	form_class = PasswordChangeForm
+	template_name = "auth/password_change_form.html"
+	view_id = "current_user_password_update"
+	view_name = _lazy("change password")
+	pattern = r'^password$'
 	success_url = reverse_lazy("user:current_user_detail")
 	# Translators: current user password successful update message
 	success_message = _lazy("your password were successfully updated!")
 	history_message_template = "%(user_first_name)s has updated own user's password."
 
-	def get_form(self):
-		return self.form_class(user = self.request.user, **self.get_form_kwargs())
+	def get_object(self, *args, **kwargs):
+		self.is_update = True
+		return self.request.user
+
+	def get_form_kwargs(self):
+		kwargs = super(CurrentUserPasswordUpdateView, self).get_form_kwargs()
+		kwargs["user"] = self.get_user()
+		del kwargs["instance"]
+		return kwargs
 
 	def form_valid(self, form):
-		form.save()
+		response = super(CurrentUserPasswordUpdateView, self).form_valid(form)
 		update_session_auth_hash(self.request, form.user)
-		return super(CurrentUserPasswordUpdateView, self).form_valid(form)
+		return response
 
 class UsersListView(PermissionRequiredMixin, PermissionDeniedInfoMessageMixin, generic.ListView):
 	model = User
