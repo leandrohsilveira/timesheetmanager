@@ -13,6 +13,7 @@ class ChecklistSiteConfig(BaseSiteConfig):
 	app_name = apps.app_name
 	namespace = apps.namespace
 	urls = [
-		url(r'^$', views.index, name = 'index'),
-		url(r'^new$', views.CompanyCreateView.as_view(), name = "company_create")
+		url(r'^index$', views.index, name = 'index'),
+		views.CompanyDetailView.as_url_import(),
+		views.CompanyCreateView.as_url_import(),
 	]

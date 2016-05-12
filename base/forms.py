@@ -3,31 +3,48 @@ Created on 13 de abr de 2016
 
 @author: Leandro
 '''
+from django.conf.urls import url
 from django.contrib import messages
 from django.contrib.admin import models as log_models
 from django.contrib.auth.mixins import AccessMixin
-from django.contrib.contenttypes.models import ContentType, ContentTypeManager
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.forms import models as model_forms
 from django.utils.translation import ugettext_lazy as _lazy, ugettext as _
 from django.views import generic
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
-from django.views.generic.edit import ModelFormMixin
 
 from history.models import HistoryEntry
 
 
-class ProductivEnvModelFormView(SingleObjectTemplateResponseMixin, generic.FormView):
+class ProductivEnvBaseMixin(SingleObjectTemplateResponseMixin):
+	context_object_name = "object"
+	view_id = None
+	view_name = None
+	template_name_suffix = "_view"
+	pattern = None
+
+	@classmethod
+	def as_url_import(self):
+		return url(self.pattern, self.as_view(), name = self.view_id)
+
+	def get_context_data(self, **kwargs):
+		kwargs[self.context_object_name] = self.object
+		kwargs["view_id"] = self.view_id
+		if self.view_name:
+			kwargs["view_name"] = self.view_name
+		return super(ProductivEnvBaseMixin, self).get_context_data(**kwargs)
+
+class ProductivEnvDetailView(ProductivEnvBaseMixin, generic.DetailView):
+	template_name_suffix = "_detail"
+
+class ProductivEnvModelFormView(ProductivEnvBaseMixin, generic.FormView):
 
 	form_object_name = "object"
 	fields = None
 	model = None
 	object = None
 	is_update = None
-	view_id = None
-	view_name = None
-	pattern = None
-	context_object_name = "object"
 	template_name_suffix = "_form"
 	
 	def get_current_object(self):
@@ -119,13 +136,6 @@ class ProductivEnvModelFormView(SingleObjectTemplateResponseMixin, generic.FormV
 				self.is_update = False
 				self.object = None
 		return self.object
-
-	def get_context_data(self, **kwargs):
-		kwargs[self.context_object_name] = self.object
-		kwargs["view_id"] = self.view_id
-		if self.view_name:
-			kwargs["view_name"] = self.view_name
-		return super(ProductivEnvModelFormView, self).get_context_data(**kwargs)
 
 	def get(self, request, *args, **kwargs):
 		self.__validate_configuration()
