@@ -5,9 +5,10 @@ from django.core.urlresolvers import reverse_lazy
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _lazy
+from django.views import generic
 
 from base.forms import ProductivEnvLogEntryMixin, ProductivEnvHistoryEntryMixin, \
-	ProductivEnvModelFormView
+	ProductivEnvModelFormView, ProductivEnvDetailView
 from checklist.models import Company
 
 
@@ -22,9 +23,19 @@ def get_or_none(model, *args, **kwargs):
 def index(request):
 	company = get_or_none(Company, creator__id = request.user.id)
 	if company:
-		return HttpResponse("OK")
+		return redirect("checklist:company_detail")
 	else:
 		return redirect("checklist:company_create")
+
+class CompanyDetailView(LoginRequiredMixin, ProductivEnvDetailView):
+	model = Company
+	view_id = "company_detail"
+	view_name = "My Company"
+	pattern = r'^$'
+
+	def get_object(self, queryset = None):
+		return get_or_none(Company, creator__id = self.request.user.id)
+
 
 class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, ProductivEnvLogEntryMixin, ProductivEnvHistoryEntryMixin, ProductivEnvModelFormView):
 	model = Company
